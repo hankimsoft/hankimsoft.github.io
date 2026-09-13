@@ -14,6 +14,14 @@
   }
   function setStyle(el, css) { if (el) el.setAttribute('style', css); }
 
+  /* role="button" 인 요소는 클릭뿐 아니라 Enter·Space 로도 눌려야 한다. */
+  function onActivate(el, fn) {
+    el.addEventListener('click', fn);
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); fn(); }
+    });
+  }
+
   function chip(active) {
     return active
       ? 'padding:10px 17px;border-radius:999px;background:#2A2521;color:#F4EFE6;font-size:13.5px;font-weight:700;cursor:pointer;border:1px solid #2A2521'
@@ -64,7 +72,7 @@
     if (chips.length) {
       var base = lang === 'ko' ? 12900 : 12.9;
       chips.forEach(function (c) {
-        c.addEventListener('click', function () {
+        onActivate(c, function () {
           var pct = Number(c.getAttribute('data-v'));
           var result = lang === 'ko'
             ? Math.round(base * (100 - pct) / 100)
@@ -82,7 +90,7 @@
     if (segs.length && rowsBox) {
       var rowEls = Array.prototype.slice.call(rowsBox.children);
       segs.forEach(function (s) {
-        s.addEventListener('click', function () {
+        onActivate(s, function () {
           var mode = Number(s.getAttribute('data-v'));
           segs.forEach(function (o) { setStyle(o, seg(o === s)); });
           q('[data-m="hint"]').textContent = t.modeHints[mode];
@@ -114,7 +122,7 @@
     if (!root) return;
     wire(root, lang);
     Array.prototype.forEach.call(root.querySelectorAll('[data-act="lang"]'), function (b) {
-      b.addEventListener('click', function () { show(b.getAttribute('data-v')); });
+      onActivate(b, function () { show(b.getAttribute('data-v')); });
     });
   });
 
