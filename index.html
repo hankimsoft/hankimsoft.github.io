@@ -49,8 +49,14 @@
     display:flex; flex-direction:column; gap:16px;
     transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   }
-  .card::before{content:''; position:absolute; inset:0 0 auto; height:4px;
+  .card::before{content:''; position:absolute; inset:0 0 auto; height:4px; z-index:3; pointer-events:none;
                 background:linear-gradient(90deg,var(--accent),transparent)}
+  /* 카드 전체를 덮는 링크 — 안쪽 스토어 버튼은 위로 띄워 따로 눌리게 한다 */
+  .card-link{position:absolute; inset:0; z-index:1; border-radius:inherit; cursor:pointer}
+  .card-link:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+  .card:has(.card-link){cursor:pointer}
+  .card:has(.card-link):hover h3{text-decoration:underline; text-underline-offset:3px;
+                                 text-decoration-thickness:2px; text-decoration-color:var(--accent)}
   .card:hover{transform:translateY(-3px); box-shadow:0 18px 40px rgba(42,37,33,.09); border-color:#D4C9B4}
 
   .top{display:flex; align-items:center; gap:15px}
@@ -65,7 +71,7 @@
   .tag-soon{background:#EDE7DD; color:#7A7166}
 
   /* ---------- store buttons ---------- */
-  .links{display:flex; flex-wrap:wrap; gap:9px; align-items:center}
+  .links{position:relative; z-index:2; display:flex; flex-wrap:wrap; gap:9px; align-items:center}
   .pill{display:inline-flex; align-items:center; gap:8px; padding:11px 17px; border-radius:999px;
         background:#EDE7DD; border:1px solid var(--line); font-size:13.5px; font-weight:700;
         text-decoration:none; color:var(--ink); transition:background .15s ease}
@@ -135,6 +141,7 @@
       <div class="apps">
 
         <div class="card" style="--accent:#3E9E6E">
+          <a class="card-link" href="/brim/" aria-label="담은(Brim) 소개 페이지로 이동"></a>
           <div class="top">
             <img class="icon" src="assets/brim-icon.svg" alt="">
             <div>
@@ -144,7 +151,6 @@
           </div>
           <p class="desc">살 것을 미리 적고 장을 보면서 체크하면 담은 금액이 실시간으로 쌓입니다. 예산을 정해두면 예산선에 얼마나 가까운지 게이지로 보여줍니다.</p>
           <div class="links">
-            <a class="pill pill-dark" href="/brim/">소개 보기</a>
             <a class="pill" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
               App Store
