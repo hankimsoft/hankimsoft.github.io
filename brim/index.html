@@ -29,6 +29,12 @@
   img { max-width: 100%; }
   a { color: inherit; }
   [hidden] { display: none !important; }
+
+  /* 언어 전환 — head 의 인라인 스크립트가 <html data-lang> 을 첫 페인트 전에 심는다.
+     JS 가 없으면 규칙이 걸리지 않아 두 언어가 모두 보인다. */
+  html[data-lang="ko"] #sec-en, html[data-lang="en"] #sec-ko,
+  html[data-lang="ko"] #page-en, html[data-lang="en"] #page-ko,
+  html[data-lang] #lang-divider { display: none !important; }
   input[type=range] { accent-color: #3E9E6E; cursor: pointer; }
 
   /* 좁은 화면 대응 — 원본은 인라인 스타일이라 미디어 쿼리가 없었다 */
@@ -37,6 +43,8 @@
     [data-g="spentText"] { font-size: 34px !important; }
   }
 </style>
+<script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 */
+(function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l})();</script>
 </head>
 <body>
 <script>window.__BRIM__ = {"text":{"ko":{"gPillOver":"예산 초과","gPillNear":"예산선 근처","gPillRoom":"여유 있음","gRemainLabelOver":"초과","gRemainLabelNormal":"남은 금액","dSavedWord":"할인","modeHints":["집에서 목록을 미리 짤 때","장을 보면서 하나씩 담을 때","영수증을 보고 정리할 때"]},"en":{"gPillOver":"Over budget","gPillNear":"Close to the line","gPillRoom":"Room to spare","gRemainLabelOver":"Over by","gRemainLabelNormal":"Left","dSavedWord":"off","modeHints":["Planning the list at home","Adding items as you shop","Sorting out a receipt"]}},"rows":{"ko":[[["사과","18,900원"],["우유","7,480원"],["달걀","5,290원"]],[["사과","18,900원"],["우유","—"],["달걀","—"]],[["18,900원","사과"],["7,480원","우유"],["5,290원","달걀"]]],"en":[[["Apples","$13.90"],["Milk","$5.49"],["Eggs","$3.89"]],[["Apples","$13.90"],["Milk","—"],["Eggs","—"]],[["$13.90","Apples"],["$5.49","Milk"],["$3.89","Eggs"]]]}};</script>
@@ -401,7 +409,7 @@
 
 
 </div>
-<div id="page-en" hidden>
+<div id="page-en">
 
 
 <div style="min-height:100vh;display:flex;flex-direction:column">

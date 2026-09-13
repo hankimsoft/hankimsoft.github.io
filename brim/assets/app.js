@@ -104,8 +104,7 @@
   var sections = { ko: document.getElementById('page-ko'), en: document.getElementById('page-en') };
 
   function show(lang) {
-    sections.ko.hidden = (lang !== 'ko');
-    sections.en.hidden = (lang !== 'en');
+    document.documentElement.setAttribute('data-lang', lang);
     document.documentElement.lang = lang;
     try { localStorage.setItem('brim-lang', lang); } catch (e) {}
   }
@@ -119,7 +118,5 @@
     });
   });
 
-  var saved = null;
-  try { saved = localStorage.getItem('brim-lang'); } catch (e) {}
-  if (saved === 'en') show('en');
+  /* 초기 언어는 head 의 인라인 스크립트가 이미 정했다. */
 })();

@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="../assets/doc.css">
+<script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 */
+(function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l})();</script>
 </head>
 <body>
 
@@ -28,11 +30,11 @@
 <main>
   <div class="wrap">
     <div class="doc-head">
-      <h1 data-ko="개인정보 처리방침" data-en="Privacy Policy">개인정보 처리방침</h1>
-      <p class="meta" data-ko="담은(Brim) · 시행일: 2026.08.07 · 최종 수정일: 2026.08.09" data-en="Brim · Effective date: 2026.08.07 · Last updated: 2026.08.09">담은(Brim) · 시행일: 2026.08.07 · 최종 수정일: 2026.08.09</p>
+      <h1><span class="l-ko">개인정보 처리방침</span><span class="l-en">Privacy Policy</span></h1>
+      <p class="meta"><span class="l-ko">담은(Brim) · 시행일: 2026.08.07 · 최종 수정일: 2026.08.09</span><span class="l-en">Brim · Effective date: 2026.08.07 · Last updated: 2026.08.09</span></p>
       <div class="lang" role="tablist" aria-label="언어 선택">
-        <button type="button" role="tab" data-lang="ko" aria-selected="true">한국어</button>
-        <button type="button" role="tab" data-lang="en" aria-selected="false">English</button>
+        <button type="button" role="tab" data-lang="ko">한국어</button>
+        <button type="button" role="tab" data-lang="en">English</button>
       </div>
     </div>
 
