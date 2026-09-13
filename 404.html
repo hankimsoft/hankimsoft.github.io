@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>페이지를 찾을 수 없습니다 — hankimsoft</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/brim/assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 */
+(function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l})();</script>
+<style>
+  :root{color-scheme:light; --bg:#F4EFE6; --surface:#FBF8F3; --ink:#2A2521; --ink2:#5C544B; --ink3:#8A8073; --line:#E4DCCE; --line2:#DFD6C6}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; min-height:100vh; display:flex; flex-direction:column;
+       background:var(--bg); color:var(--ink); line-height:1.7;
+       font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',system-ui,sans-serif;
+       word-break:keep-all; overflow-wrap:anywhere}
+  .wrap{max-width:1120px; margin:0 auto; padding-inline:28px; width:100%}
+  header{background:rgba(237,231,221,.92); border-bottom:1px solid var(--line2)}
+  header .wrap{display:flex; align-items:center; padding-block:14px}
+  .brand{font-size:17px; font-weight:800; letter-spacing:-.4px; text-decoration:none; color:inherit}
+  main{flex:1; display:flex; align-items:center; padding-block:60px}
+  .code{font-size:13px; font-weight:800; letter-spacing:.12em; color:var(--ink3)}
+  h1{margin:14px 0 0; font-size:42px; line-height:1.2; letter-spacing:-1.8px; font-weight:800}
+  p{margin:18px 0 0; font-size:16.5px; color:var(--ink2); max-width:44ch}
+  .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:32px}
+  .pill{display:inline-flex; align-items:center; padding:12px 20px; border-radius:999px;
+        background:#EDE7DD; border:1px solid var(--line); font-size:14px; font-weight:700;
+        text-decoration:none; color:var(--ink)}
+  .pill:hover{background:#E3DBCC}
+  .pill-dark{background:var(--ink); border-color:var(--ink); color:#F4EFE6}
+  .pill-dark:hover{background:#3A342E}
+  a:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+  footer{border-top:1px solid var(--line2)}
+  footer .wrap{padding-block:24px 36px; font-size:13px; color:var(--ink3)}
+  html[data-lang="ko"] .l-en, html[data-lang="en"] .l-ko{display:none !important}
+  @media (max-width:620px){
+    .wrap{padding-inline:20px}
+    h1{font-size:30px; letter-spacing:-1.1px}
+    p{font-size:15.5px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><a class="brand" href="/">hankimsoft</a></div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="code">404</div>
+    <h1><span class="l-ko">페이지를 찾을 수 없습니다</span><span class="l-en">Page not found</span></h1>
+    <p>
+      <span class="l-ko">주소가 바뀌었거나 삭제된 페이지입니다. 아래에서 원하시는 곳으로 가실 수 있습니다.</span>
+      <span class="l-en">The address may have changed, or the page may have been removed. You can pick where to go from here.</span>
+    </p>
+    <div class="links">
+      <a class="pill pill-dark" href="/"><span class="l-ko">홈으로</span><span class="l-en">Home</span></a>
+      <a class="pill" href="/brim/"><span class="l-ko">담은 소개</span><span class="l-en">About Brim</span></a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 hankimsoft</div>
+</footer>
+
+</body>
+</html>
