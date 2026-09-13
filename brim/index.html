@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brim (담은) — 장바구니 합계를 미리 아는 장보기 체크리스트</title>
-<meta name="description" content="살 것을 미리 적고 장을 보면서 체크하면 담은 금액이 실시간으로 쌓입니다. 예산 게이지, 할인 계산, 7개 언어와 지역 통화를 지원합니다. 회원가입 없이 무료.">
+<meta name="description" content="살 것을 미리 적고 장을 보면서 체크하면 담은 금액이 실시간으로 쌓입니다. 예산 게이지, 할인 계산, 한국어와 English를 지원합니다. 회원가입 없이 무료.">
 <link rel="canonical" href="https://hankimsoft.github.io/brim/">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -276,7 +276,7 @@
         <div style="display:flex;flex-direction:column;gap:9px;max-width:52ch">
           <div style="font-size:12px;font-weight:800;letter-spacing:.6px;color:#A89C86">통화</div>
           <div style="font-size:24px;font-weight:800;letter-spacing:-.8px;line-height:1.3">지역 통화 표기를 그대로 따릅니다</div>
-          <div style="font-size:14.5px;line-height:1.72;color:#5C544B">설정에서 통화를 고르면 기호와 소수점, 천 단위 구분이 그 통화 규칙대로 바뀝니다. 원·엔·루피는 정수로, 달러·유로·헤알은 소수 둘째 자리까지 표시합니다. 판매세가 있는 지역은 합계와 게이지에 세금이 반영됩니다. 통화를 바꿔도 진행 중인 체크리스트는 저장 당시의 통화를 유지합니다.</div>
+          <div style="font-size:14.5px;line-height:1.72;color:#5C544B">설정에서 통화를 고르면 기호와 소수점, 천 단위 구분이 그 통화 규칙대로 바뀝니다. 원·엔은 정수로, 달러·유로·파운드·위안은 소수 둘째 자리까지 표시합니다. 판매세가 있는 지역은 합계와 게이지에 세금이 반영됩니다. 통화를 바꿔도 진행 중인 체크리스트는 저장 당시의 통화를 유지합니다.</div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
           
@@ -291,28 +291,23 @@
             </div>
           
             <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">EUR · Deutschland</div>
+              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">70,00 €</div>
+            </div>
+          
+            <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
               <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">JPY · 日本</div>
               <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">10,000円</div>
             </div>
           
             <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">EUR · España · Deutschland</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">70,00 €</div>
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">GBP · United Kingdom</div>
+              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">£70.00</div>
             </div>
           
             <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">MXN · México</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">$1,400.00</div>
-            </div>
-          
-            <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">BRL · Brasil</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">R$ 350,00</div>
-            </div>
-          
-            <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">INR · भारत</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">₹3,000</div>
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">CNY · 中国</div>
+              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">¥70.00</div>
             </div>
           
         </div>
@@ -323,7 +318,7 @@
             <div style="padding:9px 16px;background:#EDE7DD;border:1px solid #E0D7C7;border-radius:999px;font-size:13.5px;font-weight:600;color:#4A443C">한국어</div>
             <div style="padding:9px 16px;background:#EDE7DD;border:1px solid #E0D7C7;border-radius:999px;font-size:13.5px;font-weight:600;color:#4A443C">English</div>
           </div>
-          <div style="font-size:13px;color:#6E665C;line-height:1.7;flex:1;min-width:220px">앱은 기기 언어를 따라 한국어·English·日本語·Español·Português·हिन्दी·Deutsch로 표시됩니다. 이 소개 페이지는 한국어와 English로 제공합니다.</div>
+          <div style="font-size:13px;color:#6E665C;line-height:1.7;flex:1;min-width:220px">앱은 기기 언어를 따라 한국어와 English로 표시됩니다. 이 소개 페이지도 같은 두 언어로 제공합니다.</div>
         </div>
       </div>
     </section>
@@ -642,7 +637,7 @@ adds itself up</h1>
         <div style="display:flex;flex-direction:column;gap:9px;max-width:52ch">
           <div style="font-size:12px;font-weight:800;letter-spacing:.6px;color:#A89C86">Currencies</div>
           <div style="font-size:24px;font-weight:800;letter-spacing:-.8px;line-height:1.3">Regional currency formats, followed exactly</div>
-          <div style="font-size:14.5px;line-height:1.72;color:#5C544B">Pick a currency in Settings and symbols, decimals, and separators follow its own rules. Won, yen, and rupee show as whole numbers; dollar, euro, and real go to two decimals. Where sales tax applies, it is reflected in the total and the gauge. A checklist already in progress keeps the currency it was created with.</div>
+          <div style="font-size:14.5px;line-height:1.72;color:#5C544B">Pick a currency in Settings and symbols, decimals, and separators follow its own rules. Won and yen show as whole numbers; dollar, euro, pound, and yuan go to two decimals. Where sales tax applies, it is reflected in the total and the gauge. A checklist already in progress keeps the currency it was created with.</div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
           
@@ -657,28 +652,23 @@ adds itself up</h1>
             </div>
           
             <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">EUR · Deutschland</div>
+              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">70,00 €</div>
+            </div>
+          
+            <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
               <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">JPY · 日本</div>
               <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">10,000円</div>
             </div>
           
             <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">EUR · España · Deutschland</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">70,00 €</div>
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">GBP · United Kingdom</div>
+              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">£70.00</div>
             </div>
           
             <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">MXN · México</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">$1,400.00</div>
-            </div>
-          
-            <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">BRL · Brasil</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">R$ 350,00</div>
-            </div>
-          
-            <div style="background:#EDE7DD;border:1px solid #E0D7C7;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">INR · भारत</div>
-              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">₹3,000</div>
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:.4px;color:#8A8073">CNY · 中国</div>
+              <div style="font-size:19px;font-weight:800;letter-spacing:-.5px;color:#2A2521;font-variant-numeric:tabular-nums">¥70.00</div>
             </div>
           
         </div>
@@ -689,7 +679,7 @@ adds itself up</h1>
             <div style="padding:9px 16px;background:#EDE7DD;border:1px solid #E0D7C7;border-radius:999px;font-size:13.5px;font-weight:600;color:#4A443C">한국어</div>
             <div style="padding:9px 16px;background:#EDE7DD;border:1px solid #E0D7C7;border-radius:999px;font-size:13.5px;font-weight:600;color:#4A443C">English</div>
           </div>
-          <div style="font-size:13px;color:#6E665C;line-height:1.7;flex:1;min-width:220px">Brim follows your device language: Korean, English, Japanese, Spanish, Portuguese, Hindi, and German. This page is available in Korean and English.</div>
+          <div style="font-size:13px;color:#6E665C;line-height:1.7;flex:1;min-width:220px">Brim follows your device language: Korean and English. This page is available in the same two languages.</div>
         </div>
       </div>
     </section>
