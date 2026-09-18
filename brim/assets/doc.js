@@ -19,12 +19,3 @@
     b.addEventListener('click', function () { apply(b.getAttribute('data-lang')); });
   });
 })();
-
-/* 앱 웹뷰 전용 페이지(body.app): mailto 외 링크는 글자만 남긴다 — 웹뷰에서 다른 페이지로 나가지 않게. */
-(function () {
-  if (!document.body.classList.contains('app')) return;
-  var links = document.querySelectorAll('a:not([href^="mailto:"])');
-  Array.prototype.forEach.call(links, function (a) {
-    a.parentNode.replaceChild(document.createTextNode(a.textContent), a);
-  });
-})();

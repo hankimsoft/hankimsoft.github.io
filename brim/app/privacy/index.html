@@ -2,6 +2,7 @@
 layout: null
 # 앱 설정 화면 웹뷰 전용 — 머리글·메뉴·바닥글 없이 본문만. 검색 제외(noindex).
 # 본문은 _includes/brim/privacy.html 에 있습니다 (공개 페이지 /brim/privacy/ 와 같은 원본).
+# 외부 링크의 target="_blank" 는 뺀다 — 웹뷰는 새 창을 못 열어 클릭이 무시됨. 빼면 앱이 외부 브라우저로 연다.
 ---
 <!DOCTYPE html>
 <html lang="ko">
@@ -20,7 +21,7 @@ layout: null
 
 <main>
   <div class="wrap">
-{% include brim/privacy.html %}
+{% capture doc %}{% include brim/privacy.html %}{% endcapture %}{{ doc | replace: ' target="_blank"', '' }}
   </div>
 </main>
 
