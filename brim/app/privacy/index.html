@@ -1,0 +1,29 @@
+---
+layout: null
+# 앱 설정 화면 웹뷰 전용 — 머리글·메뉴·바닥글 없이 본문만. 검색 제외(noindex).
+# 본문은 _includes/brim/privacy.html 에 있습니다 (공개 페이지 /brim/privacy/ 와 같은 원본).
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>개인정보 처리방침 — Brim (담은)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../../assets/doc.css">
+<script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 */
+(function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l})();</script>
+</head>
+<body class="app">
+
+<main>
+  <div class="wrap">
+{% include brim/privacy.html %}
+  </div>
+</main>
+
+<script src="../../assets/doc.js"></script>
+</body>
+</html>
