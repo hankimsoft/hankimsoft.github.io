@@ -1,0 +1,27 @@
+---
+layout: null
+# 앱 설정 화면 웹뷰 전용 — 머리글·메뉴·바닥글 없이 본문만. 검색 제외(noindex).
+# 본문은 _includes/treebal/terms.html 에 있습니다 (공개 페이지 /treebal/terms/ 와 같은 원본).
+# 외부 링크의 target="_blank" 는 뺀다 — 웹뷰는 새 창을 못 열어 클릭이 무시됨. 빼면 앱이 외부 브라우저로 연다.
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>이용약관 — 트리밸 (Treebal)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../../assets/doc.css">
+</head>
+<body class="app">
+
+<main>
+  <div class="wrap">
+{% capture doc %}{% include treebal/terms.html %}{% endcapture %}{{ doc | replace: ' target="_blank"', '' }}
+  </div>
+</main>
+
+</body>
+</html>

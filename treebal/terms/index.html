@@ -1,10 +1,50 @@
+---
+layout: null
+# 본문은 _includes/treebal/terms.html 에 있습니다 (앱 웹뷰용 /treebal/app/terms/ 와 같은 원본).
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Treebal — Terms</title>
+<title>이용약관 — 트리밸 (Treebal)</title>
+<meta name="description" content="트리밸(Treebal) 이용약관. 앱은 투자 자문을 제공하지 않으며, 시세 정보는 실시간이 아닙니다.">
+<link rel="canonical" href="https://hankimsoft.github.io/treebal/terms/">
+<link rel="icon" href="../assets/icon.png" type="image/png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/doc.css">
 </head>
 <body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/icon.png" alt=""><b>트리밸</b></a>
+    <nav>
+      <a href="../">소개</a>
+      <a href="../privacy/">개인정보</a>
+      <a href="../terms/">약관</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+{% include treebal/terms.html %}
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 hankimsoft</div>
+    <nav>
+      <a href="/">hankimsoft</a>
+      <a href="../">트리밸 소개</a>
+      <a href="../privacy/">개인정보처리방침</a>
+      <a href="../terms/">이용약관</a>
+    </nav>
+  </div>
+</footer>
+
 </body>
 </html>
