@@ -114,6 +114,7 @@
   function show(lang) {
     document.documentElement.setAttribute('data-lang', lang);
     document.documentElement.lang = lang;
+    document.title = lang === 'ko' ? '담은 - 장보기 계산기 (Brim)' : 'Brim - Shopping Calculator';
     try { localStorage.setItem('brim-lang', lang); } catch (e) {}
   }
 
