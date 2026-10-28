@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.hankimsoft.brim",
+      "sha256_cert_fingerprints": [
+        "C0:13:AF:8C:A6:2F:FE:F2:8C:60:C9:D4:8F:FE:32:F5:AB:07:07:EA:E7:7E:F4:0F:ED:D9:29:E0:FC:2B:15:F9"
+      ]
+    }
+  }
+]

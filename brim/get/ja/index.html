@@ -3,7 +3,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<script>(function(){var u=navigator.userAgent||"";if(/facebookexternalhit|Facebot|Twitterbot|kakaotalk-scrap/i.test(u))return;var ios=/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1);var to=ios?"https://apps.apple.com/app/id6799173101":/Android/i.test(u)?"https://play.google.com/store/apps/details?id=com.hankimsoft.brim&referrer=utm_source%3Dshare_link%26utm_medium%3Dapp_share%26utm_campaign%3Dshare_link":"";if(!to)return;try{if(sessionStorage.getItem("brimGet"))return;sessionStorage.setItem("brimGet","1")}catch(e){}var done=false;function go(){if(done)return;done=true;location.replace(to)}function painted(){requestAnimationFrame(function(){setTimeout(go,50)})}if(document.readyState==="complete")painted();else window.addEventListener("load",painted);setTimeout(go,1500)})();</script>
+<script>(function(){var u=navigator.userAgent||"";if(/^#1\./.test(location.hash||""))return;if(/facebookexternalhit|Facebot|Twitterbot|kakaotalk-scrap/i.test(u))return;var ios=/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1);var to=ios?"https://apps.apple.com/app/id6799173101":/Android/i.test(u)?"https://play.google.com/store/apps/details?id=com.hankimsoft.brim&referrer=utm_source%3Dshare_link%26utm_medium%3Dapp_share%26utm_campaign%3Dshare_link":"";if(!to)return;try{if(sessionStorage.getItem("brimGet"))return;sessionStorage.setItem("brimGet","1")}catch(e){}var done=false;function go(){if(done)return;done=true;location.replace(to)}function painted(){requestAnimationFrame(function(){setTimeout(go,50)})}if(document.readyState==="complete")painted();else window.addEventListener("load",painted);setTimeout(go,1500)})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>アプリをダウンロード | Brim - 買い物電卓</title>
 <meta name="description" content="このリストはBrimで作りました。書くたびに合計がすぐわかります。">
@@ -41,6 +41,31 @@ h1{margin:0;font-size:22px;line-height:1.25;letter-spacing:-.5px;font-weight:800
 .light{background:#FBF8F3;color:#2A2521;border:1px solid #DACFBC}
 .more{display:block;margin-top:24px;padding:12px;text-align:center;font-size:14.5px;font-weight:600;color:#5C544B}
 a:focus-visible{outline:2px solid #2A2521;outline-offset:3px}
+.has-list .art,.has-list .sub,.has-list .btns.default,.has-list .more{display:none}
+.has-list .name{margin-top:0}
+.has-list .name img{width:28px;height:28px}
+.has-list h1{font-size:16px;color:#5C544B}
+.list{margin-top:16px;background:#FBF8F3;border:1px solid #DACFBC;border-radius:18px;padding:16px 16px 12px}
+.lt{font-size:19px;font-weight:800;overflow-wrap:anywhere}
+.ls{font-size:13px;color:#7A7066;margin:3px 0 10px}
+.row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #ECE4D6;font-size:15.5px}
+.ck{width:22px;height:22px;border-radius:7px;border:1.6px solid #C9BDA9;display:flex;align-items:center;
+  justify-content:center;font-size:13px;color:#fff;flex:none}
+.ck.on{background:#2E7A56;border-color:#2E7A56}
+.row .nm{flex:1;overflow-wrap:anywhere}.row .pr{font-weight:600;white-space:nowrap}
+.tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1.5px solid #2A2521;margin-top:4px;
+  padding-top:10px;font-size:15px}
+.tot b{font-size:22px;font-weight:800}
+.bud{display:flex;justify-content:space-between;font-size:13.5px;color:#7A7066;margin-top:4px}
+.warn{text-align:center;padding:26px 18px}
+.lt2{font-size:18px;font-weight:800}
+.wt{font-size:14.5px;color:#5C544B;line-height:1.55;margin:8px 0 0}
+.green{background:#2E7A56;color:#fff}
+.hint{font-size:13.5px;color:#5C544B;line-height:1.5;text-align:center;margin:14px 6px 0}
+.tip{margin-top:14px;background:#FBF1E6;border:1px solid #EBCFAF;border-radius:14px;padding:13px 14px;
+  font-size:14px;line-height:1.5;color:#5C4A36}
+.tip p{margin:4px 0 0}
+.btn.sm{min-height:44px;font-size:14.5px;margin-top:10px}
 </style>
 </head>
 <body>
@@ -48,11 +73,84 @@ a:focus-visible{outline:2px solid #2A2521;outline-offset:3px}
   <img class="art" src="/brim/get/og-ja.jpg" width="1200" height="630" alt="予算を決めて、ぴったり合わせる">
   <div class="name"><img src="/brim/assets/icon.svg" alt=""><h1>Brim - 買い物電卓</h1></div>
   <p class="sub">書くたびに合計がすぐわかる<br>予算を決めて、ぴったり合わせる</p>
-  <div class="btns">
+  <div class="btns default">
     <a class="btn dark" href="https://apps.apple.com/app/id6799173101"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M16.6 12.8c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.7zM14.4 5.6c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2.1-.5 2.7-1.3z"/></svg><span>App Storeからダウンロード</span></a>
     <a class="btn light" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim&amp;referrer=utm_source%3Dshare_link%26utm_medium%3Dapp_share%26utm_campaign%3Dshare_link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.1-9.7L3.6 2.3z" fill="#2E7A56"/><path d="M16.1 15.2l-3.4-3.2-9.1 9.7c.4.4 1.1.5 1.8.1l10.7-6.6z" fill="#2A2521"/><path d="M20.3 10.6l-4.2-2.6-3.4 3.9 3.4 3.3 4.2-2.6c.9-.6.9-1.5 0-2z" fill="#C9853F"/><path d="M16.1 8L5.4 1.4c-.7-.4-1.4-.3-1.8.1l9.1 10.3L16.1 8z" fill="#7FBF9A"/></svg><span>Google Playで手に入れよう</span></a>
   </div>
   <a class="more" href="/brim/">Brimについて詳しく</a>
+  <section id="list" hidden>
+    <div id="card" class="list"></div>
+    <div id="lbtns" class="btns"></div>
+    <p id="lnote" class="hint"></p>
+    <div id="tip" class="tip" hidden></div>
+  </section>
 </main>
+<script>/*BL*/var BL={
+b64:function(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u},
+decode:function(f){
+ // 조각은 우리가 만든 글자(base64url — A–Z a–z 0–9 - _)만 — 이 값이 「앱에서 열기」 주소에 그대로 붙으므로 다른 글자
+ // (`#Intent;…` · `&` 등)가 들면 맨 앞에서 「망가진 링크」로(사이트 쪽 검토 2026-10-28 — 전엔 압축 풀기가 없는 옛 브라우저에서
+ // 「목록은 앱에서」 길로 빠져 그 값이 버튼 주소에 붙었다). 넘김 스크립트는 `#1.`만 보고 넘기지 않는다 → 빈 화면이 아니라 이 안내
+ if(!/^1\.[A-Za-z0-9_-]+$/.test(f)||f.length>8000)return Promise.reject(new Error('bad'));
+ if(typeof DecompressionStream==='undefined')return Promise.reject(new Error('unsupported'));
+ var u;try{u=BL.b64(f.slice(2))}catch(e){return Promise.reject(new Error('bad'))}
+ // deflate-raw를 모르는 브라우저(크롬 · 웹뷰 80 ~ 102 무렵)는 여기서 **동기로** 던진다 — 잡지 않으면 .then이 안 붙어
+ // 목록도 버튼도 없는 빈 페이지가 됐다(별도 검수 2026-10-28) → 「목록은 앱에서」 길로
+ var st;try{st=new Blob([u]).stream().pipeThrough(new DecompressionStream('deflate-raw'))}catch(e){return Promise.reject(new Error('unsupported'))}
+ return new Response(st).text().then(function(t){var l=BL.check(JSON.parse(t));if(!l)throw new Error('bad');return l},function(){throw new Error('bad')})},
+check:function(m){
+ if(!m||typeof m.t!=='string'||typeof m.c!=='string'||!/^[A-Z]{3}$/.test(m.c)||!Array.isArray(m.i)||!m.i.length||m.i.length>500)return null;
+ var items=[];for(var k=0;k<m.i.length;k++){var r=m.i[k];
+  if(!Array.isArray(r)||typeof r[0]!=='string'||!(r[1]===null||(Number.isInteger(r[1])&&r[1]>=0&&r[1]<=999999999))||(r[2]!==0&&r[2]!==1))return null;
+  items.push({n:r[0],p:r[1],c:r[2]===1})}
+ function rate(v){return v==null?0:(typeof v==='number'&&v>=0&&v<=100?v:NaN)}
+ var x=rate(m.x),p=rate(m.p);if(isNaN(x)||isNaN(p))return null;
+ if(m.b!=null&&!(Number.isInteger(m.b)&&m.b>=0))return null;
+ return {t:m.t,c:m.c,b:m.b==null?null:m.b,x:x,p:p,a:m.a===1,items:items}},
+half:function(a,b){return Math.floor((2*a+b)/(2*b))},
+total:function(l){var s=0;l.items.forEach(function(it){s+=it.p||0});
+ var tax=(l.x>0&&s>0)?BL.half(s*Math.round(l.x*1000),100000):0,tip=0;
+ if(l.p>0&&s>0)tip=BL.half((l.a?s+tax:s)*Math.round(l.p*1000),100000);
+ var on=s>0?(l.x>0&&l.p>0?'both':l.x>0?'tax':l.p>0?'tip':null):null;
+ return {sub:s,total:s+tax+tip,on:on}},
+LOC:{KRW:'ko',USD:'en',EUR:'de',JPY:'ja',GBP:'en',CNY:'zh',MXN:'es-MX',BRL:'pt-BR'},
+money:function(v,c){if(c==='KRW')return v.toLocaleString('ko-KR')+'원';
+ var f=new Intl.NumberFormat(BL.LOC[c]||'en',{style:'currency',currency:c}),d=f.resolvedOptions().maximumFractionDigits;
+ return f.format(v/Math.pow(10,d))}
+};/*/BL*/
+(function(){
+var h=(location.hash||'').slice(1);if(!/^1\./.test(h))return;
+var T={"cnt1": "{n}件", "cnt": "{n}件", "total": "合計", "budget": "予算", "charges_tax": "税込み", "charges_tip": "チップ込み", "charges": "税・チップ込み", "open": "Brimで開く", "again": "インストール後、このリンクを<b>もう一度<\/b>タップすると、リストをアプリに追加できます。", "pc": "スマートフォンでこのリンクを開くと、リストをBrimに追加できます。", "broken_t": "リストを開けません", "broken_d": "リンクが途中で切れている可能性があります。送った人にもう一度共有してもらってください。", "tip_t": "アプリが開きませんか？", "tip_d": "Brimを最新バージョンにアップデートしてから、もう一度このリンクをタップしてください。", "upd_apple": "App Storeでアップデート", "upd_play": "Google Playでアップデート", "nopreview": "リストはアプリで見られます。", "apple": "App Storeからダウンロード", "play": "Google Playで手に入れよう"},APPLE="https://apps.apple.com/app/id6799173101",PLAY="https://play.google.com/store/apps/details?id=com.hankimsoft.brim&referrer=utm_source%3Dshare_link%26utm_medium%3Dapp_share%26utm_campaign%3Dshare_link",PKG="com.hankimsoft.brim",SVG={apple:"<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M16.6 12.8c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.7zM14.4 5.6c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2.1-.5 2.7-1.3z\"/><\/svg>",play:"<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l9.1-9.7L3.6 2.3z\" fill=\"#2E7A56\"/><path d=\"M16.1 15.2l-3.4-3.2-9.1 9.7c.4.4 1.1.5 1.8.1l10.7-6.6z\" fill=\"#2A2521\"/><path d=\"M20.3 10.6l-4.2-2.6-3.4 3.9 3.4 3.3 4.2-2.6c.9-.6.9-1.5 0-2z\" fill=\"#C9853F\"/><path d=\"M16.1 8L5.4 1.4c-.7-.4-1.4-.3-1.8.1l9.1 10.3L16.1 8z\" fill=\"#7FBF9A\"/><\/svg>"};
+var ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1),and=!ios&&/Android/i.test(ua);
+document.documentElement.classList.add('has-list');
+document.getElementById('list').hidden=false;
+var card=document.getElementById('card'),btns=document.getElementById('lbtns'),note=document.getElementById('lnote'),tip=document.getElementById('tip');
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function store(kind,cls,parent){
+ var o=[];if(!and)o.push(['apple',APPLE,kind==='update'?T.upd_apple:T.apple]);if(!ios)o.push(['play',PLAY,kind==='update'?T.upd_play:T.play]);
+ o.forEach(function(s,i){var a=el('a','btn '+(cls||(i===0?'dark':'light')));a.href=s[1];a.insertAdjacentHTML('beforeend',SVG[s[0]]);a.appendChild(el('span',null,s[2]));parent.appendChild(a)})}
+function actions(){
+ if(!ios&&!and){note.textContent=T.pc;store('get',null,btns);return}
+ var open=ios?'brim://list?l='+h:'intent://list?l='+h+'#Intent;scheme=brim;package='+PKG+';S.browser_fallback_url='+encodeURIComponent(PLAY)+';end';
+ var a=el('a','btn green',T.open);a.href=open;btns.appendChild(a);
+ store('get','light',btns);
+ note.innerHTML=T.again;
+ // 눌렀는데 1.5초 뒤에도 이 페이지가 그대로면(앱이 안 열림 — 옛 앱) 업데이트 안내
+ a.addEventListener('click',function(){setTimeout(function(){if(document.hidden||!tip.hidden)return;
+  tip.appendChild(el('b',null,T.tip_t));tip.appendChild(el('p',null,T.tip_d));store('update','light sm',tip);tip.hidden=false},1500)})}
+function render(l){
+ var n=l.items.length,c=0;l.items.forEach(function(it){if(it.c)c++});
+ card.appendChild(el('div','lt',l.t.trim()||'-'));
+ card.appendChild(el('div','ls',(n===1?T.cnt1:T.cnt).replace('{n}',n)+(c?' · ✓ '+c:'')));
+ l.items.forEach(function(it){var r=el('div','row');r.appendChild(el('span','ck'+(it.c?' on':''),it.c?'✓':''));
+  r.appendChild(el('span','nm',it.n.trim()||'-'));r.appendChild(el('span','pr',it.p==null?'-':BL.money(it.p,l.c)));card.appendChild(r)});
+ var t=BL.total(l),tot=el('div','tot');tot.appendChild(el('span',null,T.total));tot.appendChild(el('b',null,BL.money(t.total,l.c)));card.appendChild(tot);
+ if(t.on)card.appendChild(el('div','bud',t.on==='both'?T.charges:t.on==='tax'?T.charges_tax:T.charges_tip));
+ if(l.b!=null){var b=el('div','bud');b.appendChild(el('span',null,T.budget));b.appendChild(el('span',null,BL.money(l.b,l.c)));card.appendChild(b)}
+ actions()}
+function broken(){card.classList.add('warn');card.appendChild(el('div','lt2',T.broken_t));card.appendChild(el('p','wt',T.broken_d));store('get',null,btns)}
+function nopreview(){card.classList.add('warn');card.appendChild(el('p','wt',T.nopreview));actions()}
+BL.decode(h).then(render,function(e){if(e&&e.message==='unsupported')nopreview();else broken()});
+})();</script>
 </body>
 </html>

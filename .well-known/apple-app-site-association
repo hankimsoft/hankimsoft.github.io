@@ -1,0 +1,18 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "G9S5WW9CQF.com.hankimsoft.brim"
+        ],
+        "components": [
+          {
+            "/": "/brim/get/*",
+            "#": "1.*",
+            "comment": "P12 — 목록이 든 받기 주소"
+          }
+        ]
+      }
+    ]
+  }
+}
