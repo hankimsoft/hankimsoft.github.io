@@ -166,6 +166,19 @@
   .rows div{display:flex; justify-content:space-between; padding:10px 0; font-size:14.5px; font-weight:600; border-bottom:1px solid var(--app-divider)}
   .rows div:last-child{border-bottom:0}
   .rows .dim{color:var(--app-ctrl); font-weight:500}
+  /* 쿠폰 막대 — 폰 속 막대와 같은 규칙: 예산선 75% 자리, 80% 이상 주황 · 넘으면 빨강 */
+  .cps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px}
+  .cp{background:var(--sheet); border-radius:24px; padding:24px 24px 26px}
+  .cp .amt{font-size:28px; font-weight:800; letter-spacing:-.04em; font-variant-numeric:tabular-nums}
+  .cp .track{position:relative; height:8px; border-radius:99px; background:var(--app-track); margin:16px 0 18px}
+  .cp .track u{display:block; height:100%; border-radius:99px; background:var(--g-orange)}
+  .cp .track s{position:absolute; left:75%; top:-6px; width:2px; height:20px; background:var(--app-ink)}
+  .cp:last-child .track u{background:var(--g-red)}
+  .cp b{display:block; font-size:16px}
+  .cp small{display:block; margin-top:4px; font-size:13.5px; color:var(--ink3); font-weight:600}
+  .cp.best{outline:2px solid var(--g-orange); outline-offset:-2px}
+  .cp.best .amt, .cp.best small{color:var(--exact)}
+  .coupon .note{margin-top:16px}
   .money{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:36px; background:var(--line); border:1px solid var(--line); border-radius:18px; overflow:hidden}
   .money div{background:var(--bg); padding:18px 20px}
   .money small{display:block; font-size:12.5px; color:var(--ink3); font-weight:600}
@@ -198,7 +211,7 @@
     .hero{border-top:0}
     .step .m-art{display:block; width:140px; margin-bottom:8px}
     .flow{display:flex; flex-direction:column}
-    .duo{grid-template-columns:1fr}
+    .duo,.cps{grid-template-columns:1fr}
     .money{grid-template-columns:repeat(2,1fr)}
     .end{grid-template-columns:1fr}
     .top nav .opt{display:none}
@@ -259,8 +272,8 @@
         <img class="m-art" src="assets/char/done_cheer.svg" alt="">
         <span class="no">03</span>
         <h2><span class="l-ko">예산에 딱 맞추기</span><span class="l-en">Land right on budget</span></h2>
-        <p class="l-ko">예산을 정하면 막대에 예산선이 생기고, 가까워질수록 초록에서 주황으로 색이 바뀝니다. 딱 맞으면 알려 줍니다.</p>
-        <p class="l-en">Set a budget and the bar marks the line, shifting from green to orange as you get close. It tells you when you hit it.</p>
+        <p class="l-ko">예산을 정하면 막대에 예산선이 생기고, 가까워질수록 초록에서 주황으로 색이 바뀝니다. 「5만원 이상 구매 시 할인」처럼 금액을 맞춰야 할 때는 그 금액을 예산으로 넣고 채워 보세요.</p>
+        <p class="l-en">Set a budget and the bar marks the line, shifting from green to orange as you get close. Need to hit $50 for a coupon? Set $50 as your budget and fill up to it.</p>
       </section>
 
       <section class="step" data-step="remain">
@@ -297,6 +310,21 @@
     </div>
 
   </div>
+
+  <section class="band coupon">
+    <h2><span class="l-ko">쿠폰은 딱 맞출 때 가장 이득이에요</span><span class="l-en">A coupon pays off most when you hit the line exactly</span></h2>
+    <p class="sub l-ko">「5만원 이상 구매 시 5천원 할인」 쿠폰이라면, 5만 원에 못 미치면 쓸 수 없고 넘을수록 할인 비율이 줄어듭니다. 5만 원을 예산으로 넣고 채우면 담을 때마다 얼마 남았는지 보입니다.</p>
+    <p class="sub l-en">With a "$10 off $50" coupon, falling short means no discount, and every dollar over the line waters it down. Set $50 as your budget and Brim shows what's left with each item you add.</p>
+    <div class="cps">
+      <div class="cp"><div class="amt"><span class="l-ko">48,000원</span><span class="l-en">$48.00</span></div><div class="track"><u style="width:72%"></u><s></s></div>
+        <b><span class="l-ko">쿠폰을 못 써요</span><span class="l-en">Can't use it yet</span></b><small><span class="l-ko">2,000원 모자라요</span><span class="l-en">$2.00 short</span></small></div>
+      <div class="cp best"><div class="amt"><span class="l-ko">50,000원</span><span class="l-en">$50.00</span></div><div class="track"><u style="width:75%"></u><s></s></div>
+        <b><span class="l-ko">5,000원 할인 · 10%</span><span class="l-en">$10 off · 20%</span></b><small><span class="l-ko">딱 맞췄어요</span><span class="l-en">On budget</span></small></div>
+      <div class="cp"><div class="amt"><span class="l-ko">63,000원</span><span class="l-en">$63.00</span></div><div class="track"><u style="width:94.5%"></u><s></s></div>
+        <b><span class="l-ko">5,000원 할인 · 약 8%</span><span class="l-en">$10 off · about 16%</span></b><small><span class="l-ko">13,000원 더 썼어요</span><span class="l-en">$13.00 more spent</span></small></div>
+    </div>
+    <p class="note"><span class="l-ko">계산 예시입니다. 쿠폰 조건은 매장마다 다릅니다.</span><span class="l-en">An example calculation. Coupon terms vary by store.</span></p>
+  </section>
 
   <section class="band">
     <h2><span class="l-ko">계산기는 키패드 안에</span><span class="l-en">The calculator is in the keypad</span></h2>
