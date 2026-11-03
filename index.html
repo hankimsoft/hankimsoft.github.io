@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>hankimsoft</title>
-<meta name="description" content="hankimsoft가 만드는 모바일 앱 — 장보기 체크리스트 담은(Brim), 자산배분 리밸런싱 트리밸(Treebal), 집안일 루틴 관리 루티(Routi).">
+<meta name="description" content="hankimsoft가 만드는 모바일 앱 — 장보기 계산기 담은(Brim), 자산배분 리밸런싱 트리밸(Treebal), 집안일 루틴 관리 루티(Routi).">
 <meta name="google-site-verification" content="VJ95UxA5i5IiW1hQxM98G9uI-Lwynx4EgOh6faAXhok">
 <link rel="canonical" href="https://hankimsoft.github.io/">
 <link rel="icon" href="/brim/assets/icon.svg" type="image/svg+xml">
@@ -16,199 +16,146 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root{
-    color-scheme: light;
-    --bg:#F4EFE6; --surface:#FBF8F3; --ink:#2A2521; --ink2:#5C544B; --ink3:#8A8073;
-    --line:#E4DCCE; --line2:#DFD6C6; --wrap:1120px;
+    --bg:#F1F1EE; --ink:#16181A; --ink2:#5D6166;
+    --wall:#173A2C; --wall2:#21523D; --glass:rgba(255,255,255,.16); --glass-line:rgba(255,255,255,.34);
+    --green:#3E9E6E; --blue:#4F7CFF;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',system-ui,sans-serif;
-    word-break:keep-all; overflow-wrap:anywhere; line-height:1.7;
-  }
-  img{max-width:100%}
-  .wrap{max-width:var(--wrap); margin:0 auto; padding-inline:28px}
+  body{margin:0; min-height:100vh; background:var(--bg); color:var(--ink); word-break:keep-all; line-height:1.6;
+       font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,sans-serif}
+  a{color:inherit}
 
-  /* ---------- header ---------- */
-  header{position:sticky; top:0; z-index:20; background:rgba(237,231,221,.92);
-         backdrop-filter:blur(12px); border-bottom:1px solid var(--line2)}
-  header .wrap{display:flex; align-items:center; padding-block:14px}
-  .brand{font-size:17px; font-weight:800; letter-spacing:-.4px; text-decoration:none; color:inherit}
-  header nav{margin-left:auto; display:flex; gap:20px}
-  header nav a{font-size:13.5px; font-weight:600; color:var(--ink3); text-decoration:none}
-  header nav a:hover{color:var(--ink)}
+  .layout{max-width:1180px; margin:0 auto; min-height:100vh; padding:48px clamp(16px,4vw,48px);
+          display:grid; grid-template-columns:1fr auto; gap:clamp(32px,6vw,96px); align-items:center}
 
-  /* ---------- hero ---------- */
-  .hero{padding-block:88px 18px; position:relative}
-  .hero h1{margin:0; font-size:58px; line-height:1.14; letter-spacing:-2.4px; font-weight:800}
-  .hero p{margin:24px 0 0; font-size:18px; line-height:1.75; color:var(--ink2); max-width:40ch}
-  .rule{margin-top:44px; height:1px; background:linear-gradient(90deg,var(--line2),transparent)}
+  .side .brand{font-weight:800; font-size:17px; letter-spacing:-.3px}
+  .side h1{margin:28px 0 0; font-size:clamp(36px,4.6vw,60px); line-height:1.12; letter-spacing:-.045em; font-weight:800}
+  .side p{margin:22px 0 0; font-size:17px; color:var(--ink2); max-width:32ch}
+  .side .hint{margin-top:36px; display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink2)}
+  .side .hint i{width:26px; height:1px; background:currentColor}
+  .side .mail{display:inline-block; margin-top:40px; font-weight:700; font-size:15px; text-decoration:none; border-bottom:2px solid var(--ink)}
 
-  section{padding-block:40px}
-  .kicker{font-size:12px; font-weight:800; letter-spacing:.1em; color:var(--ink3); text-transform:uppercase}
+  /* ---------- 폰 ---------- */
+  .phone{width:390px; height:800px; padding:12px; border-radius:62px; background:#0E0F10;
+         box-shadow:0 0 0 2px #2B2D30, 0 40px 80px rgba(20,24,22,.28), 0 8px 18px rgba(20,24,22,.18)}
+  .screen{position:relative; height:100%; border-radius:50px; overflow:hidden; color:#fff;
+          background:
+            radial-gradient(60% 40% at 85% 12%, #2E6B50 0, transparent 70%),
+            radial-gradient(70% 50% at 10% 90%, #102A20 0, transparent 70%),
+            linear-gradient(170deg, var(--wall2), var(--wall));
+          padding:16px 22px 0; display:flex; flex-direction:column}
+  .status{display:flex; justify-content:space-between; align-items:center; height:38px; padding:0 14px; font-size:15px; font-weight:700}
+  .island{position:absolute; left:50%; top:14px; width:118px; height:34px; margin-left:-59px; border-radius:20px; background:#000}
+  .status svg{height:12px; fill:#fff}
 
-  /* ---------- small cards ---------- */
-  .apps{margin-top:18px; display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-  .card{
-    position:relative; overflow:hidden;
-    background:var(--surface); border:1px solid var(--line); border-radius:24px; padding:30px;
-    display:flex; flex-direction:column; gap:16px;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  }
-  .card::before{content:''; position:absolute; inset:0 0 auto; height:4px; z-index:3; pointer-events:none;
-                background:linear-gradient(90deg,var(--accent),transparent)}
-  /* 카드 전체를 덮는 링크 — 안쪽 스토어 버튼은 위로 띄워 따로 눌리게 한다 */
-  .card-link{position:absolute; inset:0; z-index:1; border-radius:inherit; cursor:pointer}
-  .card-link:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
-  .card:has(.card-link){cursor:pointer}
-  .card:has(.card-link):hover h3{text-decoration:underline; text-underline-offset:3px;
-                                 text-decoration-thickness:2px; text-decoration-color:var(--accent)}
-  .card:hover{transform:translateY(-3px); box-shadow:0 18px 40px rgba(42,37,33,.09); border-color:#D4C9B4}
+  .glass{background:var(--glass); border:1px solid var(--glass-line); border-radius:24px;
+         -webkit-backdrop-filter:blur(20px) saturate(1.5); backdrop-filter:blur(20px) saturate(1.5);
+         box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 8px 24px rgba(0,0,0,.18)}
 
-  .top{display:flex; align-items:center; gap:15px}
-  .icon{width:56px; height:56px; border-radius:24%; display:block; flex:none}
-  .icon.tbd{border:2px dashed #C7BCA6; border-radius:16px; background:transparent}
-  h3{margin:0; font-size:21px; font-weight:800; letter-spacing:-.55px}
-  .sub{font-size:13px; color:var(--ink3); font-weight:600; margin-top:4px}
-  .desc{margin:0; font-size:14.5px; line-height:1.78; color:var(--ink2); flex:1}
-  .tag{display:inline-block; margin-left:9px; padding:4px 11px; border-radius:999px;
-       font-size:11.5px; font-weight:700; vertical-align:middle;
-       background:color-mix(in srgb, var(--accent) 16%, #FBF8F3); color:var(--accent)}
-  .tag-soon{background:#EDE7DD; color:#7A7166}
+  .home{flex:1; display:grid; grid-template-columns:repeat(4,1fr); gap:20px 12px; align-content:start; padding-top:18px}
+  .w-wide{grid-column:span 4; padding:16px 18px; text-decoration:none; display:block}
+  .w-sq{grid-column:span 2; aspect-ratio:1; padding:14px 16px; text-decoration:none; display:flex; flex-direction:column}
+  .w-label{display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; opacity:.85}
+  .w-label img{width:16px; height:16px; border-radius:24%}
+  .big{font-size:30px; font-weight:800; letter-spacing:-.04em; margin-top:6px; line-height:1.1}
+  .meter{height:8px; border-radius:6px; background:rgba(255,255,255,.18); margin-top:12px; overflow:hidden}
+  .meter i{display:block; height:100%; width:81%; background:#7CD3A4; border-radius:6px}
+  .small{font-size:12.5px; opacity:.8; margin-top:6px}
+  .alloc{display:flex; height:10px; border-radius:6px; overflow:hidden; margin-top:auto}
+  .alloc i{display:block}
+  .w-sq .big{font-size:22px}
 
-  /* ---------- store buttons ---------- */
-  .links{position:relative; z-index:2; display:flex; flex-wrap:wrap; gap:9px; align-items:center}
-  .pill{display:inline-flex; align-items:center; gap:8px; padding:11px 17px; border-radius:999px;
-        background:#EDE7DD; border:1px solid var(--line); font-size:13.5px; font-weight:700;
-        text-decoration:none; color:var(--ink); transition:background .15s ease}
-  .pill:hover{background:#E3DBCC}
-  .pill svg{width:16px; height:16px; display:block; fill:currentColor}
-  .pill-dark{background:var(--ink); border-color:var(--ink); color:#F4EFE6}
-  .pill-dark:hover{background:#3A342E}
-  .note{display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:var(--ink3)}
-  .note::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); opacity:.75}
+  .icon{display:flex; flex-direction:column; align-items:center; gap:6px; text-decoration:none; font-size:11.5px; font-weight:600}
+  .icon .img{width:62px; height:62px; border-radius:24%; overflow:hidden; display:grid; place-items:center;
+             box-shadow:0 4px 12px rgba(0,0,0,.25); transition:transform .15s ease}
+  .icon:hover .img{transform:scale(1.07)}
+  .icon .img img{width:100%; height:100%; display:block}
+  .icon .tbd{border:2px dashed rgba(255,255,255,.55); box-shadow:none}
+  .icon.badge{position:relative}
+  .icon.badge::after{content:'개발 중'; position:absolute; top:-8px; right:-6px; background:#E5534B; color:#fff; font-size:9.5px; font-weight:800;
+                      padding:2px 6px; border-radius:10px}
+  .icon svg{width:30px; height:30px; fill:#fff}
 
-  /* ---------- contact ---------- */
-  .contact{
-    position:relative; overflow:hidden; border-radius:30px; padding:64px 36px;
-    background:
-      radial-gradient(120% 140% at 12% 0%, #3B352E 0%, transparent 58%),
-      radial-gradient(110% 130% at 92% 100%, #35463C 0%, transparent 55%),
-      #2A2521;
-    color:#F4EFE6; text-align:center;
-  }
-  .contact .kicker{color:#9A9084}
-  .contact .mail{display:inline-block; margin-top:16px; font-size:clamp(24px,5vw,36px); font-weight:800;
-                 letter-spacing:-1px; color:#F4EFE6; text-decoration:none;
-                 border-bottom:2px solid #6E6459; padding-bottom:5px; transition:border-color .15s ease}
-  .contact .mail:hover{border-bottom-color:#F4EFE6}
-  .contact .meta{margin:26px auto 0; display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
-  .contact .chip{padding:8px 15px; border-radius:999px; background:rgba(244,239,230,.08);
-                 border:1px solid rgba(244,239,230,.16); font-size:13px; color:#CFC6BA; font-weight:600}
+  .dots{display:flex; justify-content:center; gap:7px; padding:8px 0 12px}
+  .dots i{width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.4)}
+  .dots i:first-child{background:#fff}
+  .dock{margin:0 -8px 14px; padding:14px 18px; border-radius:36px; display:flex; justify-content:space-between}
+  .dock .icon span:last-child{display:none}
+  .bar{width:136px; height:5px; border-radius:3px; background:#fff; margin:0 auto 8px; opacity:.9}
 
-  footer{border-top:1px solid var(--line2); margin-top:60px}
-  footer .wrap{padding-block:28px 44px; font-size:13px; color:var(--ink3)}
-
-  @media (max-width:620px){
-    .wrap{padding-inline:20px}
-    .hero{padding-block:56px 10px}
-    .hero h1{font-size:36px; letter-spacing:-1.3px}
-    .hero p{font-size:16px}
-    .card{padding:26px}
-    .contact{padding:46px 24px; border-radius:24px}
+  @media (max-width:860px){
+    .layout{grid-template-columns:1fr; padding:0; gap:0; min-height:0}
+    .side{padding:36px 20px 28px}
+    .side .hint{display:none}
+    .side .mail{margin-top:24px}
+    .phone{width:auto; height:auto; padding:0; border-radius:0; box-shadow:none; background:none}
+    .screen{border-radius:28px 28px 0 0; padding:10px 18px 0; min-height:720px}
+    .status,.island{display:none}
   }
 </style>
 </head>
 <body>
+<div class="layout">
 
-<header>
-  <div class="wrap">
-    <a class="brand" href="/">hankimsoft</a>
-    <nav>
-      <a href="#apps">앱</a>
-      <a href="#contact">문의</a>
-    </nav>
-  </div>
-</header>
+  <section class="side">
+    <div class="brand">hankimsoft</div>
+    <h1>매일 여는<br>앱을 만듭니다</h1>
+    <p>장보기, 자산 관리, 집안일처럼 폰 첫 화면에 둘 만한 앱. iOS와 Android에서 씁니다.</p>
+    <div class="hint"><i></i>아이콘을 눌러 보세요</div>
+    <a class="mail" href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a>
+  </section>
 
-<main>
-  <div class="wrap">
-
-    <section class="hero">
-      <h1>일상에서 쓰는<br>작은 도구를 만듭니다</h1>
-      <p>장보기, 자산 관리, 집안일. 매일 마주치는 일을 조금 더 수월하게 만드는 모바일 앱을 개발합니다.</p>
-      <div class="rule"></div>
-    </section>
-
-    <section id="apps">
-      <div class="kicker">앱</div>
-      <div class="apps">
-
-        <div class="card" style="--accent:#3E9E6E">
-          <a class="card-link" href="/brim/" aria-label="담은(Brim) 소개 페이지로 이동"></a>
-          <div class="top">
-            <img class="icon" src="assets/brim-icon.svg" alt="">
-            <div>
-              <h3>담은<span class="tag" style="--accent:#1F5B3D">출시됨</span></h3>
-              <div class="sub">Brim · 장보기 체크리스트</div>
-            </div>
-          </div>
-          <p class="desc">살 것을 미리 적고 장을 보면서 체크하면 담은 금액이 실시간으로 쌓입니다. 예산을 정해두면 예산선에 얼마나 가까운지 게이지로 보여줍니다.</p>
-          <div class="links">
-            <a class="pill" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-              App Store
-            </a>
-            <a class="pill" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l.1.1 9.3-9.3v-.2L3.9 2.4zM17.3 15.1l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM16.4 15.9l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.6.1l10.9-6.2M16.4 8.1L5.5 1.9c-.6-.3-1.2-.3-1.6.1l9.3 9.3 3.2-3.2z"/></svg>
-              Google Play
-            </a>
-          </div>
-        </div>
-
-
-        <div class="card" style="--accent:#4F7CFF">
-          <a class="card-link" href="/treebal/" aria-label="트리밸(Treebal) 소개 페이지로 이동"></a>
-          <div class="top">
-            <img class="icon" src="assets/treebal-icon.png" alt="">
-            <div>
-              <h3>트리밸<span class="tag tag-soon">준비 중</span></h3>
-              <div class="sub">Treebal · 자산배분 리밸런싱</div>
-            </div>
-          </div>
-          <p class="desc">주식·채권·금·코인을 내 방식대로 분류하고 목표 비중과 비교합니다. 지금 무엇을 사고팔아야 하는지, 새로 넣는 돈을 어디에 얼마씩 배분할지 계산합니다.</p>
-          <div class="links"><span class="note">출시 준비 중</span></div>
-        </div>
-
-        <div class="card" style="--accent:#3F6B53">
-          <div class="top">
-            <div class="icon tbd"></div>
-            <div>
-              <h3>루티<span class="tag tag-soon">개발 중</span></h3>
-              <div class="sub">Routi · 집안일 루틴 관리</div>
-            </div>
-          </div>
-          <p class="desc">청소와 가사를 주기로 등록해두면 때가 됐을 때 알려줍니다. 완료를 체크하면 다음 주기를 자동으로 계산해 다시 챙겨줍니다.</p>
-          <div class="links"><span class="note">개발 중</span></div>
-        </div>
-
+  <div class="phone">
+    <div class="screen">
+      <div class="island"></div>
+      <div class="status"><span id="t">9:41</span>
+        <svg viewBox="0 0 66 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="24" height="10" rx="3" fill="none" stroke="#fff" stroke-width="1.2"/><rect x="40" y="3" width="18" height="6" rx="1.5"/><rect x="63" y="4" width="2" height="4" rx="1"/></svg>
       </div>
-    </section>
 
-    <section id="contact">
-      <div class="contact">
-        <div class="kicker">문의</div>
-        <a class="mail" href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a>
+      <div class="home">
+        <a class="glass w-wide" href="/brim/">
+          <div class="w-label"><img src="/assets/brim-icon.svg" alt="">담은 · 오늘 장보기</div>
+          <div class="big">24,300원</div>
+          <div class="meter"><i></i></div>
+          <div class="small">예산까지 5,700원 남았어요</div>
+        </a>
+
+        <a class="glass w-sq" href="/treebal/">
+          <div class="w-label"><img src="/assets/treebal-icon.png" alt="">트리밸</div>
+          <div class="big">비중 맞추기</div>
+          <div class="small">채권으로 168.4만 원</div>
+          <div class="alloc"><i style="width:55%;background:#7FA2FF"></i><i style="width:30%;background:#C9D7FF"></i><i style="width:10%;background:#E5B53A"></i><i style="width:5%;background:#F08A3C"></i></div>
+        </a>
+
+        <div class="w-sq" style="display:grid;grid-template-columns:1fr 1fr;gap:16px 8px;align-content:center;padding:0;aspect-ratio:auto">
+          <a class="icon" href="/brim/"><span class="img"><img src="/assets/brim-icon.svg" alt=""></span><span>담은</span></a>
+          <a class="icon" href="/treebal/"><span class="img"><img src="/assets/treebal-icon.png" alt=""></span><span>트리밸</span></a>
+          <span class="icon badge"><span class="img tbd"></span><span>루티</span></span>
+          <a class="icon" href="mailto:hankimsoft@gmail.com"><span class="img" style="background:linear-gradient(#5AB0FF,#2A7BEA)"><svg viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11zm2.2-.3L12 11.4l6.8-5.2a1 1 0 0 0-.3-.2h-13a1 1 0 0 0-.3.2zM19 8.3l-6.4 4.9a1 1 0 0 1-1.2 0L5 8.3v9.2c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V8.3z"/></svg></span><span>문의</span></a>
         </div>
-    </section>
 
+        <a class="icon" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><span class="img" style="background:linear-gradient(#1AC8FC,#1C7CF4)"><svg viewBox="0 0 24 24"><path d="M11 4a1 1 0 1 1 2 0v9.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.4l3.3 3.3V4zM5 19a1 1 0 1 1 0-2h14a1 1 0 1 1 0 2H5z"/></svg></span><span>App Store</span></a>
+        <a class="icon" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><span class="img" style="background:#fff"><svg viewBox="0 0 24 24" style="fill:#16181A"><path d="M5 3.5v17c0 .4.4.6.7.4l14-8.5a.5.5 0 0 0 0-.8l-14-8.5c-.3-.2-.7 0-.7.4z"/></svg></span><span>Play</span></a>
+        <a class="icon" href="/brim/support/"><span class="img" style="background:#ECEFEC"><svg viewBox="0 0 24 24" style="fill:#3E9E6E"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 15.5a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm1.3-5.1c-.6.3-.8.6-.8 1.1v.3h-2v-.4c0-1.2.6-2 1.6-2.5.7-.4 1-.7 1-1.2 0-.6-.5-1-1.2-1s-1.2.4-1.3 1.1H8.6C8.7 7.9 10.1 6.8 12 6.8c1.9 0 3.2 1.1 3.2 2.6 0 1.2-.7 2.1-1.9 3z"/></svg></span><span>도움말</span></a>
+        <a class="icon" href="/brim/privacy/"><span class="img" style="background:#ECEFEC"><svg viewBox="0 0 24 24" style="fill:#5D6166"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm0 2.1L6 6.4V11c0 4 2.6 7.6 6 8.9 3.4-1.3 6-4.9 6-8.9V6.4l-6-2.3z"/></svg></span><span>방침</span></a>
+      </div>
+
+      <div class="dots" aria-hidden="true"><i></i><i></i></div>
+      <nav class="glass dock" aria-label="앱">
+        <a class="icon" href="/brim/"><span class="img"><img src="/assets/brim-icon.svg" alt="담은"></span><span>담은</span></a>
+        <a class="icon" href="/treebal/"><span class="img"><img src="/assets/treebal-icon.png" alt="트리밸"></span><span>트리밸</span></a>
+        <span class="icon"><span class="img tbd"></span><span>루티</span></span>
+        <a class="icon" href="mailto:hankimsoft@gmail.com"><span class="img" style="background:linear-gradient(#5AB0FF,#2A7BEA)"><svg viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11zm2.2-.3L12 11.4l6.8-5.2a1 1 0 0 0-.3-.2h-13a1 1 0 0 0-.3.2zM19 8.3l-6.4 4.9a1 1 0 0 1-1.2 0L5 8.3v9.2c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V8.3z"/></svg></span><span>문의</span></a>
+      </nav>
+      <div class="bar"></div>
+    </div>
   </div>
-</main>
 
-<footer>
-  <div class="wrap">© 2026 hankimsoft</div>
-</footer>
-
+</div>
+<script>
+  // 상태 표시줄에 지금 시각
+  (function(){var d=new Date();document.getElementById('t').textContent=d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes()})();
+</script>
 </body>
 </html>
