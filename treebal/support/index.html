@@ -12,29 +12,20 @@ layout: null
 <title>지원 — 트리밸 (Treebal)</title>
 <meta name="description" content="트리밸(Treebal) 고객 지원. 자주 묻는 질문과 문의 방법을 안내합니다.">
 <link rel="canonical" href="https://hankimsoft.github.io/treebal/support/">
-<link rel="icon" href="../assets/icon.png" type="image/png">
+<link rel="icon" href="/treebal/assets/icon.png" type="image/png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="../assets/doc.css">
+<link rel="stylesheet" href="/assets/doc.css">
 </head>
-<body>
-
-<header>
-  <div class="wrap">
-    <a class="brand" href="../"><img src="../assets/icon.png" alt=""><b>트리밸</b></a>
-    <nav>
-      <a href="../">소개</a>
-      <a href="../support/">지원</a>
-      <a href="../privacy/">개인정보</a>
-      <a href="../terms/">약관</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-
-    <div class="doc-head">
+<body data-app="treebal">
+<header class="top"><div class="in">
+  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>hankimsoft</a>
+  <a class="me" href="/treebal/"><img src="/treebal/assets/icon.png" alt="">트리밸</a>
+  <nav><a href="/treebal/" class="opt">소개</a><a href="/treebal/support/" aria-current="page">지원</a><a href="/treebal/privacy/">개인정보</a><a href="/treebal/terms/">약관</a></nav>
+</div></header>
+<main class="layout solo">
+<article class="sheet">
+<div class="doc-head">
       <h1>지원</h1>
       <p class="meta">트리밸(Treebal)</p>
     </div>
@@ -47,79 +38,38 @@ layout: null
 
     <div class="doc">
       <h2>자주 묻는 질문</h2>
+<div class="faq">
+<details id="q1"><summary>폰을 바꾸면 그대로 옮길 수 있나요?</summary><p>네. <strong>설정 → 백업 → 백업 파일 내보내기</strong>로 파일을 만들어 두고, 새 폰에서 <strong>백업 파일에서 복원하기</strong>로 불러오면 돼요. 종목·현금·목표 비중·계좌와 기록까지 함께 옮겨져요. 백업 파일은 앱을 지우거나 폰을 바꿔도 남아요.</p></details>
 
-      <div class="qa">
-        <h3>폰을 바꾸면 그대로 옮길 수 있나요?</h3>
-        <p>네. <strong>설정 → 백업 → 백업 파일 내보내기</strong>로 파일을 만들어 두고, 새 폰에서 <strong>백업 파일에서 복원하기</strong>로 불러오면 돼요. 종목·현금·목표 비중·계좌와 기록까지 함께 옮겨져요. 백업 파일은 앱을 지우거나 폰을 바꿔도 남아요.</p>
-      </div>
+      <details id="q2"><summary>앱을 지우면 입력한 내용이 사라지나요?</summary><p>네. 모든 내용이 폰 안에만 저장돼서 앱을 지우면 함께 사라지고, 운영자가 복구해 드릴 수 없어요. 폰을 초기화하거나 잃어버린 경우에도 마찬가지예요. 중요한 내용은 백업 파일로 내보내 따로 보관해 주세요.</p></details>
 
-      <div class="qa">
-        <h3>앱을 지우면 입력한 내용이 사라지나요?</h3>
-        <p>네. 모든 내용이 폰 안에만 저장돼서 앱을 지우면 함께 사라지고, 운영자가 복구해 드릴 수 없어요. 폰을 초기화하거나 잃어버린 경우에도 마찬가지예요. 중요한 내용은 백업 파일로 내보내 따로 보관해 주세요.</p>
-      </div>
+      <details id="q3"><summary>복원했는데 기록이 일부만 왔어요.</summary><p>기록은 <strong>지금 폰에 없는 날짜만 채워 넣어요.</strong> 이미 있는 날짜는 백업 쪽 값으로 덮어쓰지 않아요. 그래서 두 폰에서 같은 기간을 쓰셨다면 그 기간만큼은 늘어나지 않아요. 종목·현금·목표 비중·계좌는 백업할 때의 상태로 모두 바뀌어요.</p></details>
 
-      <div class="qa">
-        <h3>복원했는데 기록이 일부만 왔어요.</h3>
-        <p>기록은 <strong>지금 폰에 없는 날짜만 채워 넣어요.</strong> 이미 있는 날짜는 백업 쪽 값으로 덮어쓰지 않아요. 그래서 두 폰에서 같은 기간을 쓰셨다면 그 기간만큼은 늘어나지 않아요. 종목·현금·목표 비중·계좌는 백업할 때의 상태로 모두 바뀌어요.</p>
-      </div>
+      <details id="q4"><summary>현재가가 일부 종목만 안 불러와져요.</summary><p>시세를 외부에서 받아 오기 때문에 일부 종목은 불러오지 못할 수 있어요. 불러온 종목만 채우고, 못 불러온 종목은 따로 알려 드려요. 화면을 당겨 다시 불러오시거나 그 종목의 현재가를 직접 넣으시면 돼요.</p></details>
 
-      <div class="qa">
-        <h3>현재가가 일부 종목만 안 불러와져요.</h3>
-        <p>시세를 외부에서 받아 오기 때문에 일부 종목은 불러오지 못할 수 있어요. 불러온 종목만 채우고, 못 불러온 종목은 따로 알려 드려요. 화면을 당겨 다시 불러오시거나 그 종목의 현재가를 직접 넣으시면 돼요.</p>
-      </div>
+      <details id="q5"><summary>실시간 시세인가요?</summary><p>아니에요. 앱을 열면 현재가를 자동으로 불러오고 화면을 당겨 다시 불러올 수도 있지만, 실시간 시세는 아니에요. 받아 오는 곳 사정에 따라 늦거나 틀릴 수 있어요. 중요한 투자 판단을 하기 전에는 증권사나 거래소에서 직접 확인해 주세요.</p></details>
 
-      <div class="qa">
-        <h3>실시간 시세인가요?</h3>
-        <p>아니에요. 앱을 열면 현재가를 자동으로 불러오고 화면을 당겨 다시 불러올 수도 있지만, 실시간 시세는 아니에요. 받아 오는 곳 사정에 따라 늦거나 틀릴 수 있어요. 중요한 투자 판단을 하기 전에는 증권사나 거래소에서 직접 확인해 주세요.</p>
-      </div>
+      <details id="q6"><summary>종목을 찾아도 안 나와요.</summary><p>종목 코드를 다시 확인해 주세요. 코드가 맞아도 시세를 받아 오는 곳에 없는 종목이면 검색 결과에 나오지 않을 수 있어요. 이럴 때는 종목을 직접 추가하고 현재가를 직접 넣으시면 돼요. 비중 계산은 그대로 돼요.</p></details>
 
-      <div class="qa">
-        <h3>종목을 찾아도 안 나와요.</h3>
-        <p>종목 코드를 다시 확인해 주세요. 코드가 맞아도 시세를 받아 오는 곳에 없는 종목이면 검색 결과에 나오지 않을 수 있어요. 이럴 때는 종목을 직접 추가하고 현재가를 직접 넣으시면 돼요. 비중 계산은 그대로 돼요.</p>
-      </div>
+      <details id="q7"><summary>환율이 안 불러와져요.</summary><p><strong>설정 → 환율</strong>에서 원/달러 환율을 직접 넣을 수 있어요. 직접 넣은 값이 있으면 그 값을 써요.</p></details>
 
-      <div class="qa">
-        <h3>환율이 안 불러와져요.</h3>
-        <p><strong>설정 → 환율</strong>에서 원/달러 환율을 직접 넣을 수 있어요. 직접 넣은 값이 있으면 그 값을 써요.</p>
-      </div>
+      <details id="q8"><summary>인터넷이 없어도 쓸 수 있나요?</summary><p>네. 종목 입력, 목표 비중, 비중 맞추기, 넣을 돈 나누기까지 모든 기능을 그대로 쓸 수 있어요. 인터넷은 현재가·환율을 불러올 때와 광고를 띄울 때만 써요. 현재가는 직접 넣으시면 돼요.</p></details>
 
-      <div class="qa">
-        <h3>인터넷이 없어도 쓸 수 있나요?</h3>
-        <p>네. 종목 입력, 목표 비중, 비중 맞추기, 넣을 돈 나누기까지 모든 기능을 그대로 쓸 수 있어요. 인터넷은 현재가·환율을 불러올 때와 광고를 띄울 때만 써요. 현재가는 직접 넣으시면 돼요.</p>
-      </div>
+      <details id="q9"><summary>광고를 없앨 수 있나요?</summary><p>지금은 광고를 없애는 기능이 없어요. 앱은 광고로 무료 운영되고 있어요. 관심분야에 맞춘 광고(개인 맞춤 광고)는 받지 않고, 입력하신 자산 정보는 광고에 쓰이지 않아요.</p></details>
 
-      <div class="qa">
-        <h3>광고를 없앨 수 있나요?</h3>
-        <p>지금은 광고를 없애는 기능이 없어요. 앱은 광고로 무료 운영되고 있어요. 관심분야에 맞춘 광고(개인 맞춤 광고)는 받지 않고, 입력하신 자산 정보는 광고에 쓰이지 않아요.</p>
-      </div>
-
-      <div class="qa">
-        <h3>트리밸이 종목을 추천해 주나요?</h3>
-        <p>아니에요. 트리밸은 계산 도구예요. 이용자가 정한 목표 비중과 입력한 자산으로 계산만 하고, 특정 종목의 매수·매도를 권유하거나 투자 자문을 제공하지 않아요. 투자 판단과 그 책임은 이용자 본인에게 있어요.</p>
-      </div>
-
-      <h2>관련 문서</h2>
+      <details id="q10"><summary>트리밸이 종목을 추천해 주나요?</summary><p>아니에요. 트리밸은 계산 도구예요. 이용자가 정한 목표 비중과 입력한 자산으로 계산만 하고, 특정 종목의 매수·매도를 권유하거나 투자 자문을 제공하지 않아요. 투자 판단과 그 책임은 이용자 본인에게 있어요.</p></details>
+</div>
+<h2>관련 문서</h2>
       <ul>
-        <li><a href="../privacy/">개인정보처리방침</a></li>
-        <li><a href="../terms/">이용약관</a></li>
+        <li><a href="/treebal/privacy/">개인정보처리방침</a></li>
+        <li><a href="/treebal/terms/">이용약관</a></li>
       </ul>
     </div>
-
-  </div>
+</article>
 </main>
-
-<footer>
-  <div class="wrap">
-    <div>© 2026 hankimsoft</div>
-    <nav>
-      <a href="/">hankimsoft</a>
-      <a href="../">트리밸 소개</a>
-      <a href="../support/">지원</a>
-      <a href="../privacy/">개인정보처리방침</a>
-      <a href="../terms/">이용약관</a>
-    </nav>
-  </div>
-</footer>
-
+<footer><div class="in">
+  <span>© 2026 hankimsoft</span><a href="/treebal/">트리밸 소개</a><a href="/treebal/support/">지원</a><a href="/treebal/privacy/">개인정보처리방침</a><a href="/treebal/terms/">이용약관</a><a href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a>
+</div></footer>
+<script src="/assets/doc.js"></script>
 </body>
 </html>
