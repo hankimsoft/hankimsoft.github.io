@@ -86,58 +86,62 @@
   .sbar{display:flex; justify-content:space-between; align-items:center; height:52px; padding:6px 30px 0; font-size:15px; font-weight:700; flex:none}
   .sbar svg{height:12px; fill:var(--app-ink)}
 
-  /* ---------- 앱 화면 ---------- */
-  .ahead{display:flex; align-items:center; height:44px; padding:0 18px; flex:none; gap:8px}
-  .ahead .t{flex:1; text-align:center; font-size:16px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  .ahead .x{width:64px; font-size:14px; color:var(--app-ink2)}
-  .ahead .x.r{text-align:right; display:flex; justify-content:flex-end; gap:12px}
-  .ahead .x.r b{color:var(--app-ink); letter-spacing:1px}
-  .sum{padding:10px 20px 14px; flex:none}
-  .sum .lbl{font-size:12.5px; color:var(--app-ink2); font-weight:600}
-  .sum .row{display:flex; align-items:center; gap:10px; margin-top:2px}
-  .sum .big{font-size:38px; font-weight:800; letter-spacing:-.04em; line-height:1.15; font-variant-numeric:tabular-nums}
-  .sum .big small{font-size:18px; font-weight:700; margin-left:2px}
-  .sum .badge{font-size:12.5px; font-weight:700; color:var(--brand-dark); background:var(--brand-surface); padding:3px 9px; border-radius:8px}
-  .gauge{position:relative; height:10px; border-radius:6px; background:var(--app-track); margin-top:14px}
-  .gauge i{position:absolute; left:0; top:0; bottom:0; border-radius:6px; background:var(--gc,var(--g-green)); transition:width .35s cubic-bezier(.3,.8,.3,1), background .35s ease}
-  .gauge b{position:absolute; top:-5px; bottom:-5px; width:2px; background:var(--app-ink); border-radius:1px}
-  .gline{display:flex; justify-content:space-between; margin-top:9px; font-size:12.5px; font-weight:700}
-  .gline .st{color:var(--app-ink2)} .gline .st.exact{color:var(--exact)} .gline .st.over{color:var(--g-red)}
-  .gline .bud{color:var(--brand-dark)}
-  .tools{display:flex; justify-content:space-between; align-items:center; padding:10px 20px 6px; border-top:8px solid var(--app-warm); flex:none}
-  .mode{font-size:12.5px; font-weight:600; background:var(--app-chip); padding:5px 10px; border-radius:8px}
-  .filt{display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--app-ink2); font-weight:600}
-  .filt u{text-decoration:none; min-width:20px; text-align:center; font-size:11.5px; padding:1px 6px; border-radius:7px; background:var(--app-chip)}
-  .filt.on{color:var(--brand-dark)} .filt.on u{background:var(--brand); color:#fff}
-  .items{list-style:none; margin:0; padding:0 8px; overflow:hidden; flex:1}
-  .items li{display:flex; align-items:center; gap:12px; height:50px; padding:0 12px; border-radius:12px; -webkit-tap-highlight-color:transparent; transition:background .12s ease}
+  /* ---------- 앱 화면 — 담은 저장소 project_docs/design/brand/creative/_src/gen.py(스토어 그림의 폰 화면)와 같은 치수 · 색 ---------- */
+  .ahead{display:flex; align-items:center; height:44px; padding:0 22px; flex:none}
+  .ahead .back{font-size:30px; width:40px; line-height:1; margin-top:-5px}
+  .ahead b{flex:1; text-align:center; font-weight:700; font-size:16.5px; padding-left:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .ahead .done{color:#A89E92; font-size:13.5px; margin:0 14px}
+  .ahead .dots{font-weight:900; letter-spacing:1px}
+  .sum{padding:0 22px; flex:none}
+  .sum .lbl{font-size:11.5px; color:#A89E92; margin-top:22px}
+  .tot{display:flex; align-items:baseline; margin-top:2px}
+  .tot b{font-size:42px; font-weight:800; letter-spacing:-1.2px; line-height:1.15; font-variant-numeric:tabular-nums; transition:color .3s ease}
+  .tot i{font-style:normal; font-size:14px; font-weight:700; margin-left:2px}
+  .tot.exact b,.tot.exact i{color:var(--exact)} .tot.over b,.tot.over i{color:var(--g-red)}
+  .badge{margin-left:10px; background:var(--brand-surface); color:var(--brand-dark); font-size:12.5px; font-weight:700; padding:5px 10px; border-radius:99px; transform:translateY(-6px); white-space:nowrap}
+  .gauge{position:relative; margin-top:16px; height:22px}
+  .lane{height:8px; border-radius:99px; background:var(--app-track); overflow:hidden; margin-bottom:5px}
+  .lane u{display:block; height:100%; border-radius:99px; transition:width .35s cubic-bezier(.3,.8,.3,1), background .35s ease}
+  .gauge s{position:absolute; top:-5px; width:2px; height:30px; background:var(--app-ink); left:75%}
+  .gline{display:flex; justify-content:space-between; margin-top:8px; font-size:12px}
+  .gline b{font-weight:800}
+  .gline span{color:var(--brand-dark); font-weight:700}
+  .leg{font-size:12px; color:#6F665B; margin-top:10px; display:flex; align-items:center; gap:6px; font-variant-numeric:tabular-nums}
+  .leg i{display:inline-block; width:16px; height:5px; border-radius:9px; transition:background .35s ease}
+  .leg i + span + i{margin-left:10px}
+  .tools{display:flex; justify-content:space-between; align-items:center; margin-top:26px; padding:18px 22px 10px; border-top:1px solid #EFE9DF; flex:none}
+  .mode{background:#EFE9DF; border-radius:99px; font-size:11.5px; font-weight:600; padding:6px 12px; color:#6F665B}
+  .filt{font-size:12px; color:var(--app-ink2); font-weight:600}
+  .filt em{font-style:normal; background:#ECE5D9; border-radius:9px; padding:2px 7px; margin-left:4px; font-size:11px}
+  .filt.on{color:var(--brand)} .filt.on em{background:var(--brand); color:#fff}
+  .items{list-style:none; margin:0; padding:0; overflow:hidden; flex:1}
+  .items li{display:flex; align-items:center; height:52px; border-bottom:1px solid #F0EAE0; padding:0 22px; font-size:14.5px; font-weight:600; -webkit-tap-highlight-color:transparent; transition:background .12s ease}
   .items.live li[data-i]{cursor:pointer}
-  .items.live li[data-i]:hover{background:rgba(42,37,33,.04)}
-  .items li .c{flex:none; width:24px; height:24px; border-radius:50%; border:2px solid var(--app-ctrl); display:grid; place-items:center; transition:all .15s ease}
-  .items li .c svg{width:14px; height:14px; stroke:#fff; stroke-width:3; fill:none; opacity:0}
-  .items li .n{flex:1; font-size:15px; font-weight:600}
-  .items li .p{font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; padding-left:12px; border-left:1px solid var(--app-divider); min-width:84px; text-align:right}
-  .items li .p.none{color:var(--app-ctrl); font-weight:500}
-  .items li.on .c{background:var(--brand); border-color:var(--brand)}
-  .items li.on .c svg{opacity:1}
-  .items li.on .n{color:var(--app-checked)}
-  .items li.add .c{border-style:dashed}
-  .items li.add .n{color:var(--app-ink2); font-weight:500}
-  .items li.add .n::after{content:''; display:inline-block; width:1.5px; height:17px; background:var(--brand); margin-left:2px; vertical-align:-3px; animation:blink 1s steps(1) infinite}
+  .items.live li[data-i]:hover{background:rgba(42,37,33,.03)}
+  .ck{width:24px; height:24px; border-radius:50%; background:#fff; border:1.5px solid #D9D1C4; margin-right:14px; position:relative; flex:none; transition:background .15s ease, border-color .15s ease}
+  .ck::after{content:''; position:absolute; left:7.5px; top:4px; width:5.5px; height:10px; border:solid #fff; border-width:0 2.5px 2.5px 0; transform:rotate(45deg); opacity:0}
+  .on > .ck{background:var(--brand-dark); border-color:var(--brand-dark)} .on > .ck::after{opacity:1}
+  .items .n{flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .items .p{width:96px; flex:none; border-left:1px solid #E7E0D4; padding-left:16px; font-weight:500; color:#3a342e; font-variant-numeric:tabular-nums}
+  .items li.typing .n::after{content:''; display:inline-block; width:1.5px; height:16px; background:var(--brand); margin-left:2px; vertical-align:-3px; animation:blink 1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
   .items li.hide{display:none}
-  .fly{position:absolute; right:30px; z-index:6; pointer-events:none; display:flex; align-items:center; gap:8px;
-       background:#fff; border-radius:14px; padding:9px 14px; box-shadow:0 10px 28px rgba(42,37,33,.18); font-weight:800; font-size:15px; animation:fly 1.1s ease forwards}
-  .fly span{color:var(--g-orange)}
-  @keyframes fly{0%{opacity:0; transform:translateY(8px) scale(.9)} 15%{opacity:1; transform:none} 70%{opacity:1} 100%{opacity:0; transform:translateY(-26px)}}
-  .cheer{position:absolute; left:0; right:0; bottom:26px; display:flex; flex-direction:column; align-items:center; z-index:6;
+  /* 금액을 넣을 때 떠오르는 줄 — 스토어 그림의 「삼겹살 600g +18,900」 */
+  .fly{position:absolute; left:16px; right:16px; z-index:6; pointer-events:none; display:flex; align-items:center;
+       background:#fff; border-radius:16px; padding:11px 16px 11px 12px; box-shadow:0 12px 30px rgba(42,37,33,.2); font-weight:700; font-size:15.5px; animation:fly 1.2s ease forwards}
+  .fly .ck{background:var(--brand-dark); border-color:var(--brand-dark)} .fly .ck::after{opacity:1}
+  .fly .n{flex:1}
+  .fly .p{color:var(--g-orange); font-weight:800; margin-left:16px}
+  @keyframes fly{0%{opacity:0; transform:translateY(8px) scale(.94) rotate(-2deg)} 15%{opacity:1; transform:rotate(-2deg)} 70%{opacity:1} 100%{opacity:0; transform:translateY(-24px) rotate(-2deg)}}
+  /* .phone-pin 은 sticky 라 그 자체가 기준 상자가 된다 */
+  .cheer{position:absolute; left:-118px; bottom:90px; display:flex; flex-direction:column; align-items:center; z-index:8;
          pointer-events:none; opacity:0; transform:translateY(30px) scale(.9); transition:all .45s cubic-bezier(.2,1.4,.4,1)}
   .cheer.on{opacity:1; transform:none}
   .cheer img{width:150px}
   .cheer .bubble{position:relative; background:#fff; font-weight:800; font-size:19px; padding:10px 18px; border-radius:16px; box-shadow:0 10px 30px rgba(42,37,33,.16); margin-bottom:-6px}
   .cheer .bubble::after{content:''; position:absolute; left:50%; bottom:-7px; width:14px; height:14px; margin-left:-7px; background:#fff; transform:rotate(45deg); border-radius:2px}
   .homebar{position:absolute; left:50%; bottom:8px; width:130px; height:5px; margin-left:-65px; border-radius:3px; background:var(--app-ink); opacity:.85; z-index:7}
-  @media (prefers-reduced-motion:reduce){ .fly{animation:none; opacity:0} .cheer,.gauge i,.step{transition:none} }
+  @media (prefers-reduced-motion:reduce){ .fly{animation:none; opacity:0} .cheer,.lane u,.step{transition:none} }
 
   /* ---------- 아래쪽 ---------- */
   .band{padding-block:clamp(64px,9vw,120px); border-top:1px solid var(--line)}
@@ -186,7 +190,9 @@
   @media (max-width:980px){
     .stage{grid-template-columns:1fr}
     .phone-col{order:-1; display:flex; justify-content:center}
-    .phone-pin{position:static; padding:8px 0 0}
+    .phone-pin{position:relative; padding:8px 0 0}
+    .cheer{left:-6px; bottom:12px}
+    .cheer img{width:110px}
     .hero{min-height:0; padding-top:40px}
     .step{min-height:0; opacity:1; padding-block:36px; border-top:1px solid var(--line)}
     .hero{border-top:0}
@@ -223,8 +229,8 @@
         <span class="chip"><img src="assets/icon.svg" alt=""><span class="l-ko">장보기 계산기</span><span class="l-en">Shopping Calculator</span></span>
         <h1 class="l-ko">원하는 금액에<br><em>딱 맞게</em> 담아요</h1>
         <h1 class="l-en">Know your <em>total</em><br>before the register</h1>
-        <p class="l-ko">살 것을 적고 장을 보며 체크하면 담은 금액이 바로 쌓입니다. 예산을 정해 두면 얼마나 남았는지 막대로 보여 줍니다.</p>
-        <p class="l-en">Write down what you need, check things off as you shop, and your total adds up as you go. Set a budget and the bar shows how much is left.</p>
+        <p class="l-ko">살 것을 적고, 장을 보며 담을 때마다 금액을 넣으면 합계가 바로 쌓입니다. 예산을 정해 두면 얼마나 남았는지 막대로 보여 줍니다.</p>
+        <p class="l-en">Write down what you need, enter prices as things go in the cart, and your total adds up as you go. Set a budget and the bar shows how much is left.</p>
         <div class="stores">
           <a class="btn" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>App Store</a>
           <a class="btn" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l.1.1 9.3-9.3v-.2L3.9 2.4zM17.3 15.1l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM16.4 15.9l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.6.1l10.9-6.2M16.4 8.1L5.5 1.9c-.6-.3-1.2-.3-1.6.1l9.3 9.3 3.2-3.2z"/></svg>Google Play</a>
@@ -245,8 +251,8 @@
         <img class="m-art" src="assets/02-total.png" alt="">
         <span class="no">02</span>
         <h2><span class="l-ko">담을 때마다 합계가 쌓여요</span><span class="l-en">It adds up as you go</span></h2>
-        <p class="l-ko">장바구니에 넣으며 체크하면 담은 금액이 그 자리에서 늘어납니다. 계산대 앞에서 놀랄 일이 없습니다.</p>
-        <p class="l-en">Check items off as they go in the cart and the total updates on the spot. No surprises at the register.</p>
+        <p class="l-ko">담으면서 금액을 적으면 합계가 그 자리에서 늘어나고, 체크한 금액은 옆에 따로 보입니다. 계산대 앞에서 놀랄 일이 없습니다.</p>
+        <p class="l-en">Enter a price as something goes in the cart and the total updates on the spot. What you have checked shows separately. No surprises at the register.</p>
       </section>
 
       <section class="step" data-step="budget">
@@ -268,20 +274,22 @@
 
     <div class="phone-col">
       <div class="phone-pin">
+        <!-- 딱 맞으면 캐릭터가 폰 밖에서 축하한다(스토어 그림처럼). 앱 화면 안에는 이런 캐릭터가 없다. -->
+        <div class="cheer" id="cheer" aria-hidden="true"><div class="bubble" id="bubble"></div><img src="assets/char/done_cheer.svg" alt=""></div>
         <div class="phone" role="img" aria-label="담은 앱 화면 미리 보기 · Brim app preview">
           <div class="screen">
             <div class="island"></div>
             <div class="sbar"><span>9:41</span><svg viewBox="0 0 66 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="38" y="1" width="24" height="10" rx="3" fill="none" stroke="#2A2521" stroke-width="1.2"/><rect x="40" y="3" width="18" height="6" rx="1.5"/><rect x="63" y="4" width="2" height="4" rx="1"/></svg></div>
-            <div class="ahead"><span class="x">‹</span><span class="t" id="ttl"></span><span class="x r"><span id="done"></span><b>⋯</b></span></div>
+            <div class="ahead"><span class="back">‹</span><b id="ttl"></b><span class="done" id="done"></span><span class="dots">•••</span></div>
             <div class="sum">
               <div class="lbl" id="lbl"></div>
-              <div class="row"><span class="big" id="total"></span><span class="badge" id="badge"></span></div>
-              <div class="gauge"><i id="fill"></i><b id="mark"></b></div>
-              <div class="gline"><span class="st" id="st"></span><span class="bud" id="bud"></span></div>
+              <div class="tot" id="tot"><b id="total"></b><i id="unit"></i><span class="badge" id="badge"></span></div>
+              <div class="gauge"><div class="lane"><u id="l1"></u></div><div class="lane"><u id="l2"></u></div><s></s></div>
+              <div class="gline"><b id="st"></b><span id="bud"></span></div>
+              <div class="leg"><i id="k1"></i><span id="legT"></span><i id="k2"></i><span id="legC"></span></div>
             </div>
-            <div class="tools"><span class="mode" id="mode"></span><span class="filt" id="filt"><span id="filtL"></span> <u id="left">0</u></span></div>
+            <div class="tools"><span class="mode" id="mode"></span><span class="filt" id="filt"><span id="filtL"></span><em id="left">0</em></span></div>
             <ul class="items" id="items"></ul>
-            <div class="cheer" id="cheer"><div class="bubble" id="bubble"></div><img src="assets/char/done_cheer.svg" alt=""></div>
             <div class="homebar"></div>
           </div>
         </div>

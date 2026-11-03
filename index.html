@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>hankimsoft</title>
-<meta name="description" content="hankimsoft가 만드는 모바일 앱 — 장보기 계산기 담은(Brim), 자산배분 리밸런싱 트리밸(Treebal), 집안일 루틴 관리 루티(Routi).">
+<meta name="description" content="hankimsoft가 만드는 모바일 앱 — 장보기 계산기 담은(Brim), 자산배분 리밸런싱 트리밸(Treebal).">
 <meta name="google-site-verification" content="VJ95UxA5i5IiW1hQxM98G9uI-Lwynx4EgOh6faAXhok">
 <link rel="canonical" href="https://hankimsoft.github.io/">
 <link rel="icon" href="/brim/assets/icon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:title" content="hankimsoft">
-<meta property="og:description" content="hankimsoft가 만드는 모바일 앱 — 담은, 트리밸, 루티.">
+<meta property="og:description" content="hankimsoft가 만드는 모바일 앱 — 담은, 트리밸.">
 <meta property="og:url" content="https://hankimsoft.github.io/">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -71,16 +71,12 @@
              box-shadow:0 4px 12px rgba(0,0,0,.25); transition:transform .15s ease}
   .icon:hover .img{transform:scale(1.07)}
   .icon .img img{width:100%; height:100%; display:block}
-  .icon .tbd{border:2px dashed rgba(255,255,255,.55); box-shadow:none}
-  .icon.badge{position:relative}
-  .icon.badge::after{content:'개발 중'; position:absolute; top:-8px; right:-6px; background:#E5534B; color:#fff; font-size:9.5px; font-weight:800;
-                      padding:2px 6px; border-radius:10px}
   .icon svg{width:30px; height:30px; fill:#fff}
 
   .dots{display:flex; justify-content:center; gap:7px; padding:8px 0 12px}
   .dots i{width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.4)}
   .dots i:first-child{background:#fff}
-  .dock{margin:0 -8px 14px; padding:14px 18px; border-radius:36px; display:flex; justify-content:space-between}
+  .dock{margin:0 -8px 14px; padding:14px 18px; border-radius:36px; display:flex; justify-content:space-around}
   .dock .icon span:last-child{display:none}
   .bar{width:136px; height:5px; border-radius:3px; background:#fff; margin:0 auto 8px; opacity:.9}
 
@@ -101,7 +97,7 @@
   <section class="side">
     <div class="brand">hankimsoft</div>
     <h1>매일 여는<br>앱을 만듭니다</h1>
-    <p>장보기, 자산 관리, 집안일처럼 폰 첫 화면에 둘 만한 앱. iOS와 Android에서 씁니다.</p>
+    <p>장보기, 자산 관리처럼 폰 첫 화면에 둘 만한 앱. iOS와 Android에서 씁니다.</p>
     <div class="hint"><i></i>아이콘을 눌러 보세요</div>
     <a class="mail" href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a>
   </section>
@@ -131,11 +127,9 @@
         <div class="w-sq" style="display:grid;grid-template-columns:1fr 1fr;gap:16px 8px;align-content:center;padding:0;aspect-ratio:auto">
           <a class="icon" href="/brim/"><span class="img"><img src="/assets/brim-icon.svg" alt=""></span><span>담은</span></a>
           <a class="icon" href="/treebal/"><span class="img"><img src="/assets/treebal-icon.png" alt=""></span><span>트리밸</span></a>
-          <span class="icon badge"><span class="img tbd"></span><span>루티</span></span>
+          <a class="icon" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><span class="img" style="background:linear-gradient(#1AC8FC,#1C7CF4)"><svg viewBox="0 0 24 24"><path d="M11 4a1 1 0 1 1 2 0v9.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.4l3.3 3.3V4zM5 19a1 1 0 1 1 0-2h14a1 1 0 1 1 0 2H5z"/></svg></span><span>App Store</span></a>
           <a class="icon" href="mailto:hankimsoft@gmail.com"><span class="img" style="background:linear-gradient(#5AB0FF,#2A7BEA)"><svg viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11zm2.2-.3L12 11.4l6.8-5.2a1 1 0 0 0-.3-.2h-13a1 1 0 0 0-.3.2zM19 8.3l-6.4 4.9a1 1 0 0 1-1.2 0L5 8.3v9.2c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V8.3z"/></svg></span><span>문의</span></a>
         </div>
-
-        <a class="icon" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><span class="img" style="background:linear-gradient(#1AC8FC,#1C7CF4)"><svg viewBox="0 0 24 24"><path d="M11 4a1 1 0 1 1 2 0v9.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.4l3.3 3.3V4zM5 19a1 1 0 1 1 0-2h14a1 1 0 1 1 0 2H5z"/></svg></span><span>App Store</span></a>
         <a class="icon" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><span class="img" style="background:#fff"><svg viewBox="0 0 24 24" style="fill:#16181A"><path d="M5 3.5v17c0 .4.4.6.7.4l14-8.5a.5.5 0 0 0 0-.8l-14-8.5c-.3-.2-.7 0-.7.4z"/></svg></span><span>Play</span></a>
         <a class="icon" href="/brim/support/"><span class="img" style="background:#ECEFEC"><svg viewBox="0 0 24 24" style="fill:#3E9E6E"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 15.5a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm1.3-5.1c-.6.3-.8.6-.8 1.1v.3h-2v-.4c0-1.2.6-2 1.6-2.5.7-.4 1-.7 1-1.2 0-.6-.5-1-1.2-1s-1.2.4-1.3 1.1H8.6C8.7 7.9 10.1 6.8 12 6.8c1.9 0 3.2 1.1 3.2 2.6 0 1.2-.7 2.1-1.9 3z"/></svg></span><span>도움말</span></a>
         <a class="icon" href="/brim/privacy/"><span class="img" style="background:#ECEFEC"><svg viewBox="0 0 24 24" style="fill:#5D6166"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm0 2.1L6 6.4V11c0 4 2.6 7.6 6 8.9 3.4-1.3 6-4.9 6-8.9V6.4l-6-2.3z"/></svg></span><span>방침</span></a>
@@ -145,7 +139,6 @@
       <nav class="glass dock" aria-label="앱">
         <a class="icon" href="/brim/"><span class="img"><img src="/assets/brim-icon.svg" alt="담은"></span><span>담은</span></a>
         <a class="icon" href="/treebal/"><span class="img"><img src="/assets/treebal-icon.png" alt="트리밸"></span><span>트리밸</span></a>
-        <span class="icon"><span class="img tbd"></span><span>루티</span></span>
         <a class="icon" href="mailto:hankimsoft@gmail.com"><span class="img" style="background:linear-gradient(#5AB0FF,#2A7BEA)"><svg viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11zm2.2-.3L12 11.4l6.8-5.2a1 1 0 0 0-.3-.2h-13a1 1 0 0 0-.3.2zM19 8.3l-6.4 4.9a1 1 0 0 1-1.2 0L5 8.3v9.2c0 .3.2.5.5.5h13c.3 0 .5-.2.5-.5V8.3z"/></svg></span><span>문의</span></a>
       </nav>
       <div class="bar"></div>
