@@ -1,9 +1,3 @@
----
-layout: null
-# 트리밸 소개 페이지. 문구는 portfolio_rebalancing/project_docs/store/play_listing.md 의
-# 긴 설명이 원본입니다 — 스토어 설명을 고치면 여기도 같이 고치세요.
-# 스크린샷은 release_screenshot/2_google_play/phone_screenshots 를 620px 로 줄인 것.
----
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,219 +16,250 @@ layout: null
 <style>
   :root{
     color-scheme:light;
-    --bg:#F4EFE6; --surface:#FBF8F3; --ink:#2A2521; --ink2:#5C544B; --ink3:#8A8073;
-    --line:#E4DCCE; --line2:#DFD6C6;
-    --blue:#4F7CFF; --blue-dark:#2F55C9; --blue-soft:#EEF2FF;
-    --wrap:1120px;
+    --bg:#F1F1EE; --ink:#16181A; --ink2:#5D6166; --ink3:#8E9297; --line:#DEDED8; --sheet:#FFFFFF;
+    --blue:#4F7CFF; --blue-ink:#2F55C9; --blue-soft:#E8EEFF; --navy:#16224A;
+    --pad:clamp(16px,4vw,48px);
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--ink); line-height:1.7;
-    font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,
-                'Apple SD Gothic Neo',system-ui,sans-serif;
-    word-break:keep-all; overflow-wrap:anywhere;
-  }
-  img{max-width:100%}
+  body{margin:0; background:var(--bg); color:var(--ink); word-break:keep-all; overflow-wrap:anywhere; line-height:1.6;
+       font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',system-ui,sans-serif}
   a{color:inherit}
-  .wrap{max-width:var(--wrap); margin:0 auto; padding-inline:28px}
+  img{max-width:100%}
+  .wrap{max-width:1180px; margin:0 auto; padding-inline:var(--pad)}
 
-  header{position:sticky; top:0; z-index:20; background:rgba(237,231,221,.92);
-         backdrop-filter:blur(12px); border-bottom:1px solid var(--line2)}
-  header .wrap{display:flex; align-items:center; gap:14px; padding-block:14px}
-  header .brand{display:flex; align-items:center; gap:11px; text-decoration:none}
-  header .brand img{width:28px; height:28px; border-radius:24%; display:block}
-  header .brand b{font-size:16px; font-weight:800; letter-spacing:-.4px}
-  header nav{margin-left:auto; display:flex; gap:18px}
-  header nav a{font-size:13.5px; font-weight:600; color:var(--ink3); text-decoration:none}
-  header nav a:hover{color:var(--ink)}
+  /* ---------- 위 막대 (담은 소개와 같음) ---------- */
+  .top{position:sticky; top:0; z-index:30; background:rgba(241,241,238,.84); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
+  .top .wrap{display:flex; align-items:center; gap:14px; height:58px}
+  .back{display:flex; align-items:center; gap:4px; font-size:14px; font-weight:600; color:var(--ink3); text-decoration:none}
+  .back:hover{color:var(--ink)}
+  .back svg{width:18px; height:18px}
+  .me{display:flex; align-items:center; gap:8px; font-weight:800; font-size:15px; letter-spacing:-.3px; margin-left:6px}
+  .me img{width:24px; height:24px; border-radius:24%}
+  .top nav{margin-left:auto; display:flex; align-items:center; gap:18px; font-size:13.5px; color:var(--ink2)}
+  .top nav a{text-decoration:none} .top nav a:hover{color:var(--ink)}
 
-  /* hero */
-  .hero{padding-block:78px 10px}
-  .badge{display:inline-block; padding:7px 14px; border-radius:999px; background:var(--blue-soft);
-         border:1px solid #D9E2FF; color:var(--blue-dark); font-size:12.5px; font-weight:700}
-  .hero h1{margin:20px 0 0; font-size:50px; line-height:1.18; letter-spacing:-2.1px; font-weight:800}
-  .hero .lead{margin:22px 0 0; font-size:18px; line-height:1.75; color:var(--ink2); max-width:40ch}
-  .hero .sub{margin:16px 0 0; font-size:14.5px; color:var(--ink3)}
+  /* ---------- 고정 화면 카드 + 흐르는 글 ---------- */
+  .stage{display:grid; grid-template-columns:1fr 380px; gap:clamp(32px,6vw,96px)}
+  .deck-pin{position:sticky; top:58px; height:calc(100vh - 58px); display:flex; align-items:center; justify-content:center}
+  /* 스토어 스크린샷(348×620)에는 이미 폰 틀과 제목이 들어 있어서, 폰 틀 없이 카드로 겹쳐 놓는다 */
+  .deck{position:relative; width:340px; aspect-ratio:348/620; max-height:calc(100vh - 110px)}
+  .deck img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:28px; background:#fff;
+            box-shadow:0 30px 60px rgba(22,34,74,.16), 0 4px 12px rgba(22,34,74,.08);
+            opacity:0; transform:translateY(18px) scale(.96); transition:opacity .45s ease, transform .55s cubic-bezier(.2,.8,.2,1)}
+  .deck img.on{opacity:1; transform:none; z-index:3}
+  /* 첫 화면: 세 장을 부채꼴로 */
+  .deck.fan img:nth-child(2){opacity:1; transform:translateX(-30%) rotate(-7deg) scale(.86); z-index:1}
+  .deck.fan img:nth-child(3){opacity:1; transform:translateX(30%) rotate(7deg) scale(.86); z-index:1}
+  .deck.fan img:nth-child(1){opacity:1; transform:none; z-index:3}
 
-  /* 스크린샷 가로 스트립 */
-  .shots{margin-top:46px; padding-bottom:10px; overflow-x:auto; -webkit-overflow-scrolling:touch}
-  .shots ul{display:flex; gap:16px; margin:0; padding:0 28px; list-style:none}
-  .shots li{flex:none; width:248px}
-  .shots img{width:100%; display:block; border-radius:18px; border:1px solid var(--line);
-             box-shadow:0 14px 32px rgba(42,37,33,.10); background:#fff}
-  .shots .cap{margin-top:10px; font-size:12.5px; color:var(--ink3); font-weight:600; line-height:1.55}
-  .shots-hint{margin-top:6px; font-size:12.5px; color:var(--ink3)}
+  .step{min-height:80vh; display:flex; flex-direction:column; justify-content:center; padding-block:48px; opacity:.35; transition:opacity .35s ease}
+  .step.on, .hero{opacity:1}
+  .hero{min-height:calc(100vh - 58px)}
+  .badge{align-self:flex-start; display:inline-flex; align-items:center; gap:8px; padding:6px 12px 6px 7px; border-radius:10px;
+         background:var(--blue-soft); color:var(--blue-ink); font-size:13.5px; font-weight:700}
+  .badge img{width:22px; height:22px; border-radius:24%}
+  .hero h1{margin:22px 0 0; font-size:clamp(38px,5vw,62px); line-height:1.12; letter-spacing:-.045em; font-weight:800}
+  .hero h1 em{font-style:normal; color:var(--blue)}
+  .hero .lead{margin:22px 0 0; font-size:17px; color:var(--ink2); max-width:38ch; line-height:1.75}
+  .hero .sub{margin:18px 0 0; font-size:14.5px; font-weight:700; color:var(--blue-ink)}
+  .step .no{font-size:13px; font-weight:700; color:var(--ink3); font-variant-numeric:tabular-nums}
+  .step h2{margin:12px 0 0; font-size:clamp(28px,3.2vw,42px); line-height:1.2; letter-spacing:-.04em; font-weight:800}
+  .step p{margin:16px 0 0; font-size:16.5px; color:var(--ink2); max-width:38ch; line-height:1.75}
+  .step ul{margin:16px 0 0; padding-left:20px; font-size:16.5px; color:var(--ink2); max-width:40ch; line-height:1.75}
+  .step ul li::marker{color:var(--blue)}
+  .step .m-shot{display:none}
 
-  section{padding-block:46px}
-  .kicker{font-size:12px; font-weight:800; letter-spacing:.1em; color:var(--blue-dark); text-transform:uppercase}
-  h2{margin:0; font-size:30px; letter-spacing:-1px; font-weight:800; line-height:1.3}
+  /* ---------- 아래쪽 ---------- */
+  .band{padding-block:clamp(64px,9vw,120px); border-top:1px solid var(--line)}
+  .band h2{margin:0; font-size:clamp(28px,3.4vw,42px); letter-spacing:-.04em; line-height:1.2}
+  .who{margin:28px 0 0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .who li{background:var(--sheet); border-radius:24px; padding:26px 26px 28px; font-size:16px; line-height:1.7; color:var(--ink2)}
+  .who li::before{content:''; display:block; width:28px; height:4px; border-radius:2px; background:var(--blue); margin-bottom:16px}
+  .more{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
+  .more div{border-top:2px solid var(--ink); padding-top:16px}
+  .more h3{margin:0; font-size:18px; letter-spacing:-.02em}
+  .more p{margin:8px 0 0; font-size:15px; line-height:1.75; color:var(--ink2)}
+  .notes{margin:24px 0 0; padding:0; list-style:none; border-top:1px solid var(--ink)}
+  .notes li{padding:16px 0; border-bottom:1px solid var(--line); font-size:15.5px; line-height:1.75; color:var(--ink2)}
+  .end{margin-block:0 64px; border-radius:clamp(24px,3vw,40px); background:var(--navy); color:#EEF2FF;
+       display:grid; grid-template-columns:1fr auto; align-items:center; gap:24px; padding:clamp(32px,5vw,64px)}
+  .end .k{font-size:13.5px; font-weight:700; color:#9DB4FF}
+  .end h2{margin:8px 0 0; font-size:clamp(28px,3.6vw,44px); letter-spacing:-.04em; line-height:1.2}
+  .end a.mail{display:inline-block; margin-top:22px; font-size:clamp(18px,2.4vw,24px); font-weight:800; text-decoration:none; border-bottom:2px solid #6F86D6; padding-bottom:3px}
+  .end a.mail:hover{border-bottom-color:#EEF2FF}
+  .end img{width:clamp(96px,12vw,140px); border-radius:24%; box-shadow:0 20px 40px rgba(0,0,0,.3)}
+  footer .wrap{display:flex; flex-wrap:wrap; gap:8px 20px; padding-block:24px 48px; border-top:1px solid var(--line); font-size:13px; color:var(--ink3)}
+  footer a{text-decoration:none} footer a:hover{color:var(--ink)}
 
-  .cards{margin-top:26px; display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
-  .card{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:24px}
-  .card b{display:block; font-size:16px; font-weight:800; letter-spacing:-.3px; margin-bottom:7px}
-  .card span{font-size:14.5px; line-height:1.78; color:var(--ink2)}
-  .card.flat{display:flex; gap:12px; align-items:flex-start; font-size:15.5px; color:var(--ink2); line-height:1.78}
-  .card.flat::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--blue);
-                     flex:none; margin-top:10px}
-
-  /* 내 폰에만 — 파란 패널 */
-  .onphone{
-    border-radius:28px; padding:52px 36px; color:#EEF2FF; text-align:center;
-    background:radial-gradient(120% 140% at 10% 0%, #6E92FF 0%, transparent 55%), var(--blue);
-  }
-  .onphone h2{color:#fff; margin-top:6px}
-  .onphone .kicker{color:#C9D6FF}
-  .onphone ul{margin:26px auto 0; padding:0; list-style:none; display:grid; gap:12px; max-width:640px; text-align:left}
-  .onphone li{display:flex; gap:12px; align-items:flex-start; font-size:15.5px; line-height:1.78}
-  .onphone li::before{content:''; width:7px; height:7px; border-radius:50%; background:#fff;
-                      flex:none; margin-top:10px; opacity:.85}
-
-  /* 알아 두실 것 */
-  .notice{background:#FBF8F3; border:1px solid var(--line); border-radius:20px; padding:26px 28px}
-  .notice ul{margin:0; padding-left:20px; color:var(--ink2)}
-  .notice li{margin-top:9px; font-size:14.5px; line-height:1.78}
-  .notice li:first-child{margin-top:0}
-
-  .contact{background:var(--ink); color:#F4EFE6; border-radius:26px; padding:48px 30px; text-align:center}
-  .contact .kicker{color:#9A9084}
-  .contact .mail{display:inline-block; margin-top:14px; font-size:clamp(22px,4.6vw,32px); font-weight:800;
-                 letter-spacing:-.9px; color:#F4EFE6; text-decoration:none;
-                 border-bottom:2px solid #6E6459; padding-bottom:4px}
-  .contact .mail:hover{border-bottom-color:#F4EFE6}
-
-  footer{border-top:1px solid var(--line2); margin-top:56px}
-  footer .wrap{display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between;
-               padding-block:26px 42px; font-size:13px; color:var(--ink3)}
-  footer nav{display:flex; flex-wrap:wrap; gap:16px}
-  footer a{text-decoration:none}
-  footer a:hover{color:var(--ink)}
-  a:focus-visible{outline:2px solid var(--blue); outline-offset:3px}
-
-  @media (max-width:620px){
-    .wrap{padding-inline:20px}
-    .hero{padding-block:52px 6px}
-    .hero h1{font-size:33px; letter-spacing:-1.2px}
-    .hero .lead{font-size:16px}
-    h2{font-size:24px; letter-spacing:-.6px}
-    .shots ul{padding-inline:20px}
-    .shots li{width:212px}
-    .onphone{padding:40px 22px; border-radius:22px}
-    .contact{padding:38px 22px; border-radius:22px}
+  @media (prefers-reduced-motion:reduce){ .deck img,.step{transition:none} }
+  @media (max-width:980px){
+    .stage{grid-template-columns:1fr}
+    .deck-col{display:none}
+    .hero{min-height:0; padding-top:40px}
+    .step{min-height:0; opacity:1; padding-block:36px; border-top:1px solid var(--line)}
+    .hero{border-top:0}
+    .step .m-shot{display:block; width:min(260px,72%); border-radius:22px; margin-bottom:20px; box-shadow:0 16px 36px rgba(22,34,74,.14)}
+    .who,.more{grid-template-columns:1fr}
+    .end{grid-template-columns:1fr}
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <a class="brand" href="./"><img src="assets/icon.png" alt=""><b>트리밸</b></a>
-    <nav>
-      <a href="./">소개</a>
-      <a href="privacy/">개인정보</a>
-      <a href="terms/">약관</a>
-    </nav>
-  </div>
-</header>
+<header class="top"><div class="wrap">
+  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>hankimsoft</a>
+  <span class="me"><img src="assets/icon.png" alt="">트리밸</span>
+  <nav>
+    <a href="support/">지원</a>
+    <a href="privacy/">개인정보</a>
+    <a href="terms/">약관</a>
+  </nav>
+</div></header>
 
-<main>
+<main class="wrap">
+  <div class="stage">
 
-  <div class="wrap">
-    <section class="hero">
-      <span class="badge">출시 준비 중</span>
-      <h1>목표 비중대로<br>얼마를 사고팔지<br>알려 줘요</h1>
-      <p class="lead">트리밸은 내가 정한 목표 비중과 지금 가진 자산을 비교해서, 비중을 맞추려면 무엇을 얼마나 사고팔면 되는지, 새로 넣을 돈은 어디에 얼마씩 넣으면 되는지 원 단위로 계산해 주는 포트폴리오 리밸런싱 앱이에요.</p>
-      <p class="sub">주식 · 채권 · 금 · 코인 · 현금을 한곳에서</p>
-    </section>
-  </div>
+    <div class="flow">
+      <section class="step hero" data-shot="fan">
+        <span class="badge"><img src="assets/icon.png" alt="">출시 준비 중</span>
+        <h1>목표 비중대로<br><em>얼마를 사고팔지</em><br>알려 줘요</h1>
+        <p class="lead">트리밸은 내가 정한 목표 비중과 지금 가진 자산을 비교해서, 비중을 맞추려면 무엇을 얼마나 사고팔면 되는지, 새로 넣을 돈은 어디에 얼마씩 넣으면 되는지 원 단위로 계산해 주는 포트폴리오 리밸런싱 앱이에요.</p>
+        <p class="sub">주식 · 채권 · 금 · 코인 · 현금을 한곳에서</p>
+      </section>
 
-  <div class="shots">
-    <ul>
-      <li><img src="assets/shots/01.jpg" alt="비중 맞추기 화면 — 주식에서 168.4만 원을 채권으로 옮기면 된다고 알려 준다" loading="lazy" decoding="async">
-          <p class="cap">뭘 얼마나 팔고 살지 금액으로</p></li>
-      <li><img src="assets/shots/02.jpg" alt="홈 화면 — 총자산과 자산군별 비중, 목표에서 벗어난 정도를 보여 준다" loading="lazy" decoding="async">
-          <p class="cap">목표에서 얼마나 벗어났는지</p></li>
-      <li><img src="assets/shots/03.jpg" alt="넣을 돈 나누기 화면 — 300만 원을 채권·코인·금에 얼마씩 넣을지 보여 준다" loading="lazy" decoding="async">
-          <p class="cap">넣을 돈을 어디에 얼마씩</p></li>
-      <li><img src="assets/shots/04.jpg" alt="카테고리 화면 — 주식을 해외·국내, 지수형·개별형으로 나눈 목표 비중" loading="lazy" decoding="async">
-          <p class="cap">주식 안에서도 내 방식대로</p></li>
-      <li><img src="assets/shots/05.jpg" alt="기록 화면 — 3개월 동안 총자산이 어떻게 변했는지 보여 주는 그래프" loading="lazy" decoding="async">
-          <p class="cap">총자산이 어떻게 변했는지</p></li>
-      <li><img src="assets/shots/06.jpg" alt="보유종목 화면 — 국내·미국 주식과 코인의 현재가가 채워진 목록" loading="lazy" decoding="async">
-          <p class="cap">국내 · 미국 · 코인 현재가를 한 번에</p></li>
-      <li><img src="assets/shots/07.jpg" alt="가입과 로그인 없이, 인터넷 없이도 쓸 수 있다는 안내 화면" loading="lazy" decoding="async">
-          <p class="cap">내 자산 정보는 이 폰 안에만</p></li>
-    </ul>
-  </div>
-  <div class="wrap"><p class="shots-hint">옆으로 넘겨서 더 보기</p></div>
+      <section class="step" data-shot="1">
+        <img class="m-shot" src="assets/shots/01.jpg" alt="비중 맞추기 화면 — 주식에서 168.4만 원을 채권으로 옮기면 된다고 알려 준다" loading="lazy" decoding="async">
+        <span class="no">01</span>
+        <h2>뭘 얼마나 팔고 살지 금액으로</h2>
+        <p>목표에서 많이 벗어난 곳을 알려 주고, 사고팔기(가진 것을 팔아서 옮기기)와 더 넣기(넣을 돈만으로 맞추기) 두 가지 방법을 금액으로 보여 줘요.</p>
+      </section>
 
-  <div class="wrap">
-    <section>
-      <h2>이런 분께 맞아요</h2>
-      <div class="cards">
-        <div class="card flat">주식 · 채권 · 금 · 코인을 목표 비중대로 나눠 두고 싶은 분(자산배분)</div>
-        <div class="card flat">"지금 얼마나 벗어났지? 뭘 얼마나 팔고 사야 하지?"를 매번 엑셀로 계산하던 분</div>
-        <div class="card flat">월급날 넣을 돈을 어디에 나눠 넣을지 고민되는 분</div>
-      </div>
-    </section>
+      <section class="step" data-shot="2">
+        <img class="m-shot" src="assets/shots/02.jpg" alt="홈 화면 — 총자산과 자산군별 비중, 목표에서 벗어난 정도를 보여 준다" loading="lazy" decoding="async">
+        <span class="no">02</span>
+        <h2>목표에서 얼마나 벗어났는지</h2>
+        <p>총자산과 자산군별 비중, 목표에서 벗어난 정도를 한 화면에서 보여 줘요.</p>
+      </section>
 
-    <section>
-      <h2>할 수 있는 것</h2>
-      <div class="cards">
-        <div class="card"><b>보유종목</b><span>국내 · 미국 주식과 ETF, 코인, 금을 넣어요. 코드가 없는 종목은 현재가를 직접 넣으면 돼요.</span></div>
-        <div class="card"><b>현재가 불러오기</b><span>앱을 열면 현재가를 자동으로 불러와요. 화면을 당겨서 언제든 다시 불러올 수도 있어요. 실시간 시세는 아니에요.</span></div>
-        <div class="card"><b>현금</b><span>비상금 · 예수금 · 예금처럼 사고팔지 않는 돈은 따로 두고, 비중은 투자자산 안에서만 계산해요. 달러 현금도 넣을 수 있어요.</span></div>
-        <div class="card"><b>나만의 카테고리</b><span>주식을 해외 · 국내로, 다시 지수형 · 개별형으로 두 번까지 나눠 목표 비중을 정해요.</span></div>
-        <div class="card"><b>비중 맞추기</b><span>목표에서 많이 벗어난 곳을 알려 주고, 사고팔기(가진 것을 팔아서 옮기기)와 더 넣기(넣을 돈만으로 맞추기) 두 가지 방법을 금액으로 보여 줘요.</span></div>
-        <div class="card"><b>넣을 돈 나누기</b><span>이번에 넣을 돈을 적으면 어디에 얼마씩 넣을지 바로 보여 줘요.</span></div>
-        <div class="card"><b>기록</b><span>앱을 연 날마다 자동으로 기록해서, 총자산이 어떻게 변했는지(넣은 돈 포함)와 목표 비중대로였는지 보여 줘요.</span></div>
-        <div class="card"><b>액면분할 · 병합 알림</b><span>현재가가 하루 만에 크게 바뀌면 알려 주고, 수량을 한 번에 고칠 수 있어요.</span></div>
-        <div class="card"><b>백업 파일</b><span>기록까지 담아 내보낼 수 있어서 폰을 바꿔도 그대로 옮길 수 있어요.</span></div>
-      </div>
-    </section>
+      <section class="step" data-shot="3">
+        <img class="m-shot" src="assets/shots/03.jpg" alt="넣을 돈 나누기 화면 — 300만 원을 채권·코인·금에 얼마씩 넣을지 보여 준다" loading="lazy" decoding="async">
+        <span class="no">03</span>
+        <h2>넣을 돈을 어디에 얼마씩</h2>
+        <p>이번에 넣을 돈을 적으면 어디에 얼마씩 넣을지 바로 보여 줘요.</p>
+      </section>
 
-    <section>
-      <div class="onphone">
+      <section class="step" data-shot="4">
+        <img class="m-shot" src="assets/shots/04.jpg" alt="카테고리 화면 — 주식을 해외·국내, 지수형·개별형으로 나눈 목표 비중" loading="lazy" decoding="async">
+        <span class="no">04</span>
+        <h2>주식 안에서도 내 방식대로</h2>
+        <p>주식을 해외 · 국내로, 다시 지수형 · 개별형으로 두 번까지 나눠 목표 비중을 정해요.</p>
+      </section>
+
+      <section class="step" data-shot="5">
+        <img class="m-shot" src="assets/shots/05.jpg" alt="기록 화면 — 3개월 동안 총자산이 어떻게 변했는지 보여 주는 그래프" loading="lazy" decoding="async">
+        <span class="no">05</span>
+        <h2>총자산이 어떻게 변했는지</h2>
+        <p>앱을 연 날마다 자동으로 기록해서, 총자산이 어떻게 변했는지(넣은 돈 포함)와 목표 비중대로였는지 보여 줘요.</p>
+      </section>
+
+      <section class="step" data-shot="6">
+        <img class="m-shot" src="assets/shots/06.jpg" alt="보유종목 화면 — 국내·미국 주식과 코인의 현재가가 채워진 목록" loading="lazy" decoding="async">
+        <span class="no">06</span>
+        <h2>국내 · 미국 · 코인 현재가를 한 번에</h2>
+        <p>국내 · 미국 주식과 ETF, 코인, 금을 넣어요. 코드가 없는 종목은 현재가를 직접 넣으면 돼요.</p>
+        <p>앱을 열면 현재가를 자동으로 불러와요. 화면을 당겨서 언제든 다시 불러올 수도 있어요. 실시간 시세는 아니에요.</p>
+      </section>
+
+      <section class="step" data-shot="7">
+        <img class="m-shot" src="assets/shots/07.jpg" alt="가입과 로그인 없이, 인터넷 없이도 쓸 수 있다는 안내 화면" loading="lazy" decoding="async">
+        <span class="no">07</span>
         <h2>내 자산 정보는 내 폰에만</h2>
         <ul>
           <li>회원가입이나 로그인 없이 바로 쓸 수 있어요.</li>
           <li>입력한 수량과 금액 같은 자산 정보는 내 폰에만 저장되고, 밖으로 나가지 않아요.</li>
           <li>인터넷이 없어도 모든 기능을 쓸 수 있어요. 현재가만 직접 넣으면 돼요.</li>
         </ul>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <section>
-      <h2>알아 두실 것</h2>
-      <div class="notice" style="margin-top:22px">
-        <ul>
-          <li>트리밸은 계산 도구예요. 투자 자문이 아니며, 투자 판단과 그 책임은 이용자 본인에게 있어요.</li>
-          <li>현재가는 외부에서 받아 오는 값이라 늦거나 틀릴 수 있어요.</li>
-          <li>무료 앱이고 광고가 나와요. 관심분야에 맞춘 광고(개인 맞춤 광고)는 받지 않고, 자산 정보는 광고에 쓰이지 않아요.</li>
-        </ul>
+    <div class="deck-col" aria-hidden="true">
+      <div class="deck-pin">
+        <div class="deck fan" id="deck">
+          <img src="assets/shots/01.jpg" alt="">
+          <img src="assets/shots/02.jpg" alt="">
+          <img src="assets/shots/03.jpg" alt="">
+          <img src="assets/shots/04.jpg" alt="" loading="lazy">
+          <img src="assets/shots/05.jpg" alt="" loading="lazy">
+          <img src="assets/shots/06.jpg" alt="" loading="lazy">
+          <img src="assets/shots/07.jpg" alt="" loading="lazy">
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section>
-      <div class="contact">
-        <div class="kicker">문의</div>
-        <a class="mail" href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a>
-      </div>
-    </section>
   </div>
 
+  <section class="band">
+    <h2>이런 분께 맞아요</h2>
+    <ul class="who">
+      <li>주식 · 채권 · 금 · 코인을 목표 비중대로 나눠 두고 싶은 분(자산배분)</li>
+      <li>"지금 얼마나 벗어났지? 뭘 얼마나 팔고 사야 하지?"를 매번 엑셀로 계산하던 분</li>
+      <li>월급날 넣을 돈을 어디에 나눠 넣을지 고민되는 분</li>
+    </ul>
+  </section>
+
+  <section class="band">
+    <h2>그 밖에도</h2>
+    <div class="more">
+      <div><h3>현금</h3><p>비상금 · 예수금 · 예금처럼 사고팔지 않는 돈은 따로 두고, 비중은 투자자산 안에서만 계산해요. 달러 현금도 넣을 수 있어요.</p></div>
+      <div><h3>액면분할 · 병합 알림</h3><p>현재가가 하루 만에 크게 바뀌면 알려 주고, 수량을 한 번에 고칠 수 있어요.</p></div>
+      <div><h3>백업 파일</h3><p>기록까지 담아 내보낼 수 있어서 폰을 바꿔도 그대로 옮길 수 있어요.</p></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <h2>알아 두실 것</h2>
+    <ul class="notes">
+      <li>트리밸은 계산 도구예요. 투자 자문이 아니며, 투자 판단과 그 책임은 이용자 본인에게 있어요.</li>
+      <li>현재가는 외부에서 받아 오는 값이라 늦거나 틀릴 수 있어요.</li>
+      <li>무료 앱이고 광고가 나와요. 관심분야에 맞춘 광고(개인 맞춤 광고)는 받지 않고, 자산 정보는 광고에 쓰이지 않아요.</li>
+    </ul>
+  </section>
+
+  <section class="end">
+    <div>
+      <div class="k">출시 준비 중</div>
+      <h2>곧 스토어에서<br>만나요</h2>
+      <a class="mail" href="mailto:hankimsoft@gmail.com?subject=%5B%ED%8A%B8%EB%A6%AC%EB%B0%B8%5D%20%EB%AC%B8%EC%9D%98%ED%95%98%EA%B8%B0">hankimsoft@gmail.com</a>
+    </div>
+    <img src="assets/icon.png" alt="">
+  </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <div>© 2026 hankimsoft</div>
-    <nav>
-      <a href="/">hankimsoft</a>
-      <a href="privacy/">개인정보처리방침</a>
-      <a href="terms/">이용약관</a>
-    </nav>
-  </div>
-</footer>
+<footer><div class="wrap">
+  <span>© 2026 hankimsoft</span>
+  <a href="support/">지원</a><a href="privacy/">개인정보처리방침</a><a href="terms/">이용약관</a>
+</div></footer>
 
+<script>
+/* 넓은 화면: 글이 화면 가운데를 지날 때 오른쪽 스크린샷 카드를 바꾼다 */
+(function () {
+  'use strict';
+  var deck = document.getElementById('deck');
+  var imgs = deck.querySelectorAll('img');
+  var wide = matchMedia('(min-width:981px)');
+  function show(k) {
+    deck.classList.toggle('fan', k === 'fan');
+    imgs.forEach(function (im, i) { im.classList.toggle('on', k !== 'fan' && String(i + 1) === k); });
+    document.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('on', s.dataset.shot === k); });
+  }
+  var io = new IntersectionObserver(function (es) {
+    if (!wide.matches) return;
+    es.forEach(function (e) { if (e.isIntersecting) show(e.target.dataset.shot); });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('.step').forEach(function (s) { io.observe(s); });
+  show('fan');
+})();
+</script>
 </body>
 </html>
