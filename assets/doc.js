@@ -34,6 +34,9 @@
     root.lang = lang;
     buttons.forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-lang') === lang)); });
     try { localStorage.setItem('brim-lang', lang); } catch (e) {}
+    // 담은 문서 페이지는 head 스크립트가 두 언어 제목을 <html>에 넣어 둔다
+    var t = root.getAttribute('data-title-' + lang);
+    if (t) document.title = t;
     var s = document.querySelector('.toc summary');
     if (s) s.textContent = lang === 'ko' ? '목차' : 'Contents';
     buildToc(lang);
