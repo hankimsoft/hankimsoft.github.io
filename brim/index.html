@@ -64,7 +64,7 @@
   .chip img{width:22px; height:22px; border-radius:24%}
   .hero h1{margin:22px 0 0; font-size:clamp(40px,5.2vw,66px); line-height:1.1; letter-spacing:-.045em; font-weight:800}
   .hero h1 em{font-style:normal; color:var(--brand)}
-  .hero p{margin:22px 0 0; font-size:17px; color:var(--ink2); max-width:34ch; line-height:1.75}
+  .hero p{margin:24px 0 0; font-size:clamp(17px,1.5vw,19.5px); color:var(--ink2); max-width:32ch; line-height:1.75}
   .stores{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px}
   .btn{display:inline-flex; align-items:center; gap:9px; height:48px; padding:0 18px; border-radius:12px;
        background:var(--ink); color:#fff; font-size:15px; font-weight:700; text-decoration:none; transition:opacity .15s ease}
@@ -75,7 +75,10 @@
   .try i{display:block; width:34px; height:1.5px; background:currentColor}
   .step .no{font-size:13px; font-weight:700; color:var(--ink3); font-variant-numeric:tabular-nums}
   .step h2{margin:12px 0 0; font-size:clamp(30px,3.4vw,44px); line-height:1.18; letter-spacing:-.04em; font-weight:800}
-  .step p{margin:16px 0 0; font-size:16.5px; color:var(--ink2); max-width:36ch; line-height:1.75}
+  .step p{margin:20px 0 0; font-size:clamp(17px,1.5vw,19.5px); color:var(--ink2); max-width:32ch; line-height:1.75}
+  /* 한 단계에 한 문장 — 형광펜 강조 */
+  .step p strong, .band .sub strong{color:var(--ink); font-weight:700; background:linear-gradient(transparent 60%, rgba(62,158,110,.24) 0); padding:0 1px;
+                   -webkit-box-decoration-break:clone; box-decoration-break:clone}
   .step .m-art{display:none}
 
   /* ---------- 폰 틀 ---------- */
@@ -146,7 +149,7 @@
   /* ---------- 아래쪽 ---------- */
   .band{padding-block:clamp(64px,9vw,120px); border-top:1px solid var(--line)}
   .band h2{margin:0; font-size:clamp(28px,3.4vw,42px); letter-spacing:-.04em; line-height:1.2}
-  .band .sub{margin:14px 0 0; color:var(--ink2); font-size:16px; max-width:56ch; line-height:1.75}
+  .band .sub{margin:18px 0 0; color:var(--ink2); font-size:clamp(17px,1.4vw,18.5px); max-width:52ch; line-height:1.75}
   /* 키패드 — 담은 number_keyboard_bottom_sheet.dart 의 배치 · theme.dart 색 그대로 */
   .kp-grid{display:grid; grid-template-columns:1fr minmax(0,400px); gap:clamp(32px,6vw,96px); align-items:center}
   .feats{list-style:none; padding:0; margin:30px 0 0; display:grid; gap:18px}
@@ -154,7 +157,7 @@
   .feats i{flex:none; width:46px; height:46px; border-radius:14px; background:var(--brand-surface); color:var(--brand-dark);
            display:grid; place-items:center; font-style:normal; font-weight:800; font-size:18px; letter-spacing:-.5px}
   .feats b{display:block; font-size:17px; letter-spacing:-.3px; margin-top:1px}
-  .feats div > span{display:block; font-size:14.5px; color:var(--ink2); line-height:1.6}
+  .feats div > span{display:block; font-size:16px; color:var(--ink2); line-height:1.6}
   .kpd{background:var(--app-bg); border-radius:34px; overflow:hidden; color:var(--app-ink);
        box-shadow:0 0 0 1px rgba(42,37,33,.05), 0 34px 70px rgba(20,24,22,.16), 0 8px 18px rgba(20,24,22,.08)}
   .kpd-top{display:grid; grid-template-columns:1fr auto; align-items:center; gap:2px 12px; padding:22px 22px 16px}
@@ -185,18 +188,6 @@
   .kpd-keys .op{background:var(--brand-surface); color:var(--brand-dark)}
   .kpd-keys .ok{grid-row:span 3; background:var(--brand); color:#fff; font-size:17px; font-weight:700}
   .kpd-keys button:disabled{cursor:default; color:#A89E92}
-  /* 입력 순서 — 앱 ARB 의 입력 모드 이름 · 설명 그대로 */
-  .modes{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px}
-  .md{background:var(--sheet); border-radius:26px; padding:24px 24px 22px; display:flex; flex-direction:column}
-  .md h3{margin:0; font-size:21px; letter-spacing:-.03em}
-  .md .cap{margin-top:4px; font-size:13.5px; font-weight:700; color:var(--brand-dark)}
-  .md ul{list-style:none; margin:18px 0 0; padding:4px 0; background:var(--app-bg); border-radius:16px}
-  .md li{display:flex; align-items:center; height:42px; padding:0 14px; font-size:14px; font-weight:600; border-bottom:1px solid #F0EAE0}
-  .md li:last-child{border-bottom:0}
-  .md .n{flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  .md .p{width:82px; flex:none; border-left:1px solid #E7E0D4; padding-left:12px; font-weight:500; font-variant-numeric:tabular-nums}
-  .md .cur::after{content:''; display:inline-block; width:1.5px; height:15px; background:var(--brand); vertical-align:-3px; animation:blink 1s steps(1) infinite}
-  .md p{margin:14px 0 0; font-size:14px; color:var(--ink2)}
   /* 03단계 쿠폰 */
   .ticket-wrap{margin-top:28px; max-width:400px; transform:rotate(-2deg); filter:drop-shadow(0 16px 22px rgba(179,97,38,.26))}
   .ticket{--cut:118px; display:flex; color:#fff; border-radius:20px; background:linear-gradient(120deg,#F09A4A 0%,#E0792F 45%,#C2562E 100%);
@@ -217,51 +208,48 @@
   .hit .no b{text-decoration:line-through; color:var(--ink3)}
   .hit .yes{background:var(--exact); color:#fff} .hit .yes b{color:#fff}
   .step .note{margin-top:12px; font-size:12.5px; color:var(--ink3)}
-  .money{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:36px; background:var(--line); border:1px solid var(--line); border-radius:18px; overflow:hidden}
-  .money div{background:var(--bg); padding:18px 20px}
-  .money small{display:block; font-size:12.5px; color:var(--ink3); font-weight:600}
-  .money b{font-size:20px; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
-  .langs{margin-top:18px; font-size:14px; color:var(--ink2); line-height:1.7}
+  /* 통화 — 진열대 가격표 */
+  .tags{display:grid; grid-template-columns:repeat(4,1fr); gap:22px 18px; margin-top:44px}
+  .tag{background:var(--sheet); border-radius:14px; overflow:hidden; transform:rotate(-1.2deg); transition:transform .25s ease;
+       box-shadow:0 1px 0 rgba(20,24,22,.05), 0 14px 30px rgba(20,24,22,.08)}
+  .tag:nth-child(even){transform:rotate(1deg)} .tag:nth-child(3n){transform:rotate(-.4deg)}
+  .tag:hover{transform:translateY(-4px) rotate(0)}
+  .tag small{display:flex; justify-content:space-between; gap:8px; background:#FFD84D; color:#3B3000; padding:8px 14px; font-size:12px; font-weight:800; white-space:nowrap}
+  .tag small span:last-child{font-weight:600; opacity:.75; overflow:hidden; text-overflow:ellipsis}
+  .tag .it{display:block; padding:16px 16px 0; font-size:15px; font-weight:600; color:var(--ink2)}
+  .tag b{display:block; padding:0 16px 18px; font-size:clamp(26px,2.6vw,34px); font-weight:800; letter-spacing:-.04em; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .facts{margin:36px 0 0; padding:0; list-style:none; display:grid; gap:10px; max-width:70ch}
+  .facts li{position:relative; padding-left:20px; font-size:15.5px; color:var(--ink2); line-height:1.7}
+  .facts li::before{content:''; position:absolute; left:2px; top:.7em; width:6px; height:6px; border-radius:50%; background:var(--brand)}
   .faq{margin-top:28px; border-top:1px solid var(--ink)}
   .faq details{border-bottom:1px solid var(--line)}
   .faq summary{list-style:none; cursor:pointer; padding:20px 40px 20px 0; position:relative; font-size:17px; font-weight:700; letter-spacing:-.3px}
   .faq summary::-webkit-details-marker{display:none}
   .faq summary::after{content:'+'; position:absolute; right:4px; top:50%; transform:translateY(-50%); font-size:22px; font-weight:400; color:var(--ink3); transition:transform .2s ease}
   .faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
-  .faq p{margin:0 0 22px; color:var(--ink2); font-size:15.5px; line-height:1.8; max-width:62ch}
+  .faq p{margin:0 0 22px; color:var(--ink2); font-size:16.5px; line-height:1.8; max-width:62ch}
   .more{display:inline-block; margin-top:22px; font-weight:700; font-size:14.5px; text-decoration:none; border-bottom:2px solid var(--ink)}
-  /* 마지막 — 메인 홈 화면과 같은 초록 바탕 위 글래스 */
-  .end{position:relative; isolation:isolate; overflow:hidden; margin-block:clamp(40px,6vw,80px) 64px; border-radius:clamp(28px,3.4vw,44px); color:#fff;
-       background:radial-gradient(60% 70% at 80% 0%, #2E6B50 0, transparent 70%), linear-gradient(160deg,#21523D,#122E22);
-       display:grid; grid-template-columns:minmax(0,560px) 1fr; align-items:center; gap:clamp(24px,4vw,56px); padding:clamp(20px,5vw,64px)}
-  .blob{position:absolute; z-index:-1; border-radius:50%; filter:blur(56px)}
-  .b1{width:380px; height:380px; left:-80px; bottom:-170px; background:#3E9E6E; opacity:.85; animation:drift 16s ease-in-out infinite alternate}
-  .b2{width:300px; height:300px; left:38%; top:-150px; background:#E0A82E; opacity:.5; animation:drift 20s ease-in-out infinite alternate-reverse}
-  .b3{width:280px; height:280px; right:-60px; bottom:-90px; background:#E0792F; opacity:.42; animation:drift 18s ease-in-out infinite alternate}
-  @keyframes drift{to{transform:translate(50px,-30px) scale(1.12)}}
-  .pane{padding:clamp(24px,3.6vw,44px); border-radius:30px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.26);
-        -webkit-backdrop-filter:blur(26px) saturate(1.6); backdrop-filter:blur(26px) saturate(1.6);
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.4), inset 0 -1px 0 rgba(255,255,255,.08), 0 24px 60px rgba(0,0,0,.2)}
-  .pane .ic{width:60px; height:60px; border-radius:24%; display:block; box-shadow:0 10px 24px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.2)}
-  .end h2{margin:22px 0 0; font-size:clamp(30px,4vw,48px); letter-spacing:-.04em; line-height:1.15}
-  .end .stores{margin-top:28px}
-  .end .btn{background:rgba(255,255,255,.94); color:#173A2C; box-shadow:0 6px 18px rgba(0,0,0,.16)}
-  .end .btn + .btn{background:rgba(255,255,255,.14); color:#fff; box-shadow:inset 0 0 0 1px rgba(255,255,255,.4), inset 0 1px 0 rgba(255,255,255,.3)}
+  /* 마지막 — 카드 한 장. 뒤에 색 번짐을 두고 반투명 유리로 비친다 */
+  .end{position:relative; isolation:isolate; margin-block:clamp(24px,4vw,56px) 40px; padding-block:clamp(28px,5vw,64px)}
+  .blob{position:absolute; z-index:-1; border-radius:50%; filter:blur(48px)}
+  .b1{width:clamp(220px,30vw,380px); aspect-ratio:1; left:2%; top:0; background:#3E9E6E; opacity:.7; animation:drift 16s ease-in-out infinite alternate}
+  .b2{width:clamp(180px,24vw,300px); aspect-ratio:1; left:42%; bottom:0; background:#E0A82E; opacity:.6; animation:drift 20s ease-in-out infinite alternate-reverse}
+  .b3{width:clamp(180px,22vw,280px); aspect-ratio:1; right:2%; top:6%; background:#E0792F; opacity:.5; animation:drift 18s ease-in-out infinite alternate}
+  @keyframes drift{to{transform:translate(40px,-24px) scale(1.1)}}
+  .pane{display:grid; grid-template-columns:1fr auto; align-items:center; gap:32px; padding:clamp(28px,4.6vw,60px); border-radius:clamp(28px,3.4vw,40px);
+        background:rgba(255,255,255,.4); border:1px solid rgba(255,255,255,.8);
+        -webkit-backdrop-filter:blur(32px) saturate(1.8); backdrop-filter:blur(32px) saturate(1.8);
+        box-shadow:inset 0 1px 0 #fff, inset 0 -1px 0 rgba(255,255,255,.4), 0 30px 70px rgba(20,24,22,.10)}
+  .pane .ic{width:60px; height:60px; border-radius:24%; display:block; box-shadow:0 10px 22px rgba(46,122,86,.28)}
+  .end h2{margin:22px 0 0; font-size:clamp(32px,4.2vw,52px); letter-spacing:-.045em; line-height:1.12}
+  .end .stores{margin-top:30px}
+  .end .btn + .btn{background:rgba(255,255,255,.6); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(255,255,255,.95), 0 6px 16px rgba(20,24,22,.06)}
   .end .btn:hover{opacity:1; transform:translateY(-1px)}
-  .end .fine{color:rgba(255,255,255,.66)}
-  .end-art{position:relative; justify-self:center; display:flex; flex-direction:column; align-items:center}
-  .end-art img{width:clamp(150px,17vw,210px); filter:drop-shadow(0 22px 30px rgba(0,0,0,.28)); margin-top:-14px}
-  .wid{width:220px; padding:14px 16px 13px; border-radius:22px; transform:rotate(4deg); position:relative; z-index:1;
-       background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.32);
-       -webkit-backdrop-filter:blur(20px) saturate(1.5); backdrop-filter:blur(20px) saturate(1.5);
-       box-shadow:inset 0 1px 0 rgba(255,255,255,.4), 0 14px 30px rgba(0,0,0,.2)}
-  .wid small{display:block; font-size:11.5px; font-weight:700; opacity:.75}
-  .wid b{display:block; font-size:28px; font-weight:800; letter-spacing:-.04em; line-height:1.2; font-variant-numeric:tabular-nums}
-  .wid b i{font-style:normal; font-size:14px; margin-left:2px}
-  .wbar{position:relative; height:7px; border-radius:99px; background:rgba(255,255,255,.2); margin:10px 0 8px}
-  .wbar u{display:block; width:75%; height:100%; border-radius:99px; background:linear-gradient(90deg,#F2C4A0,#E0792F)}
-  .wbar s{position:absolute; left:75%; top:-4px; width:2px; height:15px; background:#fff}
-  .wid em{font-style:normal; font-size:12.5px; font-weight:800; color:#FFD3AE}
+  .end .fine{color:var(--ink2)}
+  .end-art{display:flex; flex-direction:column; align-items:center; padding-right:clamp(0px,3vw,40px)}
+  .end-art img{width:clamp(150px,17vw,220px); filter:drop-shadow(0 20px 26px rgba(20,24,22,.16))}
+  .end-art .bubble{position:relative; background:#fff; font-weight:800; font-size:17px; padding:9px 16px; border-radius:15px; margin-bottom:-4px; box-shadow:0 10px 24px rgba(42,37,33,.12); white-space:nowrap}
+  .end-art .bubble::after{content:''; position:absolute; left:50%; bottom:-6px; width:12px; height:12px; margin-left:-6px; background:#fff; transform:rotate(45deg); border-radius:2px}
   @media (prefers-reduced-motion:reduce){ .blob{animation:none} }
   footer .wrap{display:flex; flex-wrap:wrap; gap:8px 20px; padding-block:24px 48px; border-top:1px solid var(--line); font-size:13px; color:var(--ink3)}
   footer a{text-decoration:none} footer a:hover{color:var(--ink)}
@@ -277,12 +265,12 @@
     .hero{border-top:0}
     .step .m-art{display:block; width:140px; margin-bottom:8px}
     .flow{display:flex; flex-direction:column}
-    .kp-grid,.modes{grid-template-columns:1fr}
-    .money{grid-template-columns:repeat(2,1fr)}
-    .end{grid-template-columns:1fr}
-    .end-art{flex-direction:row; align-items:flex-end; gap:8px}
-    .end-art img{width:120px; flex:none; margin:0}
-    .wid{width:190px}
+    .kp-grid{grid-template-columns:1fr}
+    .pane{grid-template-columns:1fr; gap:8px}
+    .end-art{justify-self:end; padding:0}
+    .end-art img{width:130px}
+    .end-art .bubble{font-size:15px}
+    .tags{grid-template-columns:repeat(2,1fr); gap:16px 12px}
     .top nav .opt{display:none}
   }
   @media (max-width:430px){
@@ -326,24 +314,24 @@
         <img class="m-art" src="assets/char/tutorial_check.svg" alt="">
         <span class="no">01</span>
         <h2><span class="l-ko">예산을 넘지 않는 장보기,<br>적는 데서 시작해요</span><span class="l-en">Staying on budget<br>starts with a list</span></h2>
-        <p class="l-ko">살 것을 미리 적다 보면 정말 필요한 것만 남습니다. 목록에 없는 물건 앞에서는 한 번 더 생각하게 되고요. 금액은 알면 적고, 몰라도 장 보면서 넣으면 됩니다.</p>
-        <p class="l-en">Write down what you need and only what you really need makes the list. Anything that isn't on it gets a second thought. Add prices if you know them, or fill them in while you shop.</p>
+        <p class="l-ko">살 것을 미리 적다 보면 정말 필요한 것만 남습니다. <strong>목록에 없는 물건 앞에서는 한 번 더 생각하게 되고요.</strong> 금액은 알면 적고, 몰라도 장 보면서 넣으면 됩니다.</p>
+        <p class="l-en">Write down what you need and only what you really need makes the list. <strong>Anything that isn't on it gets a second thought.</strong> Add prices if you know them, or fill them in while you shop.</p>
       </section>
 
       <section class="step" data-step="add">
         <img class="m-art" src="assets/02-total.png" alt="">
         <span class="no">02</span>
         <h2><span class="l-ko">담을 때마다 합계가 쌓여요</span><span class="l-en">It adds up as you go</span></h2>
-        <p class="l-ko">담으면서 금액을 적으면 합계가 그 자리에서 늘어나고, 체크한 금액은 옆에 따로 보입니다. 계산대 앞에서 놀랄 일이 없습니다.</p>
-        <p class="l-en">Enter a price as something goes in the cart and the total updates on the spot. What you have checked shows separately. No surprises at the register.</p>
+        <p class="l-ko">담으면서 금액을 적으면 합계가 그 자리에서 늘어나고, 체크한 금액은 옆에 따로 보입니다. <strong>계산대 앞에서 놀랄 일이 없습니다.</strong></p>
+        <p class="l-en">Enter a price as something goes in the cart and the total updates on the spot. What you have checked shows separately. <strong>No surprises at the register.</strong></p>
       </section>
 
       <section class="step" data-step="budget">
         <img class="m-art" src="assets/char/done_cheer.svg" alt="">
         <span class="no">03</span>
         <h2><span class="l-ko">예산에 딱 맞추기</span><span class="l-en">Land right on budget</span></h2>
-        <p class="l-ko">예산을 정하면 막대에 예산선이 생기고, 가까워질수록 초록에서 주황으로 색이 바뀝니다. 할인 쿠폰이 있다면 기준 금액을 예산으로 넣어 보세요. 못 미치면 쓸 수 없고, 넘을수록 할인 비율은 줄어듭니다.</p>
-        <p class="l-en">Set a budget and the bar marks the line, shifting from green to orange as you get close. Got a coupon? Make its minimum your budget. Fall short and it won't apply; go over and the discount shrinks.</p>
+        <p class="l-ko">예산을 정하면 막대에 예산선이 생기고, 가까워질수록 초록에서 주황으로 색이 바뀝니다. <strong>할인 쿠폰이 있다면 기준 금액을 예산으로 넣어 보세요.</strong> 못 미치면 쓸 수 없고, 넘을수록 할인 비율은 줄어듭니다.</p>
+        <p class="l-en">Set a budget and the bar marks the line, shifting from green to orange as you get close. <strong>Got a coupon? Make its minimum your budget.</strong> Fall short and it won't apply; go over and the discount shrinks.</p>
         <!-- 쿠폰 — 03단계 폰 화면(예산 5만 원에 딱 맞춤)과 같은 숫자 -->
         <div class="ticket-wrap">
           <div class="ticket">
@@ -367,8 +355,8 @@
         <img class="m-art" src="assets/char/tutorial_filter.svg" alt="">
         <span class="no">04</span>
         <h2><span class="l-ko">남은 것만 보기</span><span class="l-en">Show only what's left</span></h2>
-        <p class="l-ko">담은 건 접어 두고 아직 안 담은 것만 봅니다. 마트를 한 바퀴 덜 돌게 됩니다.</p>
-        <p class="l-en">Checked items fold away so you see only what you still need.</p>
+        <p class="l-ko">담은 건 접어 두고 아직 안 담은 것만 봅니다. <strong>마트를 한 바퀴 덜 돌게 됩니다.</strong></p>
+        <p class="l-en">Checked items fold away so you see only what you still need. <strong>No extra lap around the store.</strong></p>
       </section>
     </div>
 
@@ -431,29 +419,31 @@
     </div>
   </section>
 
-  <section class="band">
-    <h2><span class="l-ko">적는 순서도 내 방식대로</span><span class="l-en">Enter things in your own order</span></h2>
-    <p class="sub l-ko">집에서 목록만 짤 땐 「항목 먼저」, 영수증 정리엔 「금액 먼저」. 목록 화면에서 바로 바꿀 수 있습니다.</p>
-    <p class="sub l-en">Planning at home? Use Item first. Sorting a receipt? Use Price first. Switch right from the list screen.</p>
-    <div class="modes" id="modes"></div>
-  </section>
-
-  <section class="band">
-    <h2><span class="l-ko">쓰는 곳의 돈 그대로</span><span class="l-en">Your local money, written your way</span></h2>
-    <p class="sub l-ko">설정에서 통화를 고르면 기호와 소수점, 천 단위 구분이 그 통화 규칙대로 바뀝니다. 원 · 엔은 정수로, 달러 · 유로 · 파운드 · 위안 · 멕시코 페소 · 브라질 헤알은 소수 둘째 자리까지 표시합니다. 세금과 팁은 목록 화면의 ⋯ 메뉴 「세금 · 팁」에서 켠 목록에만 더해집니다.</p>
-    <p class="sub l-en">Pick a currency in Settings and symbols, decimals, and separators follow its own rules. Won and yen show as whole numbers; dollar, euro, pound, yuan, Mexican peso, and Brazilian real go to two decimals. Turn on tax and tip for a list from the ⋯ menu (Tax &amp; tip).</p>
-    <div class="money">
-      <div><small>KRW · 한국</small><b>100,000원</b></div>
-      <div><small>USD · United States</small><b>$70.00</b></div>
-      <div><small>EUR · Deutschland</small><b>70,00 €</b></div>
-      <div><small>JPY · 日本</small><b>10,000円</b></div>
-      <div><small>GBP · United Kingdom</small><b>£70.00</b></div>
-      <div><small>CNY · 中国</small><b>¥70.00</b></div>
-      <div><small>MXN · México</small><b>$1,000.00</b></div>
-      <div><small>BRL · Brasil</small><b>R$ 350,00</b></div>
+  <section class="band cur">
+    <h2><span class="l-ko">어느 나라 마트든,<br>그 나라 돈으로</span><span class="l-en">Any store, any country,<br>in its own money</span></h2>
+    <p class="sub l-ko">설정에서 통화를 고르면 기호와 소수점, 천 단위 구분이 그 나라 방식대로 바뀝니다.</p>
+    <p class="sub l-en">Pick a currency in Settings and symbols, decimals, and separators follow that country's way.</p>
+    <!-- 진열대 가격표 — 품목 · 가격은 표기 예시 -->
+    <div class="tags">
+      <div class="tag"><small><span>KRW</span><span>한국</span></small><span class="it">대파 한 단</span><b>3,980원</b></div>
+      <div class="tag"><small><span>USD</span><span>United States</span></small><span class="it">Milk, 1 gal</span><b>$3.89</b></div>
+      <div class="tag"><small><span>EUR</span><span>Deutschland</span></small><span class="it">Brot</span><b>2,49 €</b></div>
+      <div class="tag"><small><span>JPY</span><span>日本</span></small><span class="it">卵 10個</span><b>248円</b></div>
+      <div class="tag"><small><span>GBP</span><span>United Kingdom</span></small><span class="it">Tea bags</span><b>£2.75</b></div>
+      <div class="tag"><small><span>CNY</span><span>中国</span></small><span class="it">鸡蛋</span><b>¥12.80</b></div>
+      <div class="tag"><small><span>MXN</span><span>México</span></small><span class="it">Tortillas</span><b>$28.50</b></div>
+      <div class="tag"><small><span>BRL</span><span>Brasil</span></small><span class="it">Café</span><b>R$ 18,90</b></div>
     </div>
-    <p class="langs l-ko">앱은 한국어 · English · Español · 日本語 · Português로 쓸 수 있습니다. 처음엔 기기 언어를 따르고, 설정에서 바꿀 수 있습니다. 이 소개 페이지는 한국어와 English로 제공합니다.</p>
-    <p class="langs l-en">Brim is available in Korean, English, Spanish, Japanese, and Portuguese. It starts in your device language, and you can change it in Settings. This page is available in Korean and English.</p>
+    <ul class="facts l-ko">
+      <li>원 · 엔은 정수로, 달러 · 유로 · 파운드 · 위안 · 멕시코 페소 · 브라질 헤알은 소수 둘째 자리까지 표시합니다.</li>
+      <li>세금과 팁은 목록 화면의 ⋯ 메뉴 「세금 · 팁」에서 켠 목록에만 더해집니다.</li>
+      <li>앱은 한국어 · English · Español · 日本語 · Português로 쓸 수 있습니다. 처음엔 기기 언어를 따르고, 설정에서 바꿀 수 있습니다. 이 소개 페이지는 한국어와 English로 제공합니다.</li>
+    </ul>
+    <ul class="facts l-en">
+      <li>Won and yen show as whole numbers; dollar, euro, pound, yuan, Mexican peso, and Brazilian real go to two decimals.</li>
+      <li>Turn on tax and tip for a list from the ⋯ menu (Tax &amp; tip).</li>
+      <li>Brim is available in Korean, English, Spanish, Japanese, and Portuguese. It starts in your device language, and you can change it in Settings. This page is available in Korean and English.</li>
+    </ul>
   </section>
 
   <section class="band" id="faq">
@@ -476,23 +466,17 @@
   <section class="end">
     <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
     <div class="pane">
-      <img class="ic" src="assets/icon.svg" alt="">
-      <h2 class="l-ko">다음 장보기는<br>예산 안에서</h2>
-      <h2 class="l-en">Finish your next<br>shop on budget</h2>
-      <div class="stores">
-        <a class="btn" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>App Store</a>
-        <a class="btn" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l.1.1 9.3-9.3v-.2L3.9 2.4zM17.3 15.1l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM16.4 15.9l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.6.1l10.9-6.2M16.4 8.1L5.5 1.9c-.6-.3-1.2-.3-1.6.1l9.3 9.3 3.2-3.2z"/></svg>Google Play</a>
+      <div>
+        <img class="ic" src="assets/icon.svg" alt="">
+        <h2 class="l-ko">다음 장보기는<br>예산 안에서</h2>
+        <h2 class="l-en">Finish your next<br>shop on budget</h2>
+        <div class="stores">
+          <a class="btn" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>App Store</a>
+          <a class="btn" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l.1.1 9.3-9.3v-.2L3.9 2.4zM17.3 15.1l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM16.4 15.9l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.6.1l10.9-6.2M16.4 8.1L5.5 1.9c-.6-.3-1.2-.3-1.6.1l9.3 9.3 3.2-3.2z"/></svg>Google Play</a>
+        </div>
+        <div class="fine"><span class="l-ko">무료 · 회원가입 없음 · 목록은 기기 안에만 남습니다</span><span class="l-en">Free · No sign-up · Your lists stay on your device</span></div>
       </div>
-      <div class="fine"><span class="l-ko">무료 · 회원가입 없음 · 목록은 기기 안에만 남습니다</span><span class="l-en">Free · No sign-up · Your lists stay on your device</span></div>
-    </div>
-    <div class="end-art" aria-hidden="true">
-      <div class="wid">
-        <small><span class="l-ko">담은 금액</span><span class="l-en">In cart</span></small>
-        <b><span class="l-ko">50,000<i>원</i></span><span class="l-en">$50.00</span></b>
-        <div class="wbar"><u></u><s></s></div>
-        <em><span class="l-ko">딱 맞췄어요</span><span class="l-en">On budget</span></em>
-      </div>
-      <img src="assets/char/done_cheer.svg" alt="">
+      <div class="end-art" aria-hidden="true"><div class="bubble"><span class="l-ko">딱 맞췄어요!</span><span class="l-en">Right on budget!</span></div><img src="assets/char/done_cheer.svg" alt=""></div>
     </div>
   </section>
 </main>

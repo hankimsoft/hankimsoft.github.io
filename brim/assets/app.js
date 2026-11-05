@@ -25,9 +25,6 @@
       // 키패드 체험 — 처음엔 「12,900 × 2」에 30% 할인을 건 상태
       kname: '삼겹살 600g', kstart: '12900×2', dot: false,
       tag: function (p, m) { return p + '% 할인 · ' + m; },
-      modes: ['한 줄씩', '항목 먼저', '금액 먼저'],
-      caps: ['항목 → 금액 → 닫힘', '항목만 쭉, 금액은 나중', '금액만 쭉, 항목은 나중'],
-      hints: ['장을 보면서 하나씩 담을 때', '집에서 목록을 미리 짤 때', '영수증을 보고 정리할 때']
     },
     en: {
       title: 'Brim - Shopping Calculator',
@@ -42,9 +39,6 @@
       bud: function (m) { return 'Budget ' + m + ' ›'; }, cart: 'Cart ', checked: 'Checked ',
       kname: 'Chicken breast', kstart: '8.99×2', dot: true,
       tag: function (p, m) { return p + '% off · ' + m; },
-      modes: ['One at a time', 'Item first', 'Price first'],
-      caps: ['Item → price → done', 'Items in a row, prices later', 'Prices in a row, items later'],
-      hints: ['Adding items as you shop', 'Planning the list at home', 'Sorting out a receipt']
     }
   };
   var lang = root.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
@@ -193,25 +187,6 @@
   });
   $('kdisc').addEventListener('click', function () { $('kchips').classList.toggle('off'); });
 
-  /* ---------- 입력 순서 — 세 모드를 나란히 ---------- */
-  function drawModes() {
-    var it = T.items.slice(0, 3).concat([['', 0]]);
-    // 한 줄씩: 이름 · 금액을 한 줄씩 / 항목 먼저: 이름만 쭉 / 금액 먼저: 금액만 쭉. 커서는 다음에 쓸 칸.
-    var fill = [
-      function (i) { return [i < 3, i < 2, i === 2 ? 'p' : '']; },
-      function (i) { return [i < 3, false, i === 3 ? 'n' : '']; },
-      function (i) { return [false, i < 3, i === 3 ? 'p' : '']; }
-    ];
-    $('modes').innerHTML = T.modes.map(function (m, k) {
-      return '<div class="md"><h3>' + esc(m) + '</h3><div class="cap">' + esc(T.caps[k]) + '</div><ul>' +
-        it.map(function (r, i) {
-          var f = fill[k](i);
-          return '<li><span class="n' + (f[2] === 'n' ? ' cur' : '') + '">' + (f[0] ? esc(r[0]) : '') + '</span>' +
-                 '<span class="p' + (f[2] === 'p' ? ' cur' : '') + '">' + (f[1] ? esc(T.num(r[1])) : '') + '</span></li>';
-        }).join('') + '</ul><p>' + esc(T.hints[k]) + '</p></div>';
-    }).join('');
-  }
-
   /* ---------- 언어 ---------- */
   function texts() {
     $('ttl').textContent = T.date(new Date());
@@ -223,7 +198,7 @@
     lang = l; T = L[l];
     root.setAttribute('data-lang', l); root.lang = l;
     try { localStorage.setItem('brim-lang', l); } catch (e) {}
-    expr = T.kstart; kidle = true; texts(); drawKey(); drawModes();
+    expr = T.kstart; kidle = true; texts(); drawKey();
     if (last) { var k = cur; cur = null; go(k || 'hero'); }
   }
   document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
