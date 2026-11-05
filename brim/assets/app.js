@@ -22,10 +22,12 @@
       done: '완료', lbl: '담은 금액', mode: '한 줄씩 ⌄', filt: '남은 것만', bubble: '딱 맞췄어요!',
       left: function (m) { return m + ' 남았어요'; }, exact: '딱 맞췄어요', over: function (m) { return m + ' 넘었어요'; },
       bud: function (m) { return '예산 ' + m + ' ›'; }, cart: '담은 ', checked: '체크 ',
-      price: 12900, offWord: '할인',
+      // 키패드 체험 — 처음엔 「12,900 × 2」에 30% 할인을 건 상태
+      kname: '삼겹살 600g', kstart: '12900×2', dot: false,
+      tag: function (p, m) { return p + '% 할인 · ' + m; },
       modes: ['한 줄씩', '항목 먼저', '금액 먼저'],
-      hints: ['장을 보면서 하나씩 담을 때', '집에서 목록을 미리 짤 때', '영수증을 보고 정리할 때'],
-      rows: [['사과', 18900], ['우유', 7480], ['달걀', 5290]]
+      caps: ['항목 → 금액 → 닫힘', '항목만 쭉, 금액은 나중', '금액만 쭉, 항목은 나중'],
+      hints: ['장을 보면서 하나씩 담을 때', '집에서 목록을 미리 짤 때', '영수증을 보고 정리할 때']
     },
     en: {
       title: 'Brim - Shopping Calculator',
@@ -38,10 +40,11 @@
       done: 'Done', lbl: 'In cart', mode: 'One at a time ⌄', filt: 'Remaining', bubble: 'Right on budget!',
       left: function (m) { return m + ' left'; }, exact: 'On budget', over: function (m) { return m + ' over'; },
       bud: function (m) { return 'Budget ' + m + ' ›'; }, cart: 'Cart ', checked: 'Checked ',
-      price: 12.9, offWord: 'off',
+      kname: 'Chicken breast', kstart: '8.99×2', dot: true,
+      tag: function (p, m) { return p + '% off · ' + m; },
       modes: ['One at a time', 'Item first', 'Price first'],
-      hints: ['Adding items as you shop', 'Planning the list at home', 'Sorting out a receipt'],
-      rows: [['Apples', 13.9], ['Milk', 5.49], ['Eggs', 3.89]]
+      caps: ['Item → price → done', 'Items in a row, prices later', 'Prices in a row, items later'],
+      hints: ['Adding items as you shop', 'Planning the list at home', 'Sorting out a receipt']
     }
   };
   var lang = root.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
@@ -141,29 +144,73 @@
   addEventListener('resize', fit);
   if (wide.addEventListener) wide.addEventListener('change', fit);
 
-  /* ---------- 할인 · 입력 순서 ---------- */
-  var rate = 30, mode = 0;
-  function drawDisc() {
-    var off = Math.round(T.price * rate) / 100;
-    if (lang === 'ko') off = Math.round(T.price * rate / 100);
-    $('was').textContent = T.money(T.price);
-    $('now').textContent = T.money(Math.round((T.price - off) * 100) / 100);
-    $('off').textContent = '-' + T.money(off) + ' ' + T.offWord;
-    document.querySelectorAll('#disc button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.v === rate)); });
+  /* ---------- 키패드 체험 ----------
+     앱 키패드처럼 사칙연산(× ÷ 먼저)과 할인 %. 완료를 누르면 식이 값 하나로 접힌다. */
+  var expr = '', rate = 30, kidle = true;
+  function calc(e) {
+    var t = e.replace(/[+−×÷]$/, '').split(/([+−×÷])/).filter(function (x) { return x !== ''; });
+    if (!t.length) return 0;
+    var a = [+t[0]];
+    for (var i = 1; i < t.length; i += 2) {
+      var op = t[i], n = +t[i + 1];
+      if (op === '×') a[a.length - 1] *= n;
+      else if (op === '÷') a[a.length - 1] = n ? a[a.length - 1] / n : 0;
+      else a.push(op === '−' ? -n : n);
+    }
+    return a.reduce(function (x, y) { return x + y; }, 0);
   }
+  function round(v) { return lang === 'ko' ? Math.round(v) : Math.round(v * 100) / 100; }
+  function group(n) { var p = n.split('.'); p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); return p.join('.'); }
+  function drawKey() {
+    var base = round(calc(expr)), val = round(base * (100 - rate) / 100);
+    $('kname').textContent = T.kname;
+    $('kexpr').textContent = /[+−×÷]/.test(expr) ? expr.split(/([+−×÷])/).map(function (x) { return /\d/.test(x) ? group(x) : ' ' + x + ' '; }).join('') : '';
+    $('kres').textContent = T.money(val);
+    $('ktag').innerHTML = rate ? '<span>' + esc(T.tag(rate, T.money(base))) + '</span>' : '';
+    $('kdot').disabled = !T.dot;
+    document.querySelectorAll('#kchips button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.v === rate)); });
+  }
+  function press(k) {
+    var last = expr.slice(-1), num = expr.split(/[+−×÷]/).pop();
+    // 값이 정해진 뒤 숫자를 치면 새 금액 — 할인도 처음부터
+    if (kidle && /^[0-9.]/.test(k)) { expr = ''; num = ''; last = ''; rate = 0; }
+    kidle = false;
+    if (k === 'bs') expr = expr.slice(0, -1);
+    else if (k === 'ok') { expr = String(round(calc(expr)) || ''); kidle = true; var r = $('kres'); r.classList.add('flash'); setTimeout(function () { r.classList.remove('flash'); }, 400); }
+    else if (/^[+−×÷]$/.test(k)) { if (!expr) return; expr = /[+−×÷]/.test(last) ? expr.slice(0, -1) + k : expr + k; }
+    else if (k === '.') { if (!T.dot || num.indexOf('.') >= 0) return; expr += num ? '.' : '0.'; }
+    else if (expr.length < 14) {
+      if (/\.\d{2}$/.test(num)) return;
+      expr = (num === '0' ? expr.slice(0, -1) : expr) + k;
+    }
+    drawKey();
+  }
+  document.querySelectorAll('#kkeys button').forEach(function (b) {
+    b.addEventListener('click', function () { press(b.dataset.k === 'bs' ? 'bs' : b.dataset.k === 'ok' ? 'ok' : b.dataset.k === 'dot' ? '.' : b.textContent.trim()); });
+  });
+  document.querySelectorAll('#kchips button').forEach(function (b) {
+    b.addEventListener('click', function () { rate = rate === +b.dataset.v ? 0 : +b.dataset.v; drawKey(); });
+  });
+  $('kdisc').addEventListener('click', function () { $('kchips').classList.toggle('off'); });
+
+  /* ---------- 입력 순서 — 세 모드를 나란히 ---------- */
   function drawModes() {
-    document.querySelectorAll('#modes button').forEach(function (b, i) { b.textContent = T.modes[i]; b.setAttribute('aria-pressed', String(i === mode)); });
-    // 한 줄씩: 한 줄씩 채워 가는 중 / 항목 먼저: 이름 · 금액 / 금액 먼저: 금액 · 이름 (지난 소개 페이지 데모와 같은 모양)
-    $('mrows').innerHTML = T.rows.map(function (r, i) {
-      var name = esc(r[0]), price = esc(T.money(r[1]));
-      if (mode === 0) return '<div><span>' + name + '</span><span class="' + (i === 0 ? '' : 'dim') + '">' + (i === 0 ? price : '—') + '</span></div>';
-      if (mode === 2) return '<div><span>' + price + '</span><span>' + name + '</span></div>';
-      return '<div><span>' + name + '</span><span>' + price + '</span></div>';
+    var it = T.items.slice(0, 3).concat([['', 0]]);
+    // 한 줄씩: 이름 · 금액을 한 줄씩 / 항목 먼저: 이름만 쭉 / 금액 먼저: 금액만 쭉. 커서는 다음에 쓸 칸.
+    var fill = [
+      function (i) { return [i < 3, i < 2, i === 2 ? 'p' : '']; },
+      function (i) { return [i < 3, false, i === 3 ? 'n' : '']; },
+      function (i) { return [false, i < 3, i === 3 ? 'p' : '']; }
+    ];
+    $('modes').innerHTML = T.modes.map(function (m, k) {
+      return '<div class="md"><h3>' + esc(m) + '</h3><div class="cap">' + esc(T.caps[k]) + '</div><ul>' +
+        it.map(function (r, i) {
+          var f = fill[k](i);
+          return '<li><span class="n' + (f[2] === 'n' ? ' cur' : '') + '">' + (f[0] ? esc(r[0]) : '') + '</span>' +
+                 '<span class="p' + (f[2] === 'p' ? ' cur' : '') + '">' + (f[1] ? esc(T.num(r[1])) : '') + '</span></li>';
+        }).join('') + '</ul><p>' + esc(T.hints[k]) + '</p></div>';
     }).join('');
-    $('mhint').textContent = T.hints[mode];
   }
-  document.querySelectorAll('#disc button').forEach(function (b) { b.addEventListener('click', function () { rate = +b.dataset.v; drawDisc(); }); });
-  document.querySelectorAll('#modes button').forEach(function (b) { b.addEventListener('click', function () { mode = +b.dataset.v; drawModes(); }); });
 
   /* ---------- 언어 ---------- */
   function texts() {
@@ -176,7 +223,7 @@
     lang = l; T = L[l];
     root.setAttribute('data-lang', l); root.lang = l;
     try { localStorage.setItem('brim-lang', l); } catch (e) {}
-    texts(); drawDisc(); drawModes();
+    expr = T.kstart; kidle = true; texts(); drawKey(); drawModes();
     if (last) { var k = cur; cur = null; go(k || 'hero'); }
   }
   document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
