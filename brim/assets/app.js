@@ -23,6 +23,9 @@
       left: function (m) { return m + ' 남았어요'; }, exact: '딱 맞췄어요', over: function (m) { return m + ' 넘었어요'; },
       bud: function (m) { return '예산 ' + m + ' ›'; }, cart: '담은 ', checked: '체크 ',
       // 키패드 체험 — 처음엔 「12,900 × 2」에 30% 할인을 건 상태
+      allDone: '다 담았어요!', allDoneSub: '장바구니를 다 채웠어요 👏',
+      // 공유 글 — 앱 ARB(share*, receivedList*) 그대로
+      sh: { def: '장보기', total: '합계', budget: '예산', app: '담은 - 장보기 계산기', get: 'https://hankimsoft.github.io/brim/get/', count: function (n) { return n + '개'; }, more: function (n) { return '외 ' + n + '개'; }, bud: function (m) { return '예산 ' + m; } },
       kname: '삼겹살 600g', kstart: '12900×2', dot: false,
       tag: function (p, m) { return p + '% 할인 · ' + m; },
     },
@@ -37,6 +40,8 @@
       done: 'Done', lbl: 'In cart', mode: 'One at a time ⌄', filt: 'Remaining', bubble: 'Right on budget!',
       left: function (m) { return m + ' left'; }, exact: 'On budget', over: function (m) { return m + ' over'; },
       bud: function (m) { return 'Budget ' + m + ' ›'; }, cart: 'Cart ', checked: 'Checked ',
+      allDone: 'All in the cart!', allDoneSub: 'Nothing left on the list 👏',
+      sh: { def: 'Shopping list', total: 'Total', budget: 'Budget', app: 'Brim - Shopping Calculator', get: 'https://hankimsoft.github.io/brim/get/en/', count: function (n) { return n === 1 ? '1 item' : n + ' items'; }, more: function (n) { return '+' + n + ' more'; }, bud: function (m) { return 'Budget ' + m; } },
       kname: 'Chicken breast', kstart: '8.99×2', dot: true,
       tag: function (p, m) { return p + '% off · ' + m; },
     }
@@ -54,7 +59,7 @@
 
   // 첫 화면 — 집에서 금액을 아는 것만 적어 왔고(우유 · 두부), 두 개는 이미 담았다
   var user = { priced: [1, 1, 1, 0, 0, 1, 0], checked: [1, 1, 0, 0, 0, 0, 0] };
-  var cur = null, last = null;
+  var cur = null, last = null, seq = 0;
 
   // s = { priced:[], checked:[], typing:i, filter:true }
   function render(s) {
@@ -68,6 +73,7 @@
       html += '<li data-i="' + i + '" class="' + (on ? 'on' : '') + (s.filter && on ? ' hide' : '') + '"><span class="ck"></span><span class="n">' + esc(it[0]) +
               '</span><span class="p">' + (priced ? esc(T.num(it[1])) : '') + '</span></li>';
     });
+    if (s.filter && n === T.items.length) html = '<li class="alldone"><img src="assets/char/done_cheer.svg" alt=""><b>' + esc(T.allDone) + '</b><span>' + esc(T.allDoneSub) + '</span></li>';
     var ul = $('items'); ul.innerHTML = html; ul.classList.toggle('live', cur === 'hero');
     tot /= 100; ck /= 100;
 
@@ -113,7 +119,18 @@
     // 장 보면서 — 담고 금액을 넣을 때마다 합계가 쌓인다
     add: function () { render({ priced: [1, 1, 1, 1, 0, 1, 0], checked: [1, 1, 1, 1, 0, 0, 0] }); setTimeout(function () { if (cur === 'add') fly(3); }, 250); },
     budget: function () { render({ priced: [1, 1, 1, 1, 1, 1, 1], checked: [1, 1, 1, 1, 1, 1, 1] }); },
-    remain: function () { render({ priced: [1, 1, 1, 1, 0, 1, 0], checked: [1, 1, 1, 1, 0, 0, 0], filter: true }); }
+    // 「남은 것만」 — 남은 셋을 차례로 담으면 목록 자리에 「다 담았어요!」
+    remain: function () {
+      var s = { priced: [1, 1, 1, 1, 0, 1, 0], checked: [1, 1, 1, 1, 0, 0, 0], filter: true }, run = ++seq;
+      render(s);
+      [4, 5, 6].forEach(function (i, k) {
+        setTimeout(function () {
+          if (cur !== 'remain' || run !== seq) return;
+          if (!s.priced[i]) fly(i);
+          s.priced[i] = 1; s.checked[i] = 1; render(s);
+        }, 1100 + k * 900);
+      });
+    }
   };
   function go(k) {
     if (k === cur) return; cur = k; STATES[k]();
@@ -187,6 +204,21 @@
   });
   $('kdisc').addEventListener('click', function () { $('kchips').classList.toggle('off'); });
 
+  /* ---------- 공유 ---------- 부탁하는 목록: 아직 아무것도 안 담았고, 대파는 금액을 모른다 */
+  function drawShare() {
+    var pick = [0, 1, 2, 3, 5], S = T.sh, total = 0;
+    var rows = pick.map(function (i) { var it = T.items[i], known = i !== 3; if (known) total += it[1]; return { n: it[0], p: known ? T.money(it[1]) : '-' }; });
+    var link = S.get + '#' + 'eJyrVkrOz0nVK0nNyVGyUlBKzs8ttlJIycxLL0os';
+    $('shTxt').innerHTML = esc('🛒 ' + T.date(new Date())) + '\n\n' +
+      rows.map(function (r) { return esc('☐ ' + r.n + '  ' + r.p); }).join('\n') + '\n\n' +
+      esc(S.total + '  ' + T.money(Math.round(total * 100) / 100)) + '\n' + esc(S.budget + '  ' + T.money(T.budget)) + '\n\n' +
+      esc(S.app) + '\n<a>' + esc(link.slice(0, 52)) + '…</a>';
+    $('shCard').innerHTML = '<h4>' + esc(T.date(new Date())) + '</h4><div class="sm">' + esc(T.money(Math.round(total * 100) / 100)) +
+      '<small>· ' + esc(S.count(rows.length) + ' · ' + S.bud(T.money(T.budget))) + '</small></div><hr>' +
+      rows.slice(0, 3).map(function (r) { return '<div class="r"><i></i><span>' + esc(r.n) + '</span><span>' + esc(r.p) + '</span></div>'; }).join('') +
+      '<div class="mo">' + esc(S.more(rows.length - 3)) + '</div>';
+  }
+
   /* ---------- 언어 ---------- */
   function texts() {
     $('ttl').textContent = T.date(new Date());
@@ -198,7 +230,7 @@
     lang = l; T = L[l];
     root.setAttribute('data-lang', l); root.lang = l;
     try { localStorage.setItem('brim-lang', l); } catch (e) {}
-    expr = T.kstart; kidle = true; texts(); drawKey();
+    expr = T.kstart; kidle = true; texts(); drawKey(); drawShare();
     if (last) { var k = cur; cur = null; go(k || 'hero'); }
   }
   document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
