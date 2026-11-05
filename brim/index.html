@@ -73,7 +73,8 @@
   .store{display:inline-flex; border-radius:9px; transition:opacity .15s ease}
   .store:hover{opacity:.85}
   .store:focus-visible{outline:2px solid var(--brand); outline-offset:3px}
-  .store img{display:block; height:48px; width:auto}
+  /* flex:none · max-width:none — 음수 여백만큼 상자가 좁아지면 그림이 따라 줄어 가로로 눌렸다(영어 구글 배지) */
+  .store img{display:block; flex:none; height:48px; width:auto; max-width:none}
   .store img.gp.l-en{height:71.4px; margin:-11.7px -9.7px}
   .store img.gp.l-ko{height:62.5px; margin:-7.25px 0}
   .fine{margin-top:16px; font-size:13px; color:var(--ink3)}
