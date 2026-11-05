@@ -52,6 +52,11 @@
   .deck.fan img:nth-child(2){opacity:1; transform:translateX(-30%) rotate(-7deg) scale(.86); z-index:1}
   .deck.fan img:nth-child(3){opacity:1; transform:translateX(30%) rotate(7deg) scale(.86); z-index:1}
   .deck.fan img:nth-child(1){opacity:1; transform:none; z-index:3}
+  /* 창이 좁은 노트북 폭에선 부채를 덜 펼친다 — 오른쪽 장이 창 밖으로 나가 가로 스크롤이 생겼다 */
+  @media (max-width:1240px){
+    .deck.fan img:nth-child(2){transform:translateX(-16%) rotate(-5deg) scale(.86)}
+    .deck.fan img:nth-child(3){transform:translateX(16%) rotate(5deg) scale(.86)}
+  }
 
   .step{min-height:80vh; display:flex; flex-direction:column; justify-content:center; padding-block:48px; opacity:.35; transition:opacity .35s ease}
   .step.on, .hero{opacity:1}

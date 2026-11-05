@@ -56,6 +56,7 @@
   /* ---------- 고정 폰 + 흐르는 글 ---------- */
   .stage{display:grid; grid-template-columns:1fr 390px; gap:clamp(32px,6vw,96px)}
   .phone-pin{position:sticky; top:58px; padding-block:20px}
+  .flow,.phone-col{min-width:0}
   .step{min-height:88vh; display:flex; flex-direction:column; justify-content:center; padding-block:48px; opacity:.35; transition:opacity .35s ease}
   .step.on, .hero{opacity:1}
   .hero{min-height:calc(100vh - 58px)}
@@ -267,10 +268,11 @@
   /* 마지막 — 카드 한 장. 뒤에 색 번짐을 두고 반투명 유리로 비친다 */
   .end{position:relative; isolation:isolate; margin-block:clamp(24px,4vw,56px) 40px; padding-block:clamp(28px,5vw,64px)}
   .blob{position:absolute; z-index:-1; border-radius:50%; filter:blur(48px)}
-  .b1{width:clamp(220px,30vw,380px); aspect-ratio:1; left:2%; top:0; background:#3E9E6E; opacity:.7; animation:drift 16s ease-in-out infinite alternate}
-  .b2{width:clamp(180px,24vw,300px); aspect-ratio:1; left:42%; bottom:0; background:#E0A82E; opacity:.6; animation:drift 20s ease-in-out infinite alternate-reverse}
-  .b3{width:clamp(180px,22vw,280px); aspect-ratio:1; right:2%; top:6%; background:#E0792F; opacity:.5; animation:drift 18s ease-in-out infinite alternate}
-  @keyframes drift{to{transform:translate(40px,-24px) scale(1.1)}}
+  .b1{width:min(380px,46%); aspect-ratio:1; left:3%; top:0; background:#3E9E6E; opacity:.7; animation:drift 16s ease-in-out infinite alternate}
+  .b2{width:min(300px,40%); aspect-ratio:1; left:36%; bottom:0; background:#E0A82E; opacity:.6; animation:drift 20s ease-in-out infinite alternate-reverse}
+  .b3{width:min(280px,40%); aspect-ratio:1; right:3%; top:6%; background:#E0792F; opacity:.5; animation:drift 18s ease-in-out infinite alternate}
+  /* 위아래로만 — 옆으로 움직이면 좁은 화면에서 창 밖으로 나가 가로 스크롤이 생긴다 */
+  @keyframes drift{to{transform:translateY(-28px) scale(1.05)}}
   .pane{display:grid; grid-template-columns:1fr auto; align-items:center; gap:32px; padding:clamp(28px,4.6vw,60px); border-radius:clamp(28px,3.4vw,40px);
         background:rgba(255,255,255,.4); border:1px solid rgba(255,255,255,.8);
         -webkit-backdrop-filter:blur(32px) saturate(1.8); backdrop-filter:blur(32px) saturate(1.8);
@@ -311,6 +313,7 @@
     .top nav .opt{display:none}
   }
   @media (max-width:430px){
+    .hero h1{font-size:clamp(32px,10.4vw,44px)}
     .ticket{--cut:96px} .tk-main b{font-size:26px} .tk-stub b{font-size:24px}
     .phone{width:100%; height:auto; aspect-ratio:390/800}
     .me{display:none}
@@ -352,7 +355,7 @@
         <span class="no">01</span>
         <h2><span class="l-ko">예산을 넘지 않는 장보기,<br>적는 데서 시작해요</span><span class="l-en">Staying on budget<br>starts with a list</span></h2>
         <p class="l-ko">살 것을 미리 적다 보면 정말 필요한 것만 남습니다. <strong>목록에 없는 물건 앞에서는 한 번 더 생각하게 되고요.</strong> 금액은 알면 적고, 몰라도 장 보면서 넣으면 됩니다.</p>
-        <p class="l-en">Write down what you need and only what you really need makes the list. <strong>Anything that isn't on it gets a second thought.</strong> Add prices if you know them, or fill them in while you shop.</p>
+        <p class="l-en">Write down what you need, and only what you really need makes the list. <strong>Anything that isn't on it gets a second thought.</strong> Add prices if you know them, or fill them in while you shop.</p>
       </section>
 
       <section class="step" data-step="add">
@@ -360,15 +363,15 @@
         <span class="no">02</span>
         <h2><span class="l-ko">담을 때마다 합계가 쌓여요</span><span class="l-en">It adds up as you go</span></h2>
         <p class="l-ko">담으면서 금액을 적으면 합계가 그 자리에서 늘어나고, 체크한 금액은 옆에 따로 보입니다. <strong>계산대 앞에서 놀랄 일이 없습니다.</strong></p>
-        <p class="l-en">Enter a price as something goes in the cart and the total updates on the spot. What you have checked shows separately. <strong>No surprises at the register.</strong></p>
+        <p class="l-en">Enter a price as something goes in the cart and the total updates on the spot. What you've checked off shows up separately. <strong>No surprises at the register.</strong></p>
       </section>
 
       <section class="step" data-step="budget">
         <img class="m-art" src="assets/char/done_cheer.svg" alt="">
         <span class="no">03</span>
         <h2><span class="l-ko">예산에 딱 맞추기</span><span class="l-en">Land right on budget</span></h2>
-        <p class="l-ko">예산을 정하면 막대에 예산선이 생기고, 가까워질수록 초록에서 주황으로 색이 바뀝니다. <strong>할인 쿠폰이 있다면 기준 금액을 예산으로 넣어 보세요.</strong> 못 미치면 쓸 수 없고, 넘을수록 할인 비율은 줄어듭니다.</p>
-        <p class="l-en">Set a budget and the bar marks the line, shifting from green to orange as you get close. <strong>Got a coupon? Make its minimum your budget.</strong> Fall short and it won't apply; go over and the discount shrinks.</p>
+        <p class="l-ko">예산을 정하면 막대에 예산선이 생기고, 가까워질수록 초록에서 노랑, 주황으로 색이 바뀝니다. <strong>할인 쿠폰이 있다면 기준 금액을 예산으로 넣어 보세요.</strong> 못 미치면 쓸 수 없고, 넘을수록 할인 비율은 줄어듭니다.</p>
+        <p class="l-en">Set a budget and the bar marks the line, shifting from green to yellow to orange as you get close. <strong>Got a coupon? Make its minimum your budget.</strong> Fall short and it won't apply; go over and the discount shrinks.</p>
         <!-- 쿠폰 — 03단계 폰 화면(예산 5만 원에 딱 맞춤)과 같은 숫자 -->
         <div class="ticket-wrap">
           <div class="ticket">
@@ -381,7 +384,7 @@
           </div>
         </div>
         <div class="hit">
-          <span class="no"><b><span class="l-ko">48,000원</span><span class="l-en">$48.00</span></b><span class="l-ko">못 써요</span><span class="l-en">can't use</span></span>
+          <span class="no"><b><span class="l-ko">48,000원</span><span class="l-en">$48.00</span></b><span class="l-ko">못 써요</span><span class="l-en">doesn't qualify</span></span>
           <span class="yes"><b><span class="l-ko">50,000원</span><span class="l-en">$50.00</span></b><span class="l-ko">10% 할인</span><span class="l-en">20% off</span></span>
           <span><b><span class="l-ko">63,000원</span><span class="l-en">$63.00</span></b><span class="l-ko">약 8%</span><span class="l-en">about 16%</span></span>
         </div>
@@ -393,7 +396,7 @@
         <span class="no">04</span>
         <h2><span class="l-ko">다 담았으면,<br>바로 계산대로</span><span class="l-en">All in the cart?<br>Straight to the register</span></h2>
         <p class="l-ko">「남은 것만」을 켜면 담은 건 접히고 아직 안 담은 것만 보입니다. 목록이 비면 「다 담았어요!」가 뜨고요. <strong>더 둘러볼 이유가 없습니다.</strong></p>
-        <p class="l-en">Turn on Remaining and checked items fold away, leaving only what you still need. When the list runs out, you'll see "All in the cart!" <strong>No reason to wander the aisles.</strong></p>
+        <p class="l-en">Turn on Remaining and checked items fold away, leaving only what you still need. When the list runs out, you'll see “All in the cart!” <strong>No reason to wander the aisles.</strong></p>
       </section>
     </div>
 
@@ -427,7 +430,7 @@
   <section class="band share">
     <h2><span class="l-ko">장보기 부탁할 땐,<br>목록째 보내요</span><span class="l-en">Asking someone to shop?<br>Send the whole list</span></h2>
     <p class="sub l-ko">⋯ 메뉴의 「공유」로 보내면 금액과 예산까지 같이 갑니다. 받은 사람은 링크를 눌러 「추가」만 하면 <strong>같은 목록, 같은 예산으로</strong> 장을 봅니다.</p>
-    <p class="sub l-en">Send it with Share in the ⋯ menu and prices and budget go along. They tap the link, tap Add, and shop <strong>the same list on the same budget</strong>.</p>
+    <p class="sub l-en">Share it from the ⋯ menu and the prices and budget go with it. They tap the link, tap Add, and shop <strong>the same list on the same budget</strong>.</p>
     <div class="scene">
       <div class="side">
         <div class="who"><span class="l-ko">보내는 쪽 · ⋯ → 공유</span><span class="l-en">Sender · ⋯ → Share</span></div>
@@ -456,7 +459,7 @@
         <ul class="feats">
           <li><i>×</i><div><b><span class="l-ko">여러 개면 곱하기로</span><span class="l-en">Multiply for multiples</span></b><span class="l-ko">두 팩을 담았으면 금액 × 2</span><span class="l-en">Two packs? Price × 2</span></div></li>
           <li><i>%</i><div><b><span class="l-ko">할인율만 누르면 끝</span><span class="l-en">Just tap the rate</span></b><span class="l-ko">할인된 금액이 바로 들어갑니다</span><span class="l-en">The discounted price goes straight in</span></div></li>
-          <li><i>2+1</i><div><b><span class="l-ko">개수 행사도 같은 자리에서</span><span class="l-en">Quantity deals, same place</span></b><span class="l-ko">2+1 행사처럼 개수로 묶인 할인도 같은 키패드에서 계산합니다.</span><span class="l-en">Quantity deals like 2-for-1 work out on the same keypad.</span></div></li>
+          <li><i><span class="l-ko">2+1</span><span class="l-en">+1</span></i><div><b><span class="l-ko">개수 행사도 같은 자리에서</span><span class="l-en">Multi-buy deals too</span></b><span class="l-ko">2+1 행사처럼 개수로 묶인 할인도 같은 키패드에서 계산합니다.</span><span class="l-en">Deals like buy 2, get 1 free work out on the same keypad.</span></div></li>
         </ul>
       </div>
       <!-- 담은 숫자 키패드(number_keyboard_bottom_sheet.dart)와 같은 배치 · 색 — 눌러 볼 수 있다 -->
@@ -481,9 +484,9 @@
   </section>
 
   <section class="band cur">
-    <h2><span class="l-ko">어느 나라 마트든,<br>그 나라 돈으로</span><span class="l-en">Any store, any country,<br>in its own money</span></h2>
+    <h2><span class="l-ko">어느 나라 마트든,<br>그 나라 돈으로</span><span class="l-en">Whatever the country,<br>its own currency</span></h2>
     <p class="sub l-ko">설정에서 통화를 고르면 기호와 소수점, 천 단위 구분이 그 나라 방식대로 바뀝니다.</p>
-    <p class="sub l-en">Pick a currency in Settings and symbols, decimals, and separators follow that country's way.</p>
+    <p class="sub l-en">Pick a currency in Settings, and symbols, decimals, and separators follow local conventions.</p>
     <!-- 진열대 가격표 — 품목 · 가격은 표기 예시 -->
     <div class="tags">
       <div class="tag"><small><span>KRW</span><span>한국</span></small><span class="it">대파 한 단</span><b>3,980원</b></div>
@@ -502,7 +505,7 @@
     </ul>
     <ul class="facts l-en">
       <li>Won and yen show as whole numbers; dollar, euro, pound, yuan, Mexican peso, and Brazilian real go to two decimals.</li>
-      <li>Turn on tax and tip for a list from the ⋯ menu (Tax &amp; tip).</li>
+      <li>Tax and tip are added only to lists where you turn them on, from Tax &amp; tip in the ⋯ menu.</li>
       <li>Brim is available in Korean, English, Spanish, Japanese, and Portuguese. It starts in your device language, and you can change it in Settings. This page is available in Korean and English.</li>
     </ul>
   </section>
