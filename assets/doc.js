@@ -29,11 +29,12 @@
     heads.forEach(function (h) { spy.observe(h); });
   }
 
-  function apply(lang) {
+  // 저장은 사용자가 언어 버튼을 눌렀을 때만 — 처음엔 브라우저 언어로 정하고 아무것도 남기지 않는다
+  function apply(lang, save) {
     root.setAttribute('data-lang', lang);
     root.lang = lang;
     buttons.forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-lang') === lang)); });
-    try { localStorage.setItem('brim-lang', lang); } catch (e) {}
+    if (save) { try { localStorage.setItem('brim-lang', lang); } catch (e) {} }
     // 담은 문서 페이지는 head 스크립트가 두 언어 제목을 <html>에 넣어 둔다
     var t = root.getAttribute('data-title-' + lang);
     if (t) document.title = t;
@@ -44,7 +45,7 @@
 
   if (buttons.length) apply(root.getAttribute('data-lang') === 'en' ? 'en' : 'ko');
   else buildToc('ko');
-  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.getAttribute('data-lang')); }); });
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.getAttribute('data-lang'), true); }); });
 
   // 넓은 화면에선 목차를 늘 펼쳐 두고, 좁은 화면에선 접어 둔다
   var det = document.querySelector('details.toc');

@@ -226,14 +226,15 @@
     $('filtL').textContent = T.filt; $('bubble').textContent = T.bubble; $('bud').textContent = T.bud(T.money(T.budget));
     document.title = T.title;
   }
-  function setLang(l) {
+  // 저장은 사용자가 언어 버튼을 눌렀을 때만 — 처음엔 브라우저 언어로 정하고 아무것도 남기지 않는다
+  function setLang(l, save) {
     lang = l; T = L[l];
     root.setAttribute('data-lang', l); root.lang = l;
-    try { localStorage.setItem('brim-lang', l); } catch (e) {}
+    if (save) { try { localStorage.setItem('brim-lang', l); } catch (e) {} }
     expr = T.kstart; kidle = true; texts(); drawKey(); drawShare();
     if (last) { var k = cur; cur = null; go(k || 'hero'); }
   }
-  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang, true); }); });
 
   setLang(lang);
   go('hero');

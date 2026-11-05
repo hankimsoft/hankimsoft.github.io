@@ -13,8 +13,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://hankimsoft.github.io/brim/">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css">
 <script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 */
 (function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l;if(l==="en"){document.title="Brim - Shopping Calculator";var m=document.querySelector('meta[name="description"]');if(m)m.setAttribute("content","Brim is a free shopping calculator. List what you need, add prices as you shop, and land right on budget. No sign-up.")}})();</script>
 <style>
@@ -68,11 +67,15 @@
   .hero h1{margin:22px 0 0; font-size:clamp(40px,5.2vw,66px); line-height:1.1; letter-spacing:-.045em; font-weight:800}
   .hero h1 em{font-style:normal; color:var(--brand)}
   .hero p{margin:24px 0 0; font-size:clamp(17px,1.5vw,19.5px); color:var(--ink2); max-width:32ch; line-height:1.75}
-  .stores{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px}
-  .btn{display:inline-flex; align-items:center; gap:9px; height:48px; padding:0 18px; border-radius:12px;
-       background:var(--ink); color:#fff; font-size:15px; font-weight:700; text-decoration:none; transition:opacity .15s ease}
-  .btn:hover{opacity:.85}
-  .btn svg{width:18px; height:18px; fill:currentColor}
+  .stores{display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:30px}
+  /* 스토어 배지 — 애플 · 구글 공식 배지 그대로(가이드라인: 직접 만든 버튼 · 로고 금지). 보이는 높이를 48px로 맞춘다.
+     구글 PNG(646×250)는 그림 둘레에 여백이 있다 — 영어판은 사방 41px(배지 168px 높이), 한국어판은 위아래 29px(배지 192px 높이) */
+  .store{display:inline-flex; border-radius:9px; transition:opacity .15s ease}
+  .store:hover{opacity:.85}
+  .store:focus-visible{outline:2px solid var(--brand); outline-offset:3px}
+  .store img{display:block; height:48px; width:auto}
+  .store img.gp.l-en{height:71.4px; margin:-11.7px -9.7px}
+  .store img.gp.l-ko{height:62.5px; margin:-7.25px 0}
   .fine{margin-top:16px; font-size:13px; color:var(--ink3)}
   .try{margin-top:40px; display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--brand-dark)}
   .try i{display:block; width:34px; height:1.5px; background:currentColor}
@@ -282,8 +285,6 @@
   .pane .ic{width:60px; height:60px; border-radius:24%; display:block; box-shadow:0 10px 22px rgba(46,122,86,.28)}
   .end h2{margin:22px 0 0; font-size:clamp(32px,4.2vw,52px); letter-spacing:-.045em; line-height:1.12}
   .end .stores{margin-top:30px}
-  .end .btn + .btn{background:rgba(255,255,255,.6); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(255,255,255,.95), 0 6px 16px rgba(20,24,22,.06)}
-  .end .btn:hover{opacity:1; transform:translateY(-1px)}
   .end .fine{color:var(--ink2)}
   .end-art{display:flex; flex-direction:column; align-items:center; padding-right:clamp(0px,3vw,40px)}
   .end-art img{width:clamp(150px,17vw,220px); filter:drop-shadow(0 20px 26px rgba(20,24,22,.16))}
@@ -345,8 +346,8 @@
         <p class="l-ko">살 것을 적고, 장을 보며 담을 때마다 금액을 넣으면 합계가 바로 쌓입니다. 예산을 정해 두면 얼마나 남았는지 막대로 보여 줍니다.</p>
         <p class="l-en">Write down what you need, enter prices as things go in the cart, and your total adds up as you go. Set a budget and the bar shows how much is left.</p>
         <div class="stores">
-          <a class="btn" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>App Store</a>
-          <a class="btn" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l.1.1 9.3-9.3v-.2L3.9 2.4zM17.3 15.1l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM16.4 15.9l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.6.1l10.9-6.2M16.4 8.1L5.5 1.9c-.6-.3-1.2-.3-1.6.1l9.3 9.3 3.2-3.2z"/></svg>Google Play</a>
+          <a class="store" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><img class="l-ko" src="/assets/badges/app-store-ko.svg" alt="App Store에서 다운로드"><img class="l-en" src="/assets/badges/app-store-en.svg" alt="Download on the App Store"></a>
+          <a class="store" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><img class="gp l-ko" src="/assets/badges/google-play-ko.png" alt="Google Play에서 다운로드"><img class="gp l-en" src="/assets/badges/google-play-en.png" alt="Get it on Google Play"></a>
         </div>
         <div class="fine"><span class="l-ko">무료 · 회원가입 없음 · 목록은 기기 안에만 남습니다</span><span class="l-en">Free · No sign-up · Your lists stay on your device</span></div>
         <div class="try"><i></i><span class="l-ko">폰 속 품목을 눌러 직접 담아 보세요</span><span class="l-en">Tap the items on the phone to try it</span></div>
@@ -537,8 +538,8 @@
         <h2 class="l-ko">다음 장보기는<br>예산 안에서</h2>
         <h2 class="l-en">Finish your next<br>shop on budget</h2>
         <div class="stores">
-          <a class="btn" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>App Store</a>
-          <a class="btn" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 2.4c-.3.3-.4.7-.4 1.3v16.6c0 .6.1 1 .4 1.3l.1.1 9.3-9.3v-.2L3.9 2.4zM17.3 15.1l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM16.4 15.9l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.6.1l10.9-6.2M16.4 8.1L5.5 1.9c-.6-.3-1.2-.3-1.6.1l9.3 9.3 3.2-3.2z"/></svg>Google Play</a>
+          <a class="store" href="https://apps.apple.com/app/id6799173101" target="_blank" rel="noopener"><img class="l-ko" src="/assets/badges/app-store-ko.svg" alt="App Store에서 다운로드"><img class="l-en" src="/assets/badges/app-store-en.svg" alt="Download on the App Store"></a>
+          <a class="store" href="https://play.google.com/store/apps/details?id=com.hankimsoft.brim" target="_blank" rel="noopener"><img class="gp l-ko" src="/assets/badges/google-play-ko.png" alt="Google Play에서 다운로드"><img class="gp l-en" src="/assets/badges/google-play-en.png" alt="Get it on Google Play"></a>
         </div>
         <div class="fine"><span class="l-ko">무료 · 회원가입 없음 · 목록은 기기 안에만 남습니다</span><span class="l-en">Free · No sign-up · Your lists stay on your device</span></div>
       </div>
