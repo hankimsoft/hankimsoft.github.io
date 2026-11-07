@@ -97,9 +97,9 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 /* 받기 버튼 — 흐르는 글자 위에 겹쳐 둔 밝은 유리. 글자가 뒤로 흐릿하게 지나감.
    기기에 따라 스토어로 바로(home.js), 그 밖에는 담은 페이지의 공식 배지로 */
 .row__get { position: absolute; left: var(--edge); bottom: calc(var(--row-h) * 0.2); z-index: 2; }
-.get { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 52px; padding: 0 var(--space-6); border-radius: var(--radius-pill); border: 1px solid var(--glass-light-line); background: var(--glass-light-fill); color: var(--brim-700); font-size: var(--fs-ui); font-weight: var(--fw-bold); -webkit-backdrop-filter: blur(12px) saturate(170%); backdrop-filter: blur(12px) saturate(170%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 14px 32px -14px rgba(46, 122, 86, 0.55); transition: background var(--dur-fast) var(--ease-out); }
-.get:hover { background: var(--glass-light-fill-hover); }
-.get svg { transition: transform var(--dur-fast) var(--ease-out); }
+.get { display: inline-flex; align-items: center; gap: var(--space-2); min-height: clamp(48px, 1.6vw + 42px, 64px); padding: 0 clamp(20px, 1.4vw + 14px, 34px); border-radius: var(--radius-pill); border: 1px solid var(--get-line); background: var(--get-fill); color: var(--color-inverse-ink); font-size: clamp(15px, 0.35vw + 14px, 19px); font-weight: var(--fw-bold); -webkit-backdrop-filter: blur(10px) saturate(160%); backdrop-filter: blur(10px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 14px 30px -12px rgba(46, 122, 86, 0.7); transition: background var(--dur-fast) var(--ease-out); }
+.get:hover { background: var(--get-fill-hover); }
+.get svg { width: 1.05em; height: 1.05em; transition: transform var(--dur-fast) var(--ease-out); }
 .get:hover svg { transform: translateX(3px); }
 @media (hover: hover) {
   .row:hover { background: rgba(255, 255, 255, 0.55); }
@@ -281,7 +281,6 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .hero__scroll { bottom: 16px; }
   .sec-head span { font-size: var(--fs-label); }
   .row__label { top: var(--space-3); font-size: 12.5px; }
-  .get { min-height: 48px; padding: 0 var(--space-5); }
   .row--treebal .row__track { -webkit-text-stroke-width: 4px; }
   .feature { height: 740px; }
   .feature__label { left: var(--gutter); top: var(--space-6); }
