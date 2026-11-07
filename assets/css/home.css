@@ -173,13 +173,15 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .feature__steps { position: absolute; left: var(--space-16); top: calc(var(--space-16) + var(--space-10)); margin: 0; padding: 0; list-style: none; font-size: var(--fs-ui); font-weight: var(--fw-bold); line-height: 2; color: var(--color-inverse-ink); }
 .feature__steps li { opacity: .4; transition: opacity var(--dur-fast) var(--ease-out); }
 .feature__steps li.on { opacity: 1; }
-/* 담은 캐릭터 — 폰 속 장면에 맞춰 바뀜: 0 목록 들고 · 1 돋보기(남은 것만) · 2 딱 맞춤 환호 */
-.feature__char { position: absolute; left: calc(50% + 190px); bottom: 150px; z-index: 2; width: 220px; height: 150px; pointer-events: none; }
-.feature__char img { position: absolute; left: 50%; bottom: 0; height: 100%; width: auto; max-width: none; opacity: 0; transform: translateX(-50%) translateY(12px) scale(.92); transition: opacity var(--dur-fast) var(--ease-out), transform .45s cubic-bezier(.2, 1.4, .4, 1); }
-.feature__char[data-k="0"] img:nth-of-type(1), .feature__char[data-k="1"] img:nth-of-type(2), .feature__char[data-k="2"] img:nth-of-type(3) { opacity: 1; transform: translateX(-50%); }
+/* 담은 캐릭터 — 앱 도움말 캐릭터(check_list assets/brand/character/tutorial_*). 네 장 모두 세로 범위가 같아
+   같은 높이로 그리면 크기가 맞음. --a = 그림 가로/세로. 폰 장면 따라: 0 적기 · 1 담기 · 2 남은 것만 · 3 딱 맞춤(폭죽) */
+.feature__char { position: absolute; left: calc(50% + 190px); bottom: 150px; z-index: 2; width: 220px; height: 130px; pointer-events: none; }
+.feature__char img { position: absolute; left: 50%; bottom: 0; height: 100%; width: calc(var(--a) * 130px); max-width: none; margin-left: calc(var(--a) * -65px); opacity: 0; transform: translateY(12px) scale(.92); transition: opacity var(--dur-fast) var(--ease-out), transform .45s cubic-bezier(.2, 1.4, .4, 1); }
+.feature__char[data-k="0"] img:nth-of-type(1), .feature__char[data-k="1"] img:nth-of-type(2), .feature__char[data-k="2"] img:nth-of-type(3), .feature__char[data-k="3"] img:nth-of-type(4) { opacity: 1; transform: none; }
+.feature__confetti { position: absolute; left: -240px; top: -320px; width: calc(100% + 480px); height: calc(100% + 400px); }
 .feature__bubble { position: absolute; left: 50%; bottom: calc(100% + 10px); padding: 9px 16px; border-radius: 15px; background: var(--color-surface); color: var(--brim-app-ink); font-size: 17px; font-weight: var(--fw-heavy); white-space: nowrap; box-shadow: 0 10px 24px rgba(0, 0, 0, .18); opacity: 0; transform: translateX(-50%) translateY(8px); transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
 .feature__bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; margin-left: -6px; border-radius: 2px; background: var(--color-surface); transform: rotate(45deg); }
-.feature__char[data-k="2"] .feature__bubble { opacity: 1; transform: translateX(-50%); }
+.feature__char[data-k="3"] .feature__bubble { opacity: 1; transform: translateX(-50%); }
 .feature__title { position: absolute; left: var(--space-16); bottom: var(--space-16); margin: 0; font-size: var(--fs-display); line-height: var(--lh-display); font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
 .feature__phone { position: absolute; left: 50%; top: 90px; margin-left: -150px; transform: rotate(-6deg); }
 .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: var(--radius-pill); font-size: var(--fs-ui); font-weight: var(--fw-bold); transition: opacity var(--dur-fast) var(--ease-out); }
@@ -239,7 +241,8 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .feature { height: 760px; }
   .feature__phone { left: auto; right: var(--space-16); margin-left: 0; }
   .feature__phone .device { transform: scale(.8); transform-origin: top right; }
-  .feature__char { left: auto; right: calc(var(--space-16) + 260px); bottom: auto; top: 400px; width: 180px; height: 120px; }
+  .feature__char { left: auto; right: calc(var(--space-16) + 260px); bottom: auto; top: 410px; width: 180px; height: 110px; }
+  .feature__char img { width: calc(var(--a) * 110px); margin-left: calc(var(--a) * -55px); }
 }
 
 /* ---------- 휴대폰 ---------- */
@@ -265,7 +268,8 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .feature__label { left: var(--gutter); top: var(--space-6); }
   .feature__steps { display: none; }
   .studio__text { font-size: 30px; }
-  .feature__char { left: calc(50% + 40px); right: auto; top: 370px; width: 140px; height: 92px; }
+  .feature__char { left: calc(50% + 40px); right: auto; top: 380px; width: 140px; height: 80px; }
+  .feature__char img { width: calc(var(--a) * 80px); margin-left: calc(var(--a) * -40px); }
   .feature__bubble { font-size: 14px; padding: 7px 12px; }
   .feature__title { left: var(--gutter); bottom: 108px; }
   .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }

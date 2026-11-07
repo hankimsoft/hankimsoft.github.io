@@ -46,7 +46,7 @@
     if (tot !== shown) countTo(tot);
     scr.setAttribute('data-b', band(tot / BUDGET));
     q('.tot').className = 'tot' + (exact ? ' exact' : '');
-    if (chr) chr.setAttribute('data-k', exact ? 2 : s.filter ? 1 : 0);
+    setChar(exact ? 3 : s.filter ? 2 : n ? 1 : 0);
     q('.badge').textContent = '✓ ' + n + ' · ' + num(ck);
     q('u.l1').style.width = Math.min(tot / BUDGET * 75, 100) + '%';
     q('u.l2').style.width = Math.min(ck / BUDGET * 75, 100) + '%';
@@ -55,6 +55,45 @@
     leg[0].textContent = '담은 ' + num(tot); leg[1].textContent = '체크 ' + num(ck);
     q('.filt').className = 'filt' + (s.filter ? ' on' : '');
     q('.filt em').textContent = ITEMS.length - n;
+  }
+
+  // 캐릭터 — 딱 맞는 순간 폭죽을 한 번 터뜨린다
+  function setChar(k) {
+    if (!chr || chr.getAttribute('data-k') === String(k)) return;
+    chr.setAttribute('data-k', k);
+    if (k === 3) burst();
+  }
+
+  /* 폭죽 꽃가루 — 앱 confetti_burst.dart 와 같은 조각 · 색 · 물리(30조각, 입구 쪽 -68° ±35°, 1.1초, 0.6초부터 사라짐).
+     크기는 앱의 캐릭터 높이 88 기준으로 비례(scale). 입구 = tutorial_done 그림 안 (376/448, 55/240). */
+  var CONF_COLORS = ['#3E9E6E', '#E0A82E', '#A9D8BE', '#E0792F', '#F2D488', '#2E7A56'];
+  var pieces = (function () {
+    var seed = 11, rnd = function () { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }, out = [];
+    for (var i = 0; i < 30; i++) {
+      var a = (-68 + (rnd() * 70 - 35)) * Math.PI / 180, v = 180 + rnd() * 192, sh = rnd();
+      out.push({ vx: Math.cos(a) * v, vy: Math.sin(a) * v, t0: rnd() * Math.PI * 2, spin: (rnd() - 0.5) * 16, shape: sh < 0.4 ? 0 : sh < 0.75 ? 1 : 2, color: CONF_COLORS[i % 6] });
+    }
+    return out;
+  })();
+  function burst() {
+    var cv = chr.querySelector('.feature__confetti'), img = chr.querySelectorAll('img')[3]; if (!cv || !img) return;
+    var dpr = window.devicePixelRatio || 1, W = cv.offsetWidth, H = cv.offsetHeight, ctx = cv.getContext('2d');
+    cv.width = W * dpr; cv.height = H * dpr;
+    var ox = img.offsetLeft - cv.offsetLeft + img.offsetWidth * 376 / 448, oy = img.offsetTop - cv.offsetTop + img.offsetHeight * 55 / 240, k = img.offsetHeight / 88, t0 = performance.now();
+    (function frame(now) {
+      var sec = Math.max(0, (now - t0) / 1000);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+      if (sec >= 1.1) return;
+      ctx.globalAlpha = Math.max(0, Math.min(1, 1 - (sec - 0.6) / 0.45));
+      pieces.forEach(function (p) {
+        var x = ox + p.vx * k * sec * (1 - 0.35 * sec), y = oy + p.vy * k * sec + 0.5 * 576 * k * sec * sec;
+        ctx.save(); ctx.translate(x, y); ctx.rotate(p.t0 + p.spin * sec); ctx.scale(k, k); ctx.fillStyle = p.color;
+        if (p.shape === 1) { ctx.beginPath(); ctx.arc(0, 0, 2.2, 0, Math.PI * 2); ctx.fill(); }
+        else { var w = p.shape ? 3 : 5, h = p.shape ? 13 : 9; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(-w / 2, -h / 2, w, h, 1.5); else ctx.rect(-w / 2, -h / 2, w, h); ctx.fill(); }
+        ctx.restore();
+      });
+      requestAnimationFrame(frame);
+    })(t0);
   }
 
   // 금액을 넣을 때 떠오르는 줄 — 「삼겹살 600g +18,900」
