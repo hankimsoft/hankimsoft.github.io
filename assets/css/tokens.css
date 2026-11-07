@@ -67,8 +67,8 @@
   --glass-light-fill-hover: rgba(255, 255, 255, 0.6);
   --glass-light-line: rgba(255, 255, 255, 0.8);
   /* 받기 버튼 — 담은 초록 유리(뒤가 살짝 비침) */
-  --get-fill: rgba(46, 122, 86, 0.86);
-  --get-fill-hover: rgba(46, 122, 86, 0.96);
+  --get-fill: rgba(62, 158, 110, 0.88);
+  --get-fill-hover: rgba(54, 140, 98, 0.96);
   --get-line: rgba(255, 255, 255, 0.35);
 
   /* ---------- 색 · 기기 ---------- */
