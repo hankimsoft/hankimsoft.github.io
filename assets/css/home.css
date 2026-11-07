@@ -219,6 +219,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .footer__cols strong { padding-bottom: 6px; }
 .footer__cols a { min-height: 34px; display: flex; align-items: center; color: var(--color-inverse-ink-2); transition: color var(--dur-fast) var(--ease-out); }
 .footer__cols a:hover { color: var(--color-inverse-ink); }
+.footer__copy { margin: var(--space-16) 0 0; font-size: var(--fs-label); color: var(--color-inverse-ink-2); }
 .footer__ghost { margin-top: var(--space-20); text-align: center; white-space: nowrap; font-size: var(--fs-wordmark); line-height: 0.78; font-weight: var(--fw-black); letter-spacing: var(--ls-wordmark); color: var(--color-inverse-ghost); }
 
 /* ---------- 움직임 ---------- */
