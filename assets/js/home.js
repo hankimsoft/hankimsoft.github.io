@@ -7,6 +7,13 @@
 
   var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // 휴대폰 메뉴 — 링크를 누르거나 바깥을 누르면 닫힘
+  var menu = document.querySelector('.gnb__menu');
+  if (menu) {
+    menu.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { menu.open = false; }); });
+    document.addEventListener('click', function (e) { if (menu.open && !menu.contains(e.target)) menu.open = false; });
+  }
+
   // 「무료로 받기」 — 아이폰 · 아이패드는 App Store, 안드로이드는 Google Play 로 바로. 그 밖에는 담은 페이지(공식 배지)
   var ua = navigator.userAgent;
   document.querySelectorAll('.get[data-ios]').forEach(function (a) {
