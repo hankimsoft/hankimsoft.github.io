@@ -5,7 +5,7 @@
   var d = new Date(), title = (d.getMonth() + 1) + '월 ' + d.getDate() + '일 장보기';
   document.querySelectorAll('.scr .ttl').forEach(function (e) { e.textContent = title; });
 
-  var scr = document.querySelector('.feature .scr'), steps = document.querySelectorAll('.feature__steps li');
+  var scr = document.querySelector('.feature .scr'), steps = document.querySelectorAll('.feature__steps li'), chr = document.querySelector('.feature__char');
   if (!scr || !window.IntersectionObserver || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   // 일곱 개를 다 담으면 예산 50,000원에 딱 맞는다
@@ -46,6 +46,7 @@
     if (tot !== shown) countTo(tot);
     scr.setAttribute('data-b', band(tot / BUDGET));
     q('.tot').className = 'tot' + (exact ? ' exact' : '');
+    if (chr) chr.setAttribute('data-k', exact ? 2 : s.filter ? 1 : 0);
     q('.badge').textContent = '✓ ' + n + ' · ' + num(ck);
     q('u.l1').style.width = Math.min(tot / BUDGET * 75, 100) + '%';
     q('u.l2').style.width = Math.min(ck / BUDGET * 75, 100) + '%';

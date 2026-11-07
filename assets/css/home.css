@@ -173,6 +173,13 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .feature__steps { position: absolute; left: var(--space-16); top: calc(var(--space-16) + var(--space-10)); margin: 0; padding: 0; list-style: none; font-size: var(--fs-ui); font-weight: var(--fw-bold); line-height: 2; color: var(--color-inverse-ink); }
 .feature__steps li { opacity: .4; transition: opacity var(--dur-fast) var(--ease-out); }
 .feature__steps li.on { opacity: 1; }
+/* 담은 캐릭터 — 폰 속 장면에 맞춰 바뀜: 0 목록 들고 · 1 돋보기(남은 것만) · 2 딱 맞춤 환호 */
+.feature__char { position: absolute; left: calc(50% + 190px); bottom: 150px; z-index: 2; width: 220px; height: 150px; pointer-events: none; }
+.feature__char img { position: absolute; left: 50%; bottom: 0; height: 100%; width: auto; max-width: none; opacity: 0; transform: translateX(-50%) translateY(12px) scale(.92); transition: opacity var(--dur-fast) var(--ease-out), transform .45s cubic-bezier(.2, 1.4, .4, 1); }
+.feature__char[data-k="0"] img:nth-of-type(1), .feature__char[data-k="1"] img:nth-of-type(2), .feature__char[data-k="2"] img:nth-of-type(3) { opacity: 1; transform: translateX(-50%); }
+.feature__bubble { position: absolute; left: 50%; bottom: calc(100% + 10px); padding: 9px 16px; border-radius: 15px; background: var(--color-surface); color: var(--brim-app-ink); font-size: 17px; font-weight: var(--fw-heavy); white-space: nowrap; box-shadow: 0 10px 24px rgba(0, 0, 0, .18); opacity: 0; transform: translateX(-50%) translateY(8px); transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.feature__bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; margin-left: -6px; border-radius: 2px; background: var(--color-surface); transform: rotate(45deg); }
+.feature__char[data-k="2"] .feature__bubble { opacity: 1; transform: translateX(-50%); }
 .feature__title { position: absolute; left: var(--space-16); bottom: var(--space-16); margin: 0; font-size: var(--fs-display); line-height: var(--lh-display); font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
 .feature__phone { position: absolute; left: 50%; top: 90px; margin-left: -150px; transform: rotate(-6deg); }
 .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: var(--radius-pill); font-size: var(--fs-ui); font-weight: var(--fw-bold); transition: opacity var(--dur-fast) var(--ease-out); }
@@ -183,15 +190,9 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 /* ---------- 소개 ---------- */
 .studio { padding-top: var(--space-section); }
 .studio__label { margin: 0 0 var(--space-8); font-size: var(--fs-ui); font-weight: 600; color: var(--color-ink-2); }
-.studio__text { margin: 0; font-size: var(--fs-display); line-height: 1.15; font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
+.studio__text { max-width: 1100px; margin: 0; font-size: var(--fs-h1); line-height: 1.25; font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
 .studio__text > span { display: block; text-wrap: balance; }
-.studio__app { display: inline-flex; align-items: center; gap: 0.12em; white-space: nowrap; }
-.studio__app img { width: 0.86em; height: 0.86em; border-radius: var(--radius-icon); transform: rotate(-8deg); transition: transform var(--dur-fast) var(--ease-out); }
-.studio__app--brim { color: var(--brim-500); }
-.studio__app--brim img { box-shadow: var(--shadow-icon-brim); }
-.studio__app--treebal { color: var(--treebal-500); }
-.studio__app--treebal img { box-shadow: var(--shadow-icon-treebal); transform: rotate(8deg); }
-.studio__app:hover img { transform: rotate(0) scale(1.08); }
+.studio__text > span:last-child { color: var(--color-ink-2); }
 
 /* ---------- 바닥글 ---------- */
 .footer { margin-top: calc(var(--space-section) + var(--space-5)); background: var(--color-inverse-bg); color: var(--color-inverse-ink); overflow: hidden; }
@@ -238,6 +239,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .feature { height: 760px; }
   .feature__phone { left: auto; right: var(--space-16); margin-left: 0; }
   .feature__phone .device { transform: scale(.8); transform-origin: top right; }
+  .feature__char { left: auto; right: calc(var(--space-16) + 260px); bottom: auto; top: 400px; width: 180px; height: 120px; }
 }
 
 /* ---------- 휴대폰 ---------- */
@@ -262,6 +264,9 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .feature { height: 740px; }
   .feature__label { left: var(--gutter); top: var(--space-6); }
   .feature__steps { display: none; }
+  .studio__text { font-size: 30px; }
+  .feature__char { left: calc(50% + 40px); right: auto; top: 370px; width: 140px; height: 92px; }
+  .feature__bubble { font-size: 14px; padding: 7px 12px; }
   .feature__title { left: var(--gutter); bottom: 108px; }
   .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }
   .feature__phone { top: 64px; left: 50%; right: auto; margin-left: -100px; }
