@@ -62,6 +62,10 @@
   --glass-fill: rgba(255, 255, 255, 0.14);
   --glass-fill-hover: rgba(255, 255, 255, 0.22);
   --glass-line: rgba(255, 255, 255, 0.34);
+  /* 유리 (밝은 바탕 위) */
+  --glass-light-fill: rgba(255, 255, 255, 0.4);
+  --glass-light-fill-hover: rgba(255, 255, 255, 0.6);
+  --glass-light-line: rgba(255, 255, 255, 0.8);
 
   /* ---------- 색 · 기기 ---------- */
   --device-frame: #0E0F10;
@@ -76,8 +80,7 @@
 
   /* 글자 크기 단계 (휴대폰 ↔ 데스크톱 사이에서 자연스럽게 커짐) */
   --fs-wordmark: clamp(52px, 17vw, 228px);   /* hankimsoft 워드마크 (320px에서도 한 줄) */
-  --fs-marquee: clamp(130px, 16.5vw, 240px); /* 흐르는 앱 이름 */
-  --fs-marquee-sub: clamp(64px, 8vw, 116px); /* 흐르는 '다음 앱' */
+  /* 흐르는 앱 이름 크기는 줄 높이(--row-h)의 0.83 — home.css */
   --fs-display: clamp(52px, 6.2vw, 88px);    /* 대표 문구 */
   --fs-h1: clamp(44px, 4.5vw, 64px);         /* 섹션 제목 (Apps) */
   --fs-h2: clamp(28px, 3.9vw, 56px);         /* 바닥글 메일 */

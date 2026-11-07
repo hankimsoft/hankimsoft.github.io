@@ -69,8 +69,12 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .apps { padding-top: var(--space-section); }
 .rows { position: relative; }
 .row { position: relative; border-bottom: 1px solid var(--color-line); transition: background var(--dur-fast) var(--ease-out); }
-.row__stage { position: relative; height: clamp(170px, 20vw, 290px); overflow: hidden; }
-.row__track { display: inline-flex; align-items: center; height: 100%; white-space: nowrap; font-size: var(--fs-marquee); line-height: 1; font-weight: var(--fw-black); letter-spacing: -0.07em; animation: mq var(--mq-1) linear infinite; }
+/* 줄 높이: 출시 1 → 곧 출시 ¾ → 준비 중 ¾² (글자도 같은 비율) */
+.row { --row-h: clamp(170px, 20vw, 290px); }
+.row--treebal { --row-h: calc(clamp(170px, 20vw, 290px) * 0.75); }
+.row--next { --row-h: calc(clamp(170px, 20vw, 290px) * 0.5625); }
+.row__stage { position: relative; height: var(--row-h); overflow: hidden; }
+.row__track { display: inline-flex; align-items: center; height: 100%; white-space: nowrap; font-size: calc(var(--row-h) * 0.83); line-height: 1; font-weight: var(--fw-black); letter-spacing: -0.07em; animation: mq var(--mq-1) linear infinite; }
 .row__track > * { flex: none; padding: 0 0.18em; }
 /* 아이콘 그림은 꽉 찬 사각형 → 안쪽 여백 없이 그림 자체를 둥글게, 간격은 바깥으로 */
 .row__track img { height: 0.52em; width: auto; padding: 0; margin: 0 0.28em; border-radius: var(--radius-icon); }
@@ -78,8 +82,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 /* 외곽선 글자: 가변 글꼴은 획이 겹쳐 있어 선만 그리면 글자 안에 겹친 윤곽이 보임 → 바탕색으로 채우고 선을 채움 아래에(두 배 굵기, 바깥 절반만 보임) */
 .row--treebal .row__track, .row--next .row__track { --fill: var(--color-bg); color: var(--fill); paint-order: stroke fill; transition: color var(--dur-fast) var(--ease-out); }
 .row--treebal .row__track { -webkit-text-stroke: 5px var(--treebal-500); animation-name: mqr; animation-duration: var(--mq-2); }
-.row--next .row__stage { height: clamp(100px, 11vw, 160px); }
-.row--next .row__track { font-size: var(--fs-marquee-sub); letter-spacing: -0.06em; -webkit-text-stroke: 3px var(--color-line-strong); animation-duration: var(--mq-3); }
+.row--next .row__track { letter-spacing: -0.06em; -webkit-text-stroke: 3px var(--color-line-strong); animation-duration: var(--mq-3); }
 .row__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 /* 줄 링크는 상자가 없어서(0×0) 줄 전체를 덮는 ::after 에 초점 테두리를 그림 */
 .row__link:focus-visible { outline: 0; }
@@ -91,11 +94,13 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .row--treebal .row__label { color: var(--treebal-700); }
 .row--next .row__label { color: var(--color-ink-2); top: var(--space-4); }
 .row__cta { display: inline-block; margin-left: 6px; }
-.row__badges { position: absolute; left: var(--edge); bottom: var(--space-5); z-index: 2; display: flex; gap: var(--space-2); }
-.row__badges a { display: block; transition: opacity var(--dur-fast) var(--ease-out); }
-.row__badges a:hover { opacity: .8; }
-.row__badges img { height: 44px; width: auto; }
-.row__badges img.gp { height: 57.3px; margin: -6.65px 0; }
+/* 받기 버튼 — 흐르는 글자 위에 겹쳐 둔 밝은 유리. 글자가 뒤로 흐릿하게 지나감.
+   기기에 따라 스토어로 바로(home.js), 그 밖에는 담은 페이지의 공식 배지로 */
+.row__get { position: absolute; left: var(--edge); bottom: calc(var(--row-h) * 0.2); z-index: 2; }
+.get { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 52px; padding: 0 var(--space-6); border-radius: var(--radius-pill); border: 1px solid var(--glass-light-line); background: var(--glass-light-fill); color: var(--brim-700); font-size: var(--fs-ui); font-weight: var(--fw-bold); -webkit-backdrop-filter: blur(12px) saturate(170%); backdrop-filter: blur(12px) saturate(170%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 14px 32px -14px rgba(46, 122, 86, 0.55); transition: background var(--dur-fast) var(--ease-out); }
+.get:hover { background: var(--glass-light-fill-hover); }
+.get svg { transition: transform var(--dur-fast) var(--ease-out); }
+.get:hover svg { transform: translateX(3px); }
 @media (hover: hover) {
   .row:hover { background: rgba(255, 255, 255, 0.55); }
   .row:hover .row__track { --fill: color-mix(in srgb, var(--color-bg), #fff 55%); }
@@ -276,11 +281,8 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .hero__scroll { bottom: 16px; }
   .sec-head span { font-size: var(--fs-label); }
   .row__label { top: var(--space-3); font-size: 12.5px; }
-  .row__badges { position: static; padding: 0 var(--gutter) 18px; flex-wrap: wrap; }
-  .row__badges img { height: 48px; }
-  .row__badges img.gp { height: 62.5px; margin: -7.25px 0; }
+  .get { min-height: 48px; padding: 0 var(--space-5); }
   .row--treebal .row__track { -webkit-text-stroke-width: 4px; }
-  .row--next .row__track { padding-top: 22px; }
   .feature { height: 740px; }
   .feature__label { left: var(--gutter); top: var(--space-6); }
   .feature__steps { display: none; }

@@ -7,6 +7,13 @@
 
   var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // 「무료로 받기」 — 아이폰 · 아이패드는 App Store, 안드로이드는 Google Play 로 바로. 그 밖에는 담은 페이지(공식 배지)
+  var ua = navigator.userAgent;
+  document.querySelectorAll('.get[data-ios]').forEach(function (a) {
+    if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) a.href = a.dataset.ios;
+    else if (/Android/.test(ua)) a.href = a.dataset.android;
+  });
+
   // 회사 소개 — 화면에 들어오면 한 글자씩 쳐 나감. 아직 안 친 글자도 자리는 지켜서(보이지만 않게) 줄이 흔들리지 않음
   var intro = document.querySelector('.studio__text');
   if (intro && window.IntersectionObserver && !calm) {
