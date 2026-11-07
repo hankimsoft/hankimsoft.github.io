@@ -1,0 +1,206 @@
+/* =========================================================
+   hankimsoft 메인 (/) 스타일 — tokens.css 다음에 불러옵니다.
+   값은 모두 토큰 변수. 새 값이 필요하면 tokens.css에 먼저 추가.
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  word-break: keep-all;
+  overflow-x: hidden;
+}
+img, svg { display: block; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 4px; border-radius: 10px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- 머리 (GNB) ---------- */
+.gnb__in { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 18px; font-weight: var(--fw-heavy); letter-spacing: -0.04em; }
+.gnb__nav { display: flex; gap: var(--space-1); }
+.gnb__nav a, .gnb__menu nav a { display: flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: var(--fs-ui); font-weight: 600; transition: opacity var(--dur-fast) var(--ease-out); }
+.gnb__nav a:hover { opacity: .75; }
+.gnb__menu { display: none; position: relative; }
+.gnb__menu summary { list-style: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-right: -10px; }
+.gnb__menu summary::-webkit-details-marker { display: none; }
+.gnb__menu nav { position: absolute; right: -10px; top: 48px; z-index: 10; min-width: 160px; padding: var(--space-2); border-radius: var(--radius-m); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+
+/* ---------- 첫 화면 ---------- */
+.hero { --s: 1; position: relative; height: clamp(560px, 30vw + 420px, 860px); overflow: hidden; }
+.hero__meta { position: absolute; top: 36px; font-size: var(--fs-ui); line-height: var(--lh-body); font-weight: var(--fw-medium); color: var(--color-ink-2); }
+.hero__meta--l { left: var(--gutter); }
+.hero__meta--r { right: var(--gutter); text-align: right; }
+.hero__objects { position: absolute; left: 50%; top: calc(var(--s) * 120px); width: 0; height: 0; }
+.obj { position: absolute; overflow: hidden; border-radius: var(--radius-icon); }
+.obj::after { content: ""; position: absolute; inset: 0; background: var(--icon-gloss); pointer-events: none; }
+.obj img { width: 100%; height: 100%; }
+.obj--brim { left: calc(var(--s) * -330px); top: calc(var(--s) * 40px); width: calc(var(--s) * 280px); height: calc(var(--s) * 280px); background: var(--brim-500); box-shadow: var(--shadow-icon-brim); transform: rotate(-9deg); animation: floatA var(--float-a) ease-in-out infinite; }
+.obj--treebal { left: calc(var(--s) * 30px); top: 0; width: calc(var(--s) * 230px); height: calc(var(--s) * 230px); background: var(--treebal-500); box-shadow: var(--shadow-icon-treebal); transform: rotate(11deg); animation: floatB var(--float-b) ease-in-out infinite; }
+.obj--next { left: calc(var(--s) * 260px); top: calc(var(--s) * 250px); width: calc(var(--s) * 130px); height: calc(var(--s) * 130px); border: 2px dashed var(--color-line-strong); display: flex; align-items: center; justify-content: center; transform: rotate(-4deg); animation: floatC 6s ease-in-out infinite; }
+.obj--next::after { display: none; }
+.hero__lead { position: absolute; left: 0; right: 0; bottom: calc(30px + var(--fs-wordmark) * 0.8 + var(--space-6)); margin: 0; text-align: center; font-size: var(--fs-h3); line-height: var(--lh-heading); font-weight: var(--fw-heavy); letter-spacing: var(--ls-heading); animation: rise var(--dur-enter) var(--ease-out) both; }
+.wordmark { position: absolute; left: 0; right: 0; bottom: 30px; margin: 0; text-align: center; white-space: nowrap; font-size: var(--fs-wordmark); line-height: var(--lh-tight); font-weight: var(--fw-black); letter-spacing: var(--ls-wordmark); animation: rise var(--dur-enter) var(--ease-out) both; }
+
+/* ---------- 섹션 머리 ---------- */
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-line-ink); }
+.sec-head h2 { margin: 0; font-size: var(--fs-h1); line-height: 1; font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
+.sec-head span { font-size: var(--fs-ui); font-weight: 600; color: var(--color-ink-2); }
+
+/* ---------- Apps : 흐르는 줄 ---------- */
+.apps { padding-top: var(--space-section); }
+.rows { position: relative; }
+.row { position: relative; border-bottom: 1px solid var(--color-line); transition: background var(--dur-fast) var(--ease-out); }
+.row__stage { position: relative; height: clamp(170px, 20vw, 290px); overflow: hidden; }
+.row__track { display: inline-flex; align-items: center; height: 100%; white-space: nowrap; font-size: var(--fs-marquee); line-height: 1; font-weight: var(--fw-black); letter-spacing: -0.07em; animation: mq var(--mq-1) linear infinite; }
+.row__track > * { flex: none; padding: 0 0.18em; }
+.row__track img { height: 0.52em; width: auto; padding: 0 0.1em; border-radius: 22.5%; }
+.row--brim .row__track { color: var(--brim-500); }
+.row--treebal .row__track { color: transparent; -webkit-text-stroke: 2.5px var(--treebal-500); animation-name: mqr; animation-duration: var(--mq-2); }
+.row--next .row__stage { height: clamp(100px, 11vw, 160px); }
+.row--next .row__track { font-size: var(--fs-marquee-sub); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1.5px var(--color-line-strong); animation-duration: var(--mq-3); }
+.row__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.row__label { position: absolute; left: calc(var(--gutter) - var(--space-2)); top: var(--space-5); z-index: 1; padding: 2px var(--space-2); border-radius: var(--radius-pill); background: var(--color-bg); font-size: var(--fs-label); font-weight: var(--fw-bold); }
+.row--brim .row__label { color: var(--brim-700); }
+.row--treebal .row__label { color: var(--treebal-700); }
+.row--next .row__label { color: var(--color-ink-2); top: var(--space-4); }
+.row__cta { display: inline-block; margin-left: 6px; }
+.row__badges { position: absolute; left: var(--gutter); bottom: var(--space-5); z-index: 2; display: flex; gap: var(--space-2); }
+.row__badges a { display: block; transition: opacity var(--dur-fast) var(--ease-out); }
+.row__badges a:hover { opacity: .8; }
+.row__badges img { height: 44px; width: auto; }
+.row__badges img.gp { height: 57.3px; margin: -6.65px 0; }
+@media (hover: hover) {
+  .row:hover { background: rgba(255, 255, 255, 0.55); }
+  .row:hover .row__track { animation-play-state: paused; }
+  .row__cta { transition: transform var(--dur-fast) var(--ease-out); }
+  .row:hover .row__cta, .row__link:focus-visible .row__cta { transform: translateX(6px); }
+}
+.apps__phone { position: absolute; right: 12%; top: 40px; z-index: 3; pointer-events: none; animation: bob var(--float-phone) ease-in-out infinite; transform: rotate(8deg); }
+
+/* ---------- 기기 모형 · 담은 화면 (실제 앱 화면 HTML로 교체 가능) ---------- */
+.device { width: 250px; height: 520px; padding: 9px; border-radius: var(--radius-xl); background: var(--device-frame); box-shadow: var(--shadow-float); }
+.device--l { width: 300px; height: 620px; padding: 10px; border-radius: 52px; }
+.scr { height: 100%; overflow: hidden; border-radius: calc(var(--radius-xl) - 8px); background: var(--brim-app-bg); color: var(--brim-app-ink); padding: 14px 18px; }
+.device--l .scr { border-radius: 42px; padding: 16px 20px; }
+.scr__island { margin: 0 auto; width: 32%; height: 22px; border-radius: 12px; background: #000; }
+.scr__title { margin-top: 22px; font-size: 13px; font-weight: var(--fw-heavy); }
+.scr__sum { margin-top: 16px; font-size: 34px; font-weight: var(--fw-heavy); letter-spacing: -0.04em; line-height: 1.1; }
+.scr__sum small { font-size: 0.5em; }
+.scr__bar { margin-top: 10px; height: 9px; border-radius: 5px; background: var(--brim-app-track); }
+.scr__bar i { display: block; width: 88%; height: 100%; border-radius: inherit; background: var(--brim-500); }
+.scr__list { margin-top: 18px; display: flex; flex-direction: column; gap: 5px; }
+.scr__left { margin-top: 8px; font-size: var(--fs-micro); font-weight: var(--fw-bold); color: var(--brim-700); }
+.scr__list span { display: flex; align-items: center; gap: var(--space-2); height: 42px; padding: 0 var(--space-3); border-radius: 12px; background: var(--color-surface); font-size: 12px; font-weight: var(--fw-bold); white-space: nowrap; }
+.scr__list i { flex: none; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--color-line-strong); }
+.scr__list .on i { border-color: var(--brim-500); background: var(--brim-500) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-4.9' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
+.scr__list b { margin-left: auto; font-weight: var(--fw-heavy); }
+.device--l .scr__sum { font-size: 40px; }
+.device--l .scr__list span { height: 50px; font-size: 13px; }
+
+/* ---------- 대표 앱 띠 ---------- */
+.feature { position: relative; margin-top: var(--space-section); height: clamp(640px, 53vw, 760px); overflow: hidden; background: linear-gradient(180deg, var(--brim-hero-from) 0%, var(--brim-hero-to) 100%); color: var(--color-inverse-ink); }
+.feature__ring { position: absolute; left: 50%; top: 50%; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.12); transform: translate(-50%, -50%); }
+.feature__ring--1 { width: 900px; height: 900px; }
+.feature__ring--2 { width: 620px; height: 620px; border-color: rgba(255, 255, 255, 0.16); }
+.feature__label { position: absolute; left: var(--space-16); top: var(--space-16); font-size: var(--fs-label); font-weight: var(--fw-bold); color: var(--color-inverse-ink-2); }
+.feature__title { position: absolute; left: var(--space-16); bottom: var(--space-16); margin: 0; font-size: var(--fs-display); line-height: var(--lh-display); font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
+.feature__phone { position: absolute; left: 50%; top: 90px; margin-left: -150px; transform: rotate(-6deg); }
+.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: var(--radius-pill); font-size: var(--fs-ui); font-weight: var(--fw-bold); transition: opacity var(--dur-fast) var(--ease-out); }
+.btn:hover { opacity: .85; }
+.btn--light { background: var(--color-surface); color: var(--brim-hero-to); }
+.feature .btn { position: absolute; right: var(--space-16); bottom: var(--space-16); }
+
+/* ---------- 소개 ---------- */
+.studio { padding-top: var(--space-section); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-5); }
+.studio__label { grid-column: span 4; font-size: var(--fs-ui); font-weight: 600; color: var(--color-ink-2); }
+.studio__text { grid-column: span 8; margin: 0; font-size: var(--fs-h3); line-height: var(--lh-heading); font-weight: var(--fw-heavy); letter-spacing: var(--ls-heading); }
+.studio__text span { display: block; text-wrap: balance; }
+
+/* ---------- 바닥글 ---------- */
+.footer { margin-top: calc(var(--space-section) + var(--space-5)); background: var(--color-inverse-bg); color: var(--color-inverse-ink); overflow: hidden; }
+.footer__top { padding-top: var(--space-20); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: var(--space-10); }
+.footer__mail { font-size: var(--fs-h2); font-weight: var(--fw-heavy); letter-spacing: -0.05em; border-bottom: 3px solid currentColor; padding-bottom: 6px; line-height: 1.2; }
+.footer__cols { display: flex; gap: var(--space-12); font-size: 14px; }
+.footer__cols div { display: flex; flex-direction: column; }
+.footer__cols strong { padding-bottom: 6px; }
+.footer__cols a { min-height: 34px; display: flex; align-items: center; color: var(--color-inverse-ink-2); transition: color var(--dur-fast) var(--ease-out); }
+.footer__cols a:hover { color: var(--color-inverse-ink); }
+.footer__ghost { margin-top: var(--space-20); text-align: center; white-space: nowrap; font-size: var(--fs-wordmark); line-height: 0.78; font-weight: var(--fw-black); letter-spacing: var(--ls-wordmark); color: var(--color-inverse-ghost); }
+
+/* ---------- 움직임 ---------- */
+@keyframes floatA { 0%, 100% { transform: translateY(0) rotate(-9deg); } 50% { transform: translateY(-16px) rotate(-7deg); } }
+@keyframes floatB { 0%, 100% { transform: translateY(0) rotate(11deg); } 50% { transform: translateY(-12px) rotate(13deg); } }
+@keyframes floatC { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(-2deg); } }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
+@keyframes rise { from { transform: translateY(40%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes mqr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+@supports (animation-timeline: view()) {
+  @keyframes reveal { from { opacity: 0; transform: translateY(80px); } to { opacity: 1; transform: none; } }
+  @keyframes par { from { transform: translateY(120px) rotate(-12deg); } to { transform: translateY(-60px) rotate(-3deg); } }
+  @keyframes ring { from { transform: translate(-50%, -50%) scale(.8); opacity: 0; } to { transform: translate(-50%, -50%) scale(1.05); opacity: 1; } }
+  @keyframes slide { from { transform: translateX(-12%); } to { transform: translateX(4%); } }
+  .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 28%; }
+  .feature__phone { animation: par linear both; animation-timeline: view(); }
+  .feature__ring { animation: ring linear both; animation-timeline: view(); animation-range: entry 0% cover 50%; }
+  .footer__ghost { animation: slide linear both; animation-timeline: view(); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- 태블릿 ---------- */
+@media (max-width: 1023px) {
+  .hero { --s: .8; }
+  .studio__label, .studio__text { grid-column: 1 / -1; }
+  .apps__phone { display: none; }
+  .feature { height: 760px; }
+  .feature__phone { left: auto; right: var(--space-16); margin-left: 0; }
+  .feature__phone .device { transform: scale(.8); transform-origin: top right; }
+}
+
+/* ---------- 휴대폰 ---------- */
+@media (max-width: 599px) {
+  .gnb__in { height: 60px; }
+  .logo { font-size: 17px; }
+  .gnb__nav { display: none; }
+  .gnb__menu { display: block; }
+  .hero { --s: .46; height: 480px; }
+  .hero__meta { top: 16px; font-size: var(--fs-label); }
+  .hero__objects { top: 100px; left: calc(50% - var(--s) * 30px); }
+  .hero__lead { bottom: calc(20px + var(--fs-wordmark) * 0.8 + var(--space-4)); font-size: 22px; }
+  .wordmark { bottom: 20px; }
+  .sec-head span { font-size: var(--fs-label); }
+  .row__label { top: var(--space-3); font-size: 12.5px; }
+  .row__badges { position: static; padding: 0 var(--gutter) 18px; flex-wrap: wrap; }
+  .row__badges img { height: 48px; }
+  .row__badges img.gp { height: 62.5px; margin: -7.25px 0; }
+  .row--treebal .row__track { -webkit-text-stroke-width: 2px; }
+  .apps__phone { display: none; }
+  .row--next .row__track { padding-top: 22px; }
+  .feature { height: 740px; }
+  .feature__label { left: var(--gutter); top: var(--space-6); }
+  .feature__title { left: var(--gutter); bottom: 108px; }
+  .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }
+  .feature__phone { top: 64px; left: 50%; right: auto; margin-left: -100px; }
+  .feature__phone .device { transform: scale(.667); transform-origin: top left; }
+  .feature__ring--1 { width: 560px; height: 560px; top: 260px; }
+  .feature__ring--2 { width: 380px; height: 380px; top: 260px; }
+  .footer__top { padding-top: 56px; }
+  .footer__mail { font-size: 28px; border-bottom-width: 2px; }
+  .footer__cols { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+  .footer__cols a { min-height: 44px; }
+  .footer__ghost { margin-top: var(--space-12); }
+}
+@media (max-width: 374px) {
+  .hero { --s: .38; }
+}

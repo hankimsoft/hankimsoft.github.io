@@ -1,0 +1,140 @@
+/* =========================================================
+   hankimsoft 디자인 토큰 v1.0
+   - 모든 화면은 이 파일의 변수만 사용합니다. 값을 직접 적지 않습니다.
+   - 글꼴은 Pretendard Variable 하나 (/assets/fonts/pretendard/pretendard.css, 외부 요청 없음)
+   ========================================================= */
+
+:root {
+  /* ---------- 색 · 기본 ---------- */
+  --color-bg: #F1F1EE;            /* 페이지 바탕 */
+  --color-surface: #FFFFFF;       /* 흰 면 */
+  --color-sunken: #E9E9E4;        /* 한 단계 들어간 면 (준비 중 자리) */
+  --color-ink: #16181A;           /* 본문 · 제목   대비 15.7:1 */
+  --color-ink-2: #5D6166;         /* 보조 글자     대비 5.5:1 */
+  --color-ink-3: #8E9297;         /* 장식 전용 · 글자에 쓰지 않음 (2.8:1) */
+  --color-line: #DEDED8;          /* 구분선 */
+  --color-line-strong: #B9B9B2;   /* 점선 · 외곽선 글자 */
+  --color-line-ink: #16181A;      /* 섹션 머리 굵은 선 */
+
+  /* ---------- 색 · 반전(바닥글) ---------- */
+  --color-inverse-bg: #16181A;
+  --color-inverse-ink: #FFFFFF;
+  --color-inverse-ink-2: rgba(255, 255, 255, 0.65);
+  --color-inverse-ghost: #2A2D30; /* 바닥글 큰 글자 */
+
+  /* ---------- 색 · 담은 ---------- */
+  --brim-500: #3E9E6E;            /* 브랜드 · 아이콘 · 큰 장식 글자 */
+  --brim-700: #2E7A56;            /* 글자 · 상태 표시 바탕 (흰 글자 5.2:1) */
+  --brim-100: #E4F0E9;            /* 연한 면 */
+  --brim-hero-from: #21523D;      /* 대표 앱 띠 그라데이션 */
+  --brim-hero-to: #173A2C;
+  --brim-app-bg: #FBF8F3;         /* 폰 속 앱 화면 */
+  --brim-app-ink: #2A2521;
+  --brim-app-track: #EDE6DA;      /* 예산 막대 빈 칸 */
+
+  /* ---------- 색 · 트리밸 ---------- */
+  --treebal-500: #4F7CFF;
+  --treebal-700: #2F55C9;         /* 글자 (흰 바탕 6.4:1) */
+  --treebal-300: #A9BCFF;         /* 차트 보조 */
+  --treebal-100: #E8EEFF;
+  --treebal-app-bg: #FFFFFF;
+  --treebal-app-ink: #191F28;
+
+  /* ---------- 색 · 차트 공통 ---------- */
+  --chart-gold: #E0A82E;
+  --chart-orange: #E0792F;
+
+  /* ---------- 색 · 기기 ---------- */
+  --device-frame: #0E0F10;
+
+  /* ---------- 글꼴 ---------- */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-heavy: 800;
+  --fw-black: 900;
+
+  /* 글자 크기 단계 (휴대폰 ↔ 데스크톱 사이에서 자연스럽게 커짐) */
+  --fs-wordmark: clamp(52px, 17vw, 228px);   /* hankimsoft 워드마크 (320px에서도 한 줄) */
+  --fs-marquee: clamp(130px, 16.5vw, 240px); /* 흐르는 앱 이름 */
+  --fs-marquee-sub: clamp(64px, 8vw, 116px); /* 흐르는 '다음 앱' */
+  --fs-display: clamp(52px, 6.2vw, 88px);    /* 대표 문구 */
+  --fs-h1: clamp(44px, 4.5vw, 64px);         /* 섹션 제목 (Apps) */
+  --fs-h2: clamp(28px, 3.9vw, 56px);         /* 바닥글 메일 */
+  --fs-h3: clamp(28px, 3.2vw, 46px);         /* 소개 문장 */
+  --fs-body: 17px;
+  --fs-ui: 15px;                              /* 메뉴 · 버튼 */
+  --fs-label: 13px;                           /* 번호 · 상태 · 메타 */
+  --fs-micro: 11px;                           /* 폰 속 작은 글자 */
+
+  --lh-tight: 0.8;   /* 워드마크 · 흐르는 글자 */
+  --lh-display: 0.95;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-wordmark: -0.075em;
+  --ls-display: -0.06em;
+  --ls-heading: -0.045em;
+  --ls-ui: -0.01em;
+
+  /* ---------- 간격 (4px 단위) ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-section: clamp(96px, 11vw, 160px); /* 섹션 사이 */
+  --gutter: clamp(20px, 2.8vw, 40px);        /* 좌우 여백 */
+  --container: 1360px;
+
+  /* ---------- 모서리 ---------- */
+  --radius-s: 9px;      /* 배지 자리 */
+  --radius-m: 20px;
+  --radius-l: 28px;
+  --radius-xl: 44px;    /* 기기 모형 */
+  --radius-pill: 999px;
+  --radius-icon: 22.5%; /* 앱 아이콘 = 크기의 22.5% */
+
+  /* ---------- 그림자 ---------- */
+  --shadow-soft: 0 8px 20px -10px rgba(22, 24, 26, 0.25);
+  --shadow-float: 0 50px 90px -30px rgba(0, 0, 0, 0.55);
+  --shadow-icon-brim: 0 60px 90px -40px rgba(46, 122, 86, 0.75), 0 18px 30px -14px rgba(22, 24, 26, 0.3);
+  --shadow-icon-treebal: 0 60px 90px -40px rgba(47, 85, 201, 0.75), 0 18px 30px -14px rgba(22, 24, 26, 0.3);
+  --icon-gloss: linear-gradient(155deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 45%);
+
+  /* ---------- 움직임 ---------- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 300ms;     /* 색 · 투명도 */
+  --dur-base: 600ms;     /* 위치 이동 */
+  --dur-enter: 1100ms;   /* 첫 화면 등장 */
+  --float-a: 7s;         /* 떠 있는 아이콘 */
+  --float-b: 8s;
+  --float-phone: 6s;
+  --mq-1: 28s;           /* 흐르는 줄 1 (담은) */
+  --mq-2: 34s;           /* 흐르는 줄 2 (반대 방향) */
+  --mq-3: 46s;           /* 다음 앱 줄 */
+
+  /* ---------- 화면 너비 기준 (참고용, 미디어 쿼리에 같은 값 사용) ----------
+     phone  ≤ 599px
+     tablet 600–1023px
+     laptop 1024–1279px
+     desktop ≥ 1280px
+  */
+}
+
+@media (max-width: 599px) {
+  :root {
+    --mq-1: 18s;
+    --mq-2: 22s;
+    --mq-3: 30s;
+    --radius-xl: 24px;
+    --fs-display: clamp(36px, 11.5vw, 52px);
+  }
+}
