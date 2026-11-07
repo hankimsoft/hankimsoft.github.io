@@ -107,6 +107,8 @@
   --space-section: clamp(96px, 11vw, 160px); /* 섹션 사이 */
   --gutter: clamp(20px, 2.8vw, 40px);        /* 좌우 여백 */
   --container: 1360px;
+  /* 화면 끝까지 차는 섹션 안에서 .wrap 과 같은 시작선 (머리글 로고 · Apps 제목과 맞춤). % 는 쓰는 자리의 폭 */
+  --edge: max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
 
   /* ---------- 모서리 ---------- */
   --radius-s: 9px;      /* 배지 자리 */
