@@ -58,6 +58,11 @@
   --chart-gold: #E0A82E;
   --chart-orange: #E0792F;
 
+  /* ---------- 색 · 유리 (어두운 바탕 위) ---------- */
+  --glass-fill: rgba(255, 255, 255, 0.14);
+  --glass-fill-hover: rgba(255, 255, 255, 0.22);
+  --glass-line: rgba(255, 255, 255, 0.34);
+
   /* ---------- 색 · 기기 ---------- */
   --device-frame: #0E0F10;
 
