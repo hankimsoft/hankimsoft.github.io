@@ -74,10 +74,17 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .row__track > * { flex: none; padding: 0 0.18em; }
 .row__track img { height: 0.52em; width: auto; padding: 0 0.1em; border-radius: 22.5%; }
 .row--brim .row__track { color: var(--brim-500); }
-.row--treebal .row__track { color: transparent; -webkit-text-stroke: 2.5px var(--treebal-500); animation-name: mqr; animation-duration: var(--mq-2); }
+/* 외곽선 글자: 가변 글꼴은 획이 겹쳐 있어 선만 그리면 글자 안에 겹친 윤곽이 보임 → 바탕색으로 채우고 선을 채움 아래에(두 배 굵기, 바깥 절반만 보임) */
+.row--treebal .row__track, .row--next .row__track { --fill: var(--color-bg); color: var(--fill); paint-order: stroke fill; transition: color var(--dur-fast) var(--ease-out); }
+.row--treebal .row__track { -webkit-text-stroke: 5px var(--treebal-500); animation-name: mqr; animation-duration: var(--mq-2); }
 .row--next .row__stage { height: clamp(100px, 11vw, 160px); }
-.row--next .row__track { font-size: var(--fs-marquee-sub); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1.5px var(--color-line-strong); animation-duration: var(--mq-3); }
+.row--next .row__track { font-size: var(--fs-marquee-sub); letter-spacing: -0.06em; -webkit-text-stroke: 3px var(--color-line-strong); animation-duration: var(--mq-3); }
 .row__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+/* 줄 링크는 상자가 없어서(0×0) 줄 전체를 덮는 ::after 에 초점 테두리를 그림 */
+.row__link:focus-visible { outline: 0; }
+.row__link:focus-visible::after { outline: 2px solid var(--color-ink); outline-offset: -4px; }
+/* 어두운 바탕(초록 띠 · 바닥글)에서는 흰 테두리 */
+.feature a:focus-visible, .footer a:focus-visible { outline-color: var(--color-inverse-ink); }
 .row__label { position: absolute; left: calc(var(--edge) - var(--space-2)); top: var(--space-5); z-index: 1; padding: 2px var(--space-2); border-radius: var(--radius-pill); background: var(--color-bg); font-size: var(--fs-label); font-weight: var(--fw-bold); }
 .row--brim .row__label { color: var(--brim-700); }
 .row--treebal .row__label { color: var(--treebal-700); }
@@ -90,6 +97,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .row__badges img.gp { height: 57.3px; margin: -6.65px 0; }
 @media (hover: hover) {
   .row:hover { background: rgba(255, 255, 255, 0.55); }
+  .row:hover .row__track { --fill: color-mix(in srgb, var(--color-bg), #fff 55%); }
   .row:hover .row__track { animation-play-state: paused; }
   .row__cta { transition: transform var(--dur-fast) var(--ease-out); }
   .row:hover .row__cta, .row__link:focus-visible .row__cta { transform: translateX(6px); }
@@ -98,7 +106,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 /* ---------- 기기 모형 · 담은 화면 ----------
    담은 소개 페이지(/brim/) 첫 화면과 같은 화면. 390×800 그대로 그리고 --k 배로 줄입니다. */
 .device { --k: .641; width: calc(390px * var(--k)); height: calc(800px * var(--k)); }
-.device--l { --k: .769; }
+.device--l { --k: var(--fk, .769); }
 .bp { width: 390px; height: 800px; padding: 12px; border-radius: 62px; background: var(--device-frame); box-shadow: var(--shadow-float); transform: scale(var(--k)); transform-origin: top left; }
 .scr { position: relative; height: 100%; border-radius: 50px; overflow: hidden; display: flex; flex-direction: column; background: var(--brim-app-bg); color: var(--brim-app-ink); line-height: normal; }
 .scr .island { position: absolute; left: 50%; top: 13px; width: 116px; height: 33px; margin-left: -58px; border-radius: 20px; background: #000; z-index: 1; }
@@ -165,7 +173,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .scr .homebar { position: absolute; left: 50%; bottom: 8px; width: 130px; height: 5px; margin-left: -65px; border-radius: 3px; background: var(--brim-app-ink); opacity: .85; }
 
 /* ---------- 대표 앱 띠 ---------- */
-.feature { position: relative; margin-top: var(--space-section); height: clamp(640px, 53vw, 760px); overflow: hidden; background: linear-gradient(180deg, var(--brim-hero-from) 0%, var(--brim-hero-to) 100%); color: var(--color-inverse-ink); }
+.feature { --fk: .769; position: relative; margin-top: var(--space-section); height: clamp(640px, 100vh, 760px); height: clamp(640px, 100svh, 760px); overflow: hidden; background: linear-gradient(180deg, var(--brim-hero-from) 0%, var(--brim-hero-to) 100%); color: var(--color-inverse-ink); }
 .feature__ring { position: absolute; left: 50%; top: 50%; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.12); transform: translate(-50%, -50%); }
 .feature__ring--1 { width: 900px; height: 900px; }
 .feature__ring--2 { width: 620px; height: 620px; border-color: rgba(255, 255, 255, 0.16); }
@@ -184,7 +192,10 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .feature__bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; margin-left: -6px; border-radius: 2px; background: var(--color-surface); transform: rotate(45deg); }
 .feature__char[data-k="3"] .feature__bubble { opacity: 1; transform: translateX(-50%); }
 .feature__title { position: absolute; left: var(--edge); bottom: var(--space-16); margin: 0; font-size: var(--fs-display); line-height: var(--lh-display); font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
-.feature__phone { position: absolute; left: 50%; top: 90px; margin-left: -150px; transform: rotate(-6deg); }
+.feature__phone { position: absolute; left: 50%; top: 90px; margin-left: calc(var(--fk) * -195px); transform: rotate(-6deg); }
+/* 띠가 760보다 낮아지면 폰도 줄여서 아래가 잘리지 않게 (폰 높이 800 × --fk + 위 90 + 기울기) */
+@media (min-width: 1024px) and (max-height: 759px) { .feature { --fk: .7; } }
+@media (min-width: 1024px) and (max-height: 699px) { .feature { --fk: .64; } }
 .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: var(--radius-pill); font-size: var(--fs-ui); font-weight: var(--fw-bold); transition: opacity var(--dur-fast) var(--ease-out); }
 .btn:hover { opacity: .85; }
 .btn--light { background: var(--color-surface); color: var(--brim-hero-to); }
@@ -264,14 +275,16 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .row__badges { position: static; padding: 0 var(--gutter) 18px; flex-wrap: wrap; }
   .row__badges img { height: 48px; }
   .row__badges img.gp { height: 62.5px; margin: -7.25px 0; }
-  .row--treebal .row__track { -webkit-text-stroke-width: 2px; }
+  .row--treebal .row__track { -webkit-text-stroke-width: 4px; }
   .row--next .row__track { padding-top: 22px; }
   .feature { height: 740px; }
   .feature__label { left: var(--gutter); top: var(--space-6); }
   .feature__steps { display: none; }
   .studio__text { font-size: 30px; }
-  .feature__char { --ch: 80px; left: calc(50% + 40px); right: auto; top: 380px; width: 140px; }
-  .feature__bubble { font-size: 14px; padding: 7px 12px; }
+  .feature__char { --ch: 64px; left: auto; right: var(--gutter); top: 380px; width: 140px; }
+  .feature__bubble { left: auto; right: 0; font-size: 14px; padding: 7px 12px; transform: translateY(8px); }
+  .feature__bubble::after { left: auto; right: 34px; }
+  .feature__char[data-k="3"] .feature__bubble { transform: none; }
   .feature__title { left: var(--gutter); bottom: 108px; }
   .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }
   .feature__phone { top: 64px; left: 50%; right: auto; margin-left: -100px; }
@@ -286,4 +299,5 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 }
 @media (max-width: 374px) {
   .hero { --s: .38; }
+  .feature__char { display: none; } /* 폰과 나란히 둘 폭이 없음 */
 }
