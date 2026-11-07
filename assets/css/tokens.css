@@ -31,6 +31,15 @@
   --brim-app-bg: #FBF8F3;         /* 폰 속 앱 화면 */
   --brim-app-ink: #2A2521;
   --brim-app-track: #EDE6DA;      /* 예산 막대 빈 칸 */
+  --brim-app-ink-2: #8A8178;      /* 폰 속 앱 화면 — 담은 소개 페이지(/brim/)와 같은 값 */
+  --brim-app-sub: #6F665B;
+  --brim-app-faint: #A89E92;
+  --brim-app-line: #F0EAE0;
+  --brim-app-chip: #EFE9DF;
+  --brim-app-count: #ECE5D9;
+  --brim-app-col: #E7E0D4;
+  --brim-app-ctrl: #D9D1C4;
+  --brim-gauge-checked: #F2D488; /* 체크 막대 (담은 막대는 --chart-gold) */
 
   /* ---------- 색 · 트리밸 ---------- */
   --treebal-500: #4F7CFF;
