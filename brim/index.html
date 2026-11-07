@@ -14,6 +14,7 @@
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://hankimsoft.github.io/brim/">
 <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css">
+<link rel="stylesheet" href="/assets/css/tokens.css">
 <script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 */
 (function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l;if(l==="en"){document.title="Brim - Shopping Calculator";var m=document.querySelector('meta[name="description"]');if(m)m.setAttribute("content","Brim is a free shopping calculator. List what you need, add prices as you shop, and land right on budget. No sign-up.")}})();</script>
 <style>
@@ -34,21 +35,23 @@
        font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',system-ui,sans-serif}
   a{color:inherit}
   img{max-width:100%}
-  .wrap{max-width:1180px; margin:0 auto; padding-inline:var(--pad)}
+  /* 폭 · 좌우 여백은 메인과 같은 기준(tokens.css) — 머리글 · 본문 · 바닥글 시작선이 메인과 맞음 */
+  .wrap{max-width:var(--container); margin:0 auto; padding-inline:var(--gutter)}
 
   /* 언어 — head 의 인라인 스크립트가 첫 페인트 전에 <html data-lang> 을 심는다 */
   html[data-lang="ko"] .l-en, html[data-lang="en"] .l-ko{display:none !important}
 
   /* ---------- 위 막대 ---------- */
   .top{position:sticky; top:0; z-index:30; background:rgba(241,241,238,.84); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px)}
-  .top .wrap{display:flex; align-items:center; gap:14px; height:58px}
-  .back{display:flex; align-items:center; gap:4px; font-size:14px; font-weight:600; color:var(--ink3); text-decoration:none}
-  .back:hover{color:var(--ink)}
-  .back svg{width:18px; height:18px}
-  .me{display:flex; align-items:center; gap:8px; font-weight:800; font-size:15px; letter-spacing:-.3px; margin-left:6px}
-  .me img{width:24px; height:24px; border-radius:24%}
-  .top nav{margin-left:auto; display:flex; align-items:center; gap:18px; font-size:13.5px; color:var(--ink2)}
-  .top nav a{text-decoration:none} .top nav a:hover{color:var(--ink)}
+  .top .wrap{display:flex; align-items:center; gap:10px; height:76px}
+  .logo{font-size:18px; font-weight:var(--fw-heavy); letter-spacing:-.04em; text-decoration:none}
+  .crumb{color:var(--color-line-strong); font-weight:500}
+  .me{display:flex; align-items:center; gap:8px; font-weight:var(--fw-heavy); font-size:18px; letter-spacing:-.04em}
+  .me img{width:24px; height:24px; border-radius:var(--radius-icon)}
+  .top nav{margin-left:auto; display:flex; align-items:center; gap:var(--space-1); font-size:var(--fs-ui); font-weight:600}
+  .top nav a{display:flex; align-items:center; min-height:44px; padding:0 14px; text-decoration:none; transition:opacity var(--dur-fast) var(--ease-out)}
+  .top nav a:hover{opacity:.75}
+  .top .lang{margin-left:10px}
   .lang{display:inline-flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--sheet)}
   .lang button{all:unset; cursor:pointer; padding:5px 10px; font-size:12px; font-weight:700; color:var(--ink3)}
   .lang button:focus-visible{outline:2px solid var(--brand); outline-offset:-2px}
@@ -292,8 +295,29 @@
   .end-art .bubble{position:relative; background:#fff; font-weight:800; font-size:17px; padding:9px 16px; border-radius:15px; margin-bottom:-4px; box-shadow:0 10px 24px rgba(42,37,33,.12); white-space:nowrap}
   .end-art .bubble::after{content:''; position:absolute; left:50%; bottom:-6px; width:12px; height:12px; margin-left:-6px; background:#fff; transform:rotate(45deg); border-radius:2px}
   @media (prefers-reduced-motion:reduce){ .blob{animation:none} }
-  footer .wrap{display:flex; flex-wrap:wrap; gap:8px 20px; padding-block:24px 48px; border-top:1px solid var(--line); font-size:13px; color:var(--ink3)}
-  footer a{text-decoration:none} footer a:hover{color:var(--ink)}
+  /* 바닥글 — 메인과 같은 모양(메일 · 링크 · © · 큰 흐린 글자) */
+  .footer{margin-top:var(--space-12); background:var(--color-inverse-bg); color:var(--color-inverse-ink); overflow:hidden}
+  .footer a{text-decoration:none}
+  .footer a:focus-visible{outline-color:var(--color-inverse-ink)}
+  .footer__top{padding-top:var(--space-20); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:var(--space-10)}
+  .footer__mail{font-size:var(--fs-h2); font-weight:var(--fw-heavy); letter-spacing:-.05em; border-bottom:3px solid currentColor; padding-bottom:6px; line-height:1.2}
+  .footer__cols{display:flex; gap:var(--space-12); font-size:14px}
+  .footer__cols div{display:flex; flex-direction:column}
+  .footer__cols strong{padding-bottom:6px}
+  .footer__cols a{min-height:34px; display:flex; align-items:center; color:var(--color-inverse-ink-2); transition:color var(--dur-fast) var(--ease-out)}
+  .footer__cols a:hover{color:var(--color-inverse-ink)}
+  .footer__copy{margin:var(--space-16) 0 0; font-size:var(--fs-label); color:var(--color-inverse-ink-2)}
+  .footer__ghost{margin-top:var(--space-20); text-align:center; white-space:nowrap; font-size:var(--fs-wordmark); line-height:.78; font-weight:var(--fw-black); letter-spacing:var(--ls-wordmark); color:var(--color-inverse-ghost)}
+  @media (max-width:599px){
+    .top .wrap{height:60px}
+    .logo,.me{font-size:17px}
+    .top nav a{padding:0 10px}
+    .footer__top{padding-top:56px}
+    .footer__mail{font-size:clamp(24px,7.5vw,28px); border-bottom-width:2px}
+    .footer__cols{width:100%}
+    .footer__cols a{min-height:44px}
+    .footer__ghost{margin-top:var(--space-12)}
+  }
 
   @media (max-width:980px){
     .stage{grid-template-columns:1fr}
@@ -320,14 +344,15 @@
     .hero h1{font-size:clamp(32px,10.4vw,44px)}
     .ticket{--cut:96px} .tk-main b{font-size:26px} .tk-stub b{font-size:24px}
     .phone{width:100%; height:auto; aspect-ratio:390/800}
-    .me{display:none}
+    .me,.crumb{display:none}
   }
 </style>
 </head>
 <body>
 
 <header class="top"><div class="wrap">
-  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>hankimsoft</a>
+  <a class="logo" href="/">hankimsoft</a>
+  <span class="crumb" aria-hidden="true">/</span>
   <span class="me"><img src="assets/icon.svg" alt=""><span class="l-ko">담은</span><span class="l-en">Brim</span></span>
   <nav>
     <a class="opt" href="#faq"><span class="l-ko">자주 묻는 질문</span><span class="l-en">FAQ</span></a>
@@ -459,7 +484,7 @@
       <div class="kp-copy">
         <h2><span class="l-ko">계산기는<br>키패드 안에</span><span class="l-en">The calculator<br>is in the keypad</span></h2>
         <p class="sub l-ko">사칙연산과 할인 % 키가 키패드에 들어 있어서, 계산기를 따로 켜지 않고 그 자리에서 값을 넣습니다.</p>
-        <p class="sub l-en">Arithmetic keys and a discount % key are built into the keypad. No second calculator — the number goes in right where you are.</p>
+        <p class="sub l-en">Arithmetic keys and a discount % key are built into the keypad. No second calculator - the number goes in right where you are.</p>
         <ul class="feats">
           <li><i>×</i><div><b><span class="l-ko">여러 개면 곱하기로</span><span class="l-en">Multiply for multiples</span></b><span class="l-ko">두 팩을 담았으면 금액 × 2</span><span class="l-en">Two packs? Price × 2</span></div></li>
           <li><i>%</i><div><b><span class="l-ko">할인율만 누르면 끝</span><span class="l-en">Just tap the rate</span></b><span class="l-ko">할인된 금액이 바로 들어갑니다</span><span class="l-en">The discounted price goes straight in</span></div></li>
@@ -524,7 +549,7 @@
     </div>
     <div class="faq l-en">
       <details><summary>Does my data sync to my other devices?</summary><p>No. All list data is stored only on the device you are using. There is no account and none of it is sent to a server, so your lists do not carry over to a new device. To move one list to another phone, send it with Share in the ⋯ menu, then tap the link on that phone to add it.</p></details>
-      <details><summary>I tapped a shared link, but the list didn't show up.</summary><p>Tapping the link opens "A list was shared with you" — tap Add to use it (your current list is saved to History). If nothing opens, update Brim to the latest version and tap the link again. If you just installed the app, tap the link once more. If you see "Couldn't open the list," the link was cut off — ask the sender to share it again.</p></details>
+      <details><summary>I tapped a shared link, but the list didn't show up.</summary><p>Tapping the link opens "A list was shared with you" - tap Add to use it (your current list is saved to History). If nothing opens, update Brim to the latest version and tap the link again. If you just installed the app, tap the link once more. If you see "Couldn't open the list," the link was cut off — ask the sender to share it again.</p></details>
       <details><summary>I set a budget but I do not see the gauge.</summary><p>The gauge appears only after a budget is set. Open the ⋯ menu at the top right of a list and choose Change budget.</p></details>
       <details><summary>I started a new list. Where did my old one go?</summary><p>It's saved in History, marked Not completed. Open it and tap Continue to pick up where you left off. If you don't need it, delete it from the ⋯ menu on that screen.</p></details>
     </div>
@@ -549,12 +574,15 @@
   </section>
 </main>
 
-<footer><div class="wrap">
-  <span>© 2026 hankimsoft</span>
-  <a href="support/"><span class="l-ko">지원</span><span class="l-en">Support</span></a>
-  <a href="privacy/"><span class="l-ko">개인정보 처리방침</span><span class="l-en">Privacy Policy</span></a>
-  <a href="terms/"><span class="l-ko">이용약관</span><span class="l-en">Terms of Use</span></a>
-  <a href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a>
+<footer class="footer"><div class="wrap">
+  <div class="footer__top">
+    <a href="mailto:hankimsoft@gmail.com" class="footer__mail">hankimsoft@gmail.com</a>
+    <div class="footer__cols">
+      <div><strong><span class="l-ko">담은</span><span class="l-en">Brim</span></strong><a href="support/"><span class="l-ko">지원</span><span class="l-en">Support</span></a><a href="privacy/"><span class="l-ko">개인정보 처리방침</span><span class="l-en">Privacy Policy</span></a><a href="terms/"><span class="l-ko">이용약관</span><span class="l-en">Terms of Use</span></a></div>
+    </div>
+  </div>
+  <p class="footer__copy">© 2026 hankimsoft</p>
+  <div class="footer__ghost" aria-hidden="true">hankimsoft</div>
 </div></footer>
 
 <script src="assets/app.js"></script>
