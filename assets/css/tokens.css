@@ -62,10 +62,6 @@
   --glass-fill: rgba(255, 255, 255, 0.14);
   --glass-fill-hover: rgba(255, 255, 255, 0.22);
   --glass-line: rgba(255, 255, 255, 0.34);
-  /* 유리 (밝은 바탕 위) */
-  --glass-light-fill: rgba(255, 255, 255, 0.4);
-  --glass-light-fill-hover: rgba(255, 255, 255, 0.6);
-  --glass-light-line: rgba(255, 255, 255, 0.8);
   /* 받기 버튼 — 담은 초록 유리(뒤가 살짝 비침) */
   --get-fill: rgba(46, 122, 86, 0.76);
   --get-fill-hover: rgba(46, 122, 86, 0.92);
