@@ -156,8 +156,10 @@
   if (wide.addEventListener) wide.addEventListener('change', fit);
 
   /* ---------- 키패드 체험 ----------
-     앱 키패드처럼 사칙연산(× ÷ 먼저)과 할인 %. 완료를 누르면 식이 값 하나로 접힌다. */
-  var expr = '', rate = 30, kidle = true;
+     앱 키패드(check_list_provider.dart)와 같은 순서: 사칙연산(× ÷ 먼저)으로 금액을 넣고, 「할인 %」를 누르면 할인 입력 —
+     숫자가 할인율(정수, 100까지)이 되고 금액 칸은 「N% 할인 · 원가」, 연산자 · 소수점은 무시, 빈 할인율에서 지우면 원가로,
+     완료를 누르면 할인가가 금액으로 들어간다. 처음엔 「12,900 × 2」에 30%를 막 적은 상태. */
+  var expr = '', disc = null, dbase = 0, kidle = true;
   function calc(e) {
     var t = e.replace(/[+−×÷]$/, '').split(/([+−×÷])/).filter(function (x) { return x !== ''; });
     if (!t.length) return 0;
@@ -172,22 +174,31 @@
   }
   function round(v) { return lang === 'ko' ? Math.round(v) : Math.round(v * 100) / 100; }
   function group(n) { var p = n.split('.'); p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ','); return p.join('.'); }
+  function pct() { return disc ? +disc : 0; }
   function drawKey() {
-    var base = round(calc(expr)), val = round(base * (100 - rate) / 100);
+    var on = disc !== null, base = on ? dbase : round(calc(expr)), val = on ? round(base * (100 - pct()) / 100) : base;
     $('kname').textContent = T.kname;
-    $('kexpr').textContent = /[+−×÷]/.test(expr) ? expr.split(/([+−×÷])/).map(function (x) { return /\d/.test(x) ? group(x) : ' ' + x + ' '; }).join('') : '';
+    $('kexpr').textContent = !on && /[+−×÷]/.test(expr) ? expr.split(/([+−×÷])/).map(function (x) { return /\d/.test(x) ? group(x) : ' ' + x + ' '; }).join('') : '';
     $('kres').textContent = T.money(val);
-    $('ktag').innerHTML = rate ? '<span>' + esc(T.tag(rate, T.money(base))) + '</span>' : '';
-    $('kdot').disabled = !T.dot;
-    document.querySelectorAll('#kchips button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.v === rate)); });
+    $('ktag').innerHTML = on ? '<span>' + esc(T.tag(pct(), T.money(base))) + '</span>' : '';
+    $('kdot').disabled = !T.dot || on;
+    $('kdisc').setAttribute('aria-pressed', String(on));
   }
+  function flash() { var r = $('kres'); r.classList.add('flash'); setTimeout(function () { r.classList.remove('flash'); }, 400); }
+  function endDisc() { var v = round(dbase * (100 - pct()) / 100); expr = String(pct() ? v : dbase); disc = null; }
   function press(k) {
+    if (disc !== null) {                      // 할인 입력 중
+      if (k === 'ok') { endDisc(); kidle = true; flash(); }
+      else if (k === 'bs') { if (disc === '') endDisc(); else disc = disc.slice(0, -1); }
+      else if (/^\d+$/.test(k)) { var next = disc + k; if (+next > 100) return; disc = String(+next); }
+      else return;                            // 연산자 · 소수점은 무시
+      return drawKey();
+    }
     var last = expr.slice(-1), num = expr.split(/[+−×÷]/).pop();
-    // 값이 정해진 뒤 숫자를 치면 새 금액 — 할인도 처음부터
-    if (kidle && /^[0-9.]/.test(k)) { expr = ''; num = ''; last = ''; rate = 0; }
+    if (kidle && /^[0-9.]/.test(k)) { expr = ''; num = ''; last = ''; }   // 값이 정해진 뒤 숫자를 치면 새 금액
     kidle = false;
     if (k === 'bs') expr = expr.slice(0, -1);
-    else if (k === 'ok') { expr = String(round(calc(expr)) || ''); kidle = true; var r = $('kres'); r.classList.add('flash'); setTimeout(function () { r.classList.remove('flash'); }, 400); }
+    else if (k === 'ok') { expr = String(round(calc(expr)) || ''); kidle = true; flash(); }
     else if (/^[+−×÷]$/.test(k)) { if (!expr) return; expr = /[+−×÷]/.test(last) ? expr.slice(0, -1) + k : expr + k; }
     else if (k === '.') { if (!T.dot || num.indexOf('.') >= 0) return; expr += num ? '.' : '0.'; }
     else if (expr.length < 14) {
@@ -196,13 +207,16 @@
     }
     drawKey();
   }
+  // 「할인 %」 — 금액이 있어야 들어감(앱과 같음). 이미 할인 입력 중이면 그대로
+  function startDisc() {
+    if (disc !== null) return;
+    var base = round(calc(expr)); if (!(base > 0)) return;
+    dbase = base; disc = ''; kidle = false; drawKey();
+  }
   document.querySelectorAll('#kkeys button').forEach(function (b) {
     b.addEventListener('click', function () { press(b.dataset.k === 'bs' ? 'bs' : b.dataset.k === 'ok' ? 'ok' : b.dataset.k === 'dot' ? '.' : b.textContent.trim()); });
   });
-  document.querySelectorAll('#kchips button').forEach(function (b) {
-    b.addEventListener('click', function () { rate = rate === +b.dataset.v ? 0 : +b.dataset.v; drawKey(); });
-  });
-  $('kdisc').addEventListener('click', function () { $('kchips').classList.toggle('off'); });
+  $('kdisc').addEventListener('click', startDisc);
 
   /* ---------- 공유 ---------- 부탁하는 목록: 아직 아무것도 안 담았고, 대파는 금액을 모른다 */
   function drawShare() {
@@ -231,7 +245,7 @@
     lang = l; T = L[l];
     root.setAttribute('data-lang', l); root.lang = l;
     if (save) { try { localStorage.setItem('brim-lang', l); } catch (e) {} }
-    expr = T.kstart; kidle = true; texts(); drawKey(); drawShare();
+    expr = T.kstart; disc = null; startDisc(); disc = '30'; texts(); drawKey(); drawShare();
     if (last) { var k = cur; cur = null; go(k || 'hero'); }
   }
   document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang, true); }); });
