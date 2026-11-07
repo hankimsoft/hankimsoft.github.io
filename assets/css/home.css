@@ -203,7 +203,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 
 /* ---------- 소개 ---------- */
 .studio { padding-top: var(--space-section); }
-.studio__label { margin: 0 0 var(--space-8); font-size: var(--fs-ui); font-weight: 600; color: var(--color-ink-2); }
+.studio__label { margin: 0 0 var(--space-8); font-size: var(--fs-label); font-weight: var(--fw-bold); color: var(--color-ink-2); }
 .studio__text { max-width: 1100px; margin: 0; font-size: var(--fs-h1); line-height: 1.25; font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
 .studio__text > span { display: block; text-wrap: balance; }
 .studio__text > span:last-child { color: var(--color-ink-2); }
