@@ -82,7 +82,6 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .row__cta { transition: transform var(--dur-fast) var(--ease-out); }
   .row:hover .row__cta, .row__link:focus-visible .row__cta { transform: translateX(6px); }
 }
-.apps__phone { position: absolute; right: 12%; top: 40px; z-index: 3; pointer-events: none; animation: bob var(--float-phone) ease-in-out infinite; transform: rotate(8deg); }
 
 /* ---------- 기기 모형 · 담은 화면 ----------
    담은 소개 페이지(/brim/) 첫 화면과 같은 화면. 390×800 그대로 그리고 --k 배로 줄입니다. */
@@ -170,17 +169,17 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .feature .btn { position: absolute; right: var(--space-16); bottom: var(--space-16); }
 
 /* ---------- 소개 ---------- */
-.studio { padding-top: var(--space-section); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-5); }
-.studio__label { grid-column: span 4; font-size: var(--fs-ui); font-weight: 600; color: var(--color-ink-2); }
-.studio__body { grid-column: span 8; }
-.studio__text { margin: 0; font-size: var(--fs-h3); line-height: var(--lh-heading); font-weight: var(--fw-heavy); letter-spacing: var(--ls-heading); }
-.studio__text span { display: block; text-wrap: balance; }
-.studio__sub { text-wrap: pretty; margin: var(--space-6) 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--color-ink-2); }
-.studio__points { margin: var(--space-16) 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
-.studio__points li { padding-top: var(--space-5); border-top: 1px solid var(--color-line-ink); }
-.studio__points span { display: block; font-size: var(--fs-label); font-weight: var(--fw-bold); color: var(--color-ink-2); }
-.studio__points b { display: block; margin-top: var(--space-3); font-size: 22px; line-height: var(--lh-heading); font-weight: var(--fw-heavy); letter-spacing: -0.03em; }
-.studio__points p { margin: var(--space-2) 0 0; font-size: var(--fs-ui); line-height: var(--lh-body); color: var(--color-ink-2); }
+.studio { padding-top: var(--space-section); }
+.studio__label { margin: 0 0 var(--space-8); font-size: var(--fs-ui); font-weight: 600; color: var(--color-ink-2); }
+.studio__text { margin: 0; font-size: var(--fs-display); line-height: 1.15; font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
+.studio__text > span { display: block; text-wrap: balance; }
+.studio__app { display: inline-flex; align-items: center; gap: 0.12em; white-space: nowrap; }
+.studio__app img { width: 0.86em; height: 0.86em; border-radius: var(--radius-icon); transform: rotate(-8deg); transition: transform var(--dur-fast) var(--ease-out); }
+.studio__app--brim { color: var(--brim-500); }
+.studio__app--brim img { box-shadow: var(--shadow-icon-brim); }
+.studio__app--treebal { color: var(--treebal-500); }
+.studio__app--treebal img { box-shadow: var(--shadow-icon-treebal); transform: rotate(8deg); }
+.studio__app:hover img { transform: rotate(0) scale(1.08); }
 
 /* ---------- 바닥글 ---------- */
 .footer { margin-top: calc(var(--space-section) + var(--space-5)); background: var(--color-inverse-bg); color: var(--color-inverse-ink); overflow: hidden; }
@@ -223,8 +222,6 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 /* ---------- 태블릿 ---------- */
 @media (max-width: 1023px) {
   .hero { --s: .8; }
-  .studio__label, .studio__body { grid-column: 1 / -1; }
-  .apps__phone { display: none; }
   .feature { height: 760px; }
   .feature__phone { left: auto; right: var(--space-16); margin-left: 0; }
   .feature__phone .device { transform: scale(.8); transform-origin: top right; }
@@ -247,12 +244,10 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .row__badges img { height: 48px; }
   .row__badges img.gp { height: 62.5px; margin: -7.25px 0; }
   .row--treebal .row__track { -webkit-text-stroke-width: 2px; }
-  .apps__phone { display: none; }
   .row--next .row__track { padding-top: 22px; }
   .feature { height: 740px; }
   .feature__label { left: var(--gutter); top: var(--space-6); }
   .feature__steps { display: none; }
-  .studio__points { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); margin-top: var(--space-12); }
   .feature__title { left: var(--gutter); bottom: 108px; }
   .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }
   .feature__phone { top: 64px; left: 50%; right: auto; margin-left: -100px; }
