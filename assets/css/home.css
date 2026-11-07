@@ -220,8 +220,10 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .studio__text { max-width: 1100px; margin: 0; font-size: var(--fs-h1); line-height: 1.25; font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
 .studio__text > span { display: block; text-wrap: balance; }
 .studio__text > span:last-child { color: var(--color-ink-2); }
-.studio__text .rest { visibility: hidden; }
-.studio__text .typing .typed::after { content: ""; display: inline-block; width: 0.08em; height: 0.9em; margin: 0 -0.08em 0 0.04em; vertical-align: -0.1em; background: currentColor; animation: blink 1s steps(1) infinite; }
+.studio__text.typewriter .ch { visibility: hidden; }
+.studio__text.typewriter .ch.on { visibility: visible; }
+/* 커서 — 그림자라 자리를 차지하지 않음(줄바꿈이 흔들리지 않게) */
+.studio__text .ch.cur { box-shadow: 0.07em 0 0 currentColor; animation: caret 1s steps(1) infinite; }
 
 /* ---------- 바닥글 ---------- */
 .footer { margin-top: calc(var(--space-section) + var(--space-5)); background: var(--color-inverse-bg); color: var(--color-inverse-ink); overflow: hidden; }
@@ -241,6 +243,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 @keyframes floatC { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(-2deg); } }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
 @keyframes blink { 50% { opacity: 0; } }
+@keyframes caret { 50% { box-shadow: none; } }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes fly { 0% { opacity: 0; transform: translateY(8px) scale(.94) rotate(-2deg); } 15% { opacity: 1; transform: rotate(-2deg); } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-24px) rotate(-2deg); } }
 @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }

@@ -21,27 +21,29 @@
     else if (/Android/.test(ua)) a.href = a.dataset.android;
   });
 
-  // 회사 소개 — 화면에 들어오면 한 글자씩 쳐 나감. 아직 안 친 글자도 자리는 지켜서(보이지만 않게) 줄이 흔들리지 않음
+  // 회사 소개 — 화면에 들어오면 한 글자씩 쳐 나감. 글자마다 따로 두고 처음부터 자리를 다 잡은 채(보이지만 않게) 하나씩 보이게 해서
+  // 줄바꿈이 다 쓴 뒤와 늘 같음. 커서는 그림자(자리 안 차지)로 — 커서를 상자로 끼우면 단어 가운데서 줄이 끊겨 글자가 아랫줄로 튀었다
   var intro = document.querySelector('.studio__text');
   if (intro && window.IntersectionObserver && !calm) {
-    var lines = [].slice.call(intro.children);
     intro.setAttribute('aria-label', intro.textContent.replace(/\s+/g, ' ').trim());
-    lines.forEach(function (ln) { var t = ln.textContent; ln.setAttribute('aria-hidden', 'true'); ln.innerHTML = '<span class="typed"></span><span class="rest"></span>'; ln.lastChild.textContent = t; });
+    var chars = [];
+    [].slice.call(intro.children).forEach(function (ln) {
+      var t = ln.textContent; ln.setAttribute('aria-hidden', 'true'); ln.textContent = '';
+      Array.from(t).forEach(function (ch) { var c = document.createElement('span'); c.className = 'ch'; c.textContent = ch; ln.appendChild(c); chars.push(c); });
+      chars.push(null);   // 줄이 바뀌는 자리 — 잠깐 쉼
+    });
+    intro.classList.add('typewriter');
     var io = new IntersectionObserver(function (es) {
       if (!es[0].isIntersecting) return;
       io.disconnect();
-      var li = 0;
-      (function next() {
-        var ln = lines[li]; if (!ln) return;
-        var typed = ln.firstChild, rest = ln.lastChild;
-        ln.classList.add('typing');
-        (function tick() {
-          if (rest.textContent) {
-            typed.textContent += rest.textContent[0]; rest.textContent = rest.textContent.slice(1);
-            setTimeout(tick, 55);
-          } else if (++li < lines.length) { ln.classList.remove('typing'); setTimeout(next, 260); }
-          else setTimeout(function () { ln.classList.remove('typing'); }, 2400);
-        })();
+      var k = 0, prev = null;
+      (function tick() {
+        if (k >= chars.length) { setTimeout(function () { if (prev) prev.classList.remove('cur'); }, 2400); return; }
+        var c = chars[k++];
+        if (!c) return setTimeout(tick, 260);
+        if (prev) prev.classList.remove('cur');
+        c.classList.add('on', 'cur'); prev = c;
+        setTimeout(tick, 55);
       })();
     }, { threshold: 0.6 });
     io.observe(intro);
