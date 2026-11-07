@@ -5,8 +5,36 @@
   var d = new Date(), title = (d.getMonth() + 1) + '월 ' + d.getDate() + '일 장보기';
   document.querySelectorAll('.scr .ttl').forEach(function (e) { e.textContent = title; });
 
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 회사 소개 — 화면에 들어오면 한 글자씩 쳐 나감. 아직 안 친 글자도 자리는 지켜서(보이지만 않게) 줄이 흔들리지 않음
+  var intro = document.querySelector('.studio__text');
+  if (intro && window.IntersectionObserver && !calm) {
+    var lines = [].slice.call(intro.children);
+    intro.setAttribute('aria-label', intro.textContent.replace(/\s+/g, ' ').trim());
+    lines.forEach(function (ln) { var t = ln.textContent; ln.setAttribute('aria-hidden', 'true'); ln.innerHTML = '<span class="typed"></span><span class="rest"></span>'; ln.lastChild.textContent = t; });
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      var li = 0;
+      (function next() {
+        var ln = lines[li]; if (!ln) return;
+        var typed = ln.firstChild, rest = ln.lastChild;
+        ln.classList.add('typing');
+        (function tick() {
+          if (rest.textContent) {
+            typed.textContent += rest.textContent[0]; rest.textContent = rest.textContent.slice(1);
+            setTimeout(tick, 55);
+          } else if (++li < lines.length) { ln.classList.remove('typing'); setTimeout(next, 260); }
+          else setTimeout(function () { ln.classList.remove('typing'); }, 2400);
+        })();
+      })();
+    }, { threshold: 0.6 });
+    io.observe(intro);
+  }
+
   var scr = document.querySelector('.feature .scr'), steps = document.querySelectorAll('.feature__steps li'), chr = document.querySelector('.feature__char');
-  if (!scr || !window.IntersectionObserver || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!scr || !window.IntersectionObserver || calm) return;
 
   // 일곱 개를 다 담으면 예산 50,000원에 딱 맞는다
   var BUDGET = 50000, ITEMS = [['삼겹살 600g', 18900], ['계란 한 판', 7480], ['서울우유 2L', 5290], ['대파 한 단', 3980], ['애호박 2개', 3160], ['두부 2모', 4300], ['요거트 4입', 6890]];

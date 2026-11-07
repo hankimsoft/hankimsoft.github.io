@@ -175,9 +175,10 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .feature__steps li.on { opacity: 1; }
 /* 담은 캐릭터 — 앱 도움말 캐릭터(check_list assets/brand/character/tutorial_*). 네 장 모두 세로 범위가 같아
    같은 높이로 그리면 크기가 맞음. --a = 그림 가로/세로. 폰 장면 따라: 0 적기 · 1 담기 · 2 남은 것만 · 3 딱 맞춤(폭죽) */
-.feature__char { position: absolute; left: calc(50% + 190px); bottom: 150px; z-index: 2; width: 220px; height: 130px; pointer-events: none; }
-.feature__char img { position: absolute; left: 50%; bottom: 0; height: 100%; width: calc(var(--a) * 130px); max-width: none; margin-left: calc(var(--a) * -65px); opacity: 0; transform: translateY(12px) scale(.92); transition: opacity var(--dur-fast) var(--ease-out), transform .45s cubic-bezier(.2, 1.4, .4, 1); }
+.feature__char { --ch: 130px; position: absolute; left: calc(50% + 190px); bottom: 150px; z-index: 2; width: 220px; height: var(--ch); pointer-events: none; }
+.feature__char img { position: absolute; left: 50%; bottom: 0; height: 100%; width: calc(var(--a) * var(--ch)); max-width: none; margin-left: calc(var(--a) * var(--ch) / -2); opacity: 0; transform: translateY(12px) scale(.92); transition: opacity var(--dur-fast) var(--ease-out), transform .45s cubic-bezier(.2, 1.4, .4, 1); }
 .feature__char[data-k="0"] img:nth-of-type(1), .feature__char[data-k="1"] img:nth-of-type(2), .feature__char[data-k="2"] img:nth-of-type(3), .feature__char[data-k="3"] img:nth-of-type(4) { opacity: 1; transform: none; }
+.feature__char::before { content: ""; position: absolute; left: 50%; bottom: calc(var(--ch) * -0.054); width: calc(var(--ch) * 0.7); height: calc(var(--ch) * 0.125); margin-left: calc(var(--ch) * -0.35); border-radius: 50%; background: rgba(0, 0, 0, 0.28); filter: blur(1.5px); }
 .feature__confetti { position: absolute; left: -240px; top: -320px; width: calc(100% + 480px); height: calc(100% + 400px); }
 .feature__bubble { position: absolute; left: 50%; bottom: calc(100% + 10px); padding: 9px 16px; border-radius: 15px; background: var(--color-surface); color: var(--brim-app-ink); font-size: 17px; font-weight: var(--fw-heavy); white-space: nowrap; box-shadow: 0 10px 24px rgba(0, 0, 0, .18); opacity: 0; transform: translateX(-50%) translateY(8px); transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
 .feature__bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; margin-left: -6px; border-radius: 2px; background: var(--color-surface); transform: rotate(45deg); }
@@ -195,6 +196,8 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .studio__text { max-width: 1100px; margin: 0; font-size: var(--fs-h1); line-height: 1.25; font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
 .studio__text > span { display: block; text-wrap: balance; }
 .studio__text > span:last-child { color: var(--color-ink-2); }
+.studio__text .rest { visibility: hidden; }
+.studio__text .typing .typed::after { content: ""; display: inline-block; width: 0.08em; height: 0.9em; margin: 0 -0.08em 0 0.04em; vertical-align: -0.1em; background: currentColor; animation: blink 1s steps(1) infinite; }
 
 /* ---------- 바닥글 ---------- */
 .footer { margin-top: calc(var(--space-section) + var(--space-5)); background: var(--color-inverse-bg); color: var(--color-inverse-ink); overflow: hidden; }
@@ -241,8 +244,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .feature { height: 760px; }
   .feature__phone { left: auto; right: var(--space-16); margin-left: 0; }
   .feature__phone .device { transform: scale(.8); transform-origin: top right; }
-  .feature__char { left: auto; right: calc(var(--space-16) + 260px); bottom: auto; top: 410px; width: 180px; height: 110px; }
-  .feature__char img { width: calc(var(--a) * 110px); margin-left: calc(var(--a) * -55px); }
+  .feature__char { --ch: 110px; left: auto; right: calc(var(--space-16) + 260px); bottom: auto; top: 410px; width: 180px; }
 }
 
 /* ---------- 휴대폰 ---------- */
@@ -268,8 +270,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .feature__label { left: var(--gutter); top: var(--space-6); }
   .feature__steps { display: none; }
   .studio__text { font-size: 30px; }
-  .feature__char { left: calc(50% + 40px); right: auto; top: 380px; width: 140px; height: 80px; }
-  .feature__char img { width: calc(var(--a) * 80px); margin-left: calc(var(--a) * -40px); }
+  .feature__char { --ch: 80px; left: calc(50% + 40px); right: auto; top: 380px; width: 140px; }
   .feature__bubble { font-size: 14px; padding: 7px 12px; }
   .feature__title { left: var(--gutter); bottom: 108px; }
   .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }
