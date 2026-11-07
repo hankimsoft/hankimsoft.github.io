@@ -7,16 +7,18 @@ layout: null
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>이용약관 — 트리밸 (Treebal)</title>
+<title>이용약관 - 트리밸 (Treebal)</title>
 <meta name="description" content="트리밸(Treebal) 이용약관. 앱은 투자 자문을 제공하지 않으며, 시세 정보는 실시간이 아닙니다.">
 <link rel="canonical" href="https://hankimsoft.github.io/treebal/terms/">
 <link rel="icon" href="/treebal/assets/icon.png" type="image/png">
 <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css">
+<link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/doc.css">
 </head>
 <body data-app="treebal">
 <header class="top"><div class="in">
-  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>hankimsoft</a>
+  <a class="logo" href="/">hankimsoft</a>
+  <span class="crumb" aria-hidden="true">/</span>
   <a class="me" href="/treebal/"><img src="/treebal/assets/icon.png" alt="">트리밸</a>
   <nav><a href="/treebal/" class="opt">소개</a><a href="/treebal/support/">지원</a><a href="/treebal/privacy/">개인정보</a><a href="/treebal/terms/" aria-current="page">약관</a></nav>
 </div></header>
@@ -26,8 +28,13 @@ layout: null
 {% include treebal/terms.html %}
 </article>
 </main>
-<footer><div class="in">
-  <span>© 2026 hankimsoft</span><a href="/treebal/">트리밸 소개</a><a href="/treebal/support/">지원</a><a href="/treebal/privacy/">개인정보처리방침</a><a href="/treebal/terms/">이용약관</a><a href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a>
+<footer class="footer"><div class="in">
+  <div class="footer__top">
+    <a href="mailto:hankimsoft@gmail.com" class="footer__mail">hankimsoft@gmail.com</a>
+    <div class="footer__cols"><div><strong>트리밸</strong><a href="/treebal/">소개</a><a href="/treebal/support/">지원</a><a href="/treebal/privacy/">개인정보처리방침</a><a href="/treebal/terms/">이용약관</a></div></div>
+  </div>
+  <p class="footer__copy">© 2026 hankimsoft</p>
+  <div class="footer__ghost" aria-hidden="true">hankimsoft</div>
 </div></footer>
 <script src="/assets/doc.js"></script>
 </body>
