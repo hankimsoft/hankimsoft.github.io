@@ -81,20 +81,19 @@
     scr.classList.remove('fade'); step(0); render(s);
     // 집에서 — 금액을 아는 것만 적고, 마지막 줄을 적는 중
     var word = ITEMS[6][0];
-    for (var c = 1; c <= word.length; c++) (function (c) { at(500 + c * 120, function () { s.typed = word.slice(0, c); render(s); }); })(c);
-    at(1900, function () { s.typing = -1; render(s); });
+    for (var c = 1; c <= word.length; c++) (function (c) { at(300 + c * 110, function () { s.typed = word.slice(0, c); render(s); }); })(c);
+    at(1300, function () { s.typing = -1; render(s); });
     // 마트에서 — 담을 때마다 금액을 넣으면 합계가 쌓인다
-    at(2700, function () { step(1); take(s, 0); });
-    at(3600, function () { take(s, 1); });
-    at(4500, function () { take(s, 2); });
-    at(5400, function () { take(s, 3); });
-    // 남은 것만 보고 마저 담으면 예산에 딱 맞는다
-    at(6600, function () { step(2); s.filter = true; render(s); });
-    at(7500, function () { take(s, 4); });
-    at(8400, function () { take(s, 5); });
-    at(9300, function () { take(s, 6); });
-    at(12600, function () { scr.classList.add('fade'); });
-    at(13000, play);
+    at(1900, function () { step(1); take(s, 0); });
+    at(2650, function () { take(s, 1); });
+    at(3400, function () { take(s, 3); });
+    // 남은 것만 보고 마저 담으면 예산에 딱 맞는다 (우유는 남겨 둠 — 합계는 금액을 적은 항목의 합)
+    at(4300, function () { step(2); s.filter = true; render(s); });
+    at(5050, function () { take(s, 4); });
+    at(5800, function () { take(s, 5); });
+    at(6550, function () { take(s, 6); });
+    at(9400, function () { scr.classList.add('fade'); });
+    at(9800, play);
   }
   function stop() { timers.forEach(clearTimeout); timers = []; }
 

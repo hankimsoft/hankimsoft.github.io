@@ -172,8 +172,15 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 /* ---------- 소개 ---------- */
 .studio { padding-top: var(--space-section); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-5); }
 .studio__label { grid-column: span 4; font-size: var(--fs-ui); font-weight: 600; color: var(--color-ink-2); }
-.studio__text { grid-column: span 8; margin: 0; font-size: var(--fs-h3); line-height: var(--lh-heading); font-weight: var(--fw-heavy); letter-spacing: var(--ls-heading); }
+.studio__body { grid-column: span 8; }
+.studio__text { margin: 0; font-size: var(--fs-h3); line-height: var(--lh-heading); font-weight: var(--fw-heavy); letter-spacing: var(--ls-heading); }
 .studio__text span { display: block; text-wrap: balance; }
+.studio__sub { text-wrap: pretty; margin: var(--space-6) 0 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--color-ink-2); }
+.studio__points { margin: var(--space-16) 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
+.studio__points li { padding-top: var(--space-5); border-top: 1px solid var(--color-line-ink); }
+.studio__points span { display: block; font-size: var(--fs-label); font-weight: var(--fw-bold); color: var(--color-ink-2); }
+.studio__points b { display: block; margin-top: var(--space-3); font-size: 22px; line-height: var(--lh-heading); font-weight: var(--fw-heavy); letter-spacing: -0.03em; }
+.studio__points p { margin: var(--space-2) 0 0; font-size: var(--fs-ui); line-height: var(--lh-body); color: var(--color-ink-2); }
 
 /* ---------- 바닥글 ---------- */
 .footer { margin-top: calc(var(--space-section) + var(--space-5)); background: var(--color-inverse-bg); color: var(--color-inverse-ink); overflow: hidden; }
@@ -216,7 +223,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 /* ---------- 태블릿 ---------- */
 @media (max-width: 1023px) {
   .hero { --s: .8; }
-  .studio__label, .studio__text { grid-column: 1 / -1; }
+  .studio__label, .studio__body { grid-column: 1 / -1; }
   .apps__phone { display: none; }
   .feature { height: 760px; }
   .feature__phone { left: auto; right: var(--space-16); margin-left: 0; }
@@ -245,6 +252,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .feature { height: 740px; }
   .feature__label { left: var(--gutter); top: var(--space-6); }
   .feature__steps { display: none; }
+  .studio__points { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); margin-top: var(--space-12); }
   .feature__title { left: var(--gutter); bottom: 108px; }
   .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }
   .feature__phone { top: 64px; left: 50%; right: auto; margin-left: -100px; }
