@@ -3,49 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>페이지를 찾을 수 없습니다 — hankimsoft</title>
+<title>페이지를 찾을 수 없습니다 - hankimsoft</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="/brim/assets/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" href="/assets/favicon/hk-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/assets/favicon/hk-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css">
-<script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 */
-(function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l})();</script>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<script>/* 첫 페인트 전 언어 확정 — 기본 영어, 브라우저가 한국어면 한국어, 사용자 선택이 최우선 (담은 영어 페이지에서 잘못 들어온 사람도 읽도록) */
+(function(){var l=null;try{l=localStorage.getItem("brim-lang")}catch(e){}if(l!=="ko"&&l!=="en"){var a=navigator.languages||[navigator.language||""];l="en";for(var i=0;i<a.length;i++){var x=String(a[i]).toLowerCase();if(x.indexOf("ko")===0){l="ko";break}if(x.indexOf("en")===0){l="en";break}}}var d=document.documentElement;d.setAttribute("data-lang",l);d.lang=l;if(l==="en")document.title="Page not found - hankimsoft"})();</script>
 <style>
-  :root{color-scheme:light; --bg:#F1F1EE; --ink:#16181A; --ink2:#5D6166; --ink3:#8E9297; --line:#DEDED8}
-  *{box-sizing:border-box}
+  /* 메인(/)과 같은 토큰 · 머리글 · 바닥글 */
+  :root{color-scheme:light}
+  *,*::before,*::after{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{margin:0; min-height:100vh; display:flex; flex-direction:column; background:var(--bg); color:var(--ink); line-height:1.6;
-       font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',system-ui,sans-serif;
-       word-break:keep-all; overflow-wrap:anywhere}
+  body{margin:0; min-height:100vh; display:flex; flex-direction:column; background:var(--color-bg); color:var(--color-ink);
+       font-family:var(--font-sans); font-size:var(--fs-body); line-height:var(--lh-body); word-break:keep-all}
   html[data-lang="ko"] .l-en, html[data-lang="en"] .l-ko{display:none !important}
-  .top{max-width:1180px; width:100%; margin:0 auto; padding:0 clamp(16px,4vw,48px); height:58px; display:flex; align-items:center}
-  .back{display:flex; align-items:center; gap:4px; font-size:14px; font-weight:600; color:var(--ink3); text-decoration:none}
-  .back:hover{color:var(--ink)}
-  .back svg{width:18px; height:18px}
-  main{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 20px 80px}
-  /* 홈 화면에 아직 없는 앱 — 메인의 루티 자리와 같은 점선 아이콘 */
-  .ghost{width:88px; height:88px; border-radius:24%; border:2.5px dashed #B9BCC0; display:grid; place-items:center;
-         font-size:20px; font-weight:800; color:var(--ink3); letter-spacing:.02em}
-  .lbl{margin-top:10px; font-size:12.5px; font-weight:600; color:var(--ink3)}
-  h1{margin:32px 0 0; font-size:clamp(28px,4vw,40px); line-height:1.2; letter-spacing:-.04em; font-weight:800}
-  p{margin:14px 0 0; font-size:16px; color:var(--ink2); max-width:40ch}
-  .links{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:30px}
-  .btn{display:inline-flex; align-items:center; height:46px; padding:0 18px; border-radius:12px; font-size:14.5px; font-weight:700;
-       text-decoration:none; background:#fff; color:var(--ink)}
-  .btn.dark{background:var(--ink); color:#fff}
-  .btn:hover{opacity:.85}
-  a:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
-  footer{max-width:1180px; width:100%; margin:0 auto; padding:24px clamp(16px,4vw,48px) 40px; border-top:1px solid var(--line); font-size:13px; color:var(--ink3)}
+  a{color:inherit; text-decoration:none}
+  a:focus-visible{outline:2px solid var(--color-ink); outline-offset:4px; border-radius:10px}
+  .wrap{max-width:var(--container); margin:0 auto; padding:0 var(--gutter); width:100%}
+
+  .gnb{height:76px; display:flex; align-items:center}
+  .logo{font-size:18px; font-weight:var(--fw-heavy); letter-spacing:-.04em}
+
+  main{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:var(--space-10) var(--gutter) var(--space-20)}
+  /* 메인 첫 화면의 점선 「다음 앱」 칸과 같은 모양 */
+  .ghost{width:112px; height:112px; border-radius:var(--radius-icon); border:2px dashed var(--color-line-strong); display:grid; place-items:center;
+         transform:rotate(-4deg); font-size:26px; font-weight:var(--fw-black); letter-spacing:-.04em; color:var(--color-ink-2)}
+  h1{margin:var(--space-10) 0 0; font-size:clamp(32px,4.5vw,56px); line-height:1.15; letter-spacing:var(--ls-display); font-weight:var(--fw-black)}
+  p{margin:var(--space-4) 0 0; color:var(--color-ink-2); max-width:40ch}
+  .links{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-2); margin-top:var(--space-8)}
+  .btn{display:inline-flex; align-items:center; min-height:48px; padding:0 var(--space-6); border-radius:var(--radius-pill); border:1.5px solid var(--color-ink);
+       font-size:var(--fs-ui); font-weight:var(--fw-bold); transition:background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out)}
+  .btn.dark{background:var(--color-ink); color:var(--color-inverse-ink)}
+  .btn:hover{background:var(--color-ink); color:var(--color-inverse-ink)}
+  .btn.dark:hover{opacity:.85}
+
+  .footer{background:var(--color-inverse-bg); color:var(--color-inverse-ink); overflow:hidden}
+  .footer a:focus-visible{outline-color:var(--color-inverse-ink)}
+  .footer__top{padding-top:var(--space-16); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:var(--space-6)}
+  .footer__mail{font-size:clamp(24px,3vw,40px); font-weight:var(--fw-heavy); letter-spacing:-.05em; border-bottom:3px solid currentColor; padding-bottom:6px; line-height:1.2}
+  .footer__copy{margin:0; font-size:var(--fs-label); color:var(--color-inverse-ink-2)}
+  .footer__ghost{margin-top:var(--space-12); text-align:center; white-space:nowrap; font-size:var(--fs-wordmark); line-height:.78; font-weight:var(--fw-black); letter-spacing:var(--ls-wordmark); color:var(--color-inverse-ghost)}
+
+  @media (max-width:599px){
+    .gnb{height:60px}
+    .logo{font-size:17px}
+    .footer__top{padding-top:48px}
+    .footer__mail{border-bottom-width:2px}
+  }
 </style>
 </head>
 <body>
 
-<header class="top">
-  <a class="back" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>hankimsoft</a>
+<header class="wrap gnb">
+  <a class="logo" href="/">hankimsoft</a>
 </header>
 
 <main>
   <div class="ghost" aria-hidden="true">404</div>
-  <div class="lbl" aria-hidden="true"><span class="l-ko">없는 화면</span><span class="l-en">Not here</span></div>
   <h1><span class="l-ko">페이지를 찾을 수 없습니다</span><span class="l-en">Page not found</span></h1>
   <p>
     <span class="l-ko">주소가 바뀌었거나 삭제된 페이지입니다. 아래에서 원하시는 곳으로 가실 수 있습니다.</span>
@@ -57,7 +75,13 @@
   </div>
 </main>
 
-<footer>© 2026 hankimsoft</footer>
+<footer class="footer"><div class="wrap">
+  <div class="footer__top">
+    <a href="mailto:hankimsoft@gmail.com" class="footer__mail">hankimsoft@gmail.com</a>
+    <p class="footer__copy">© 2026 hankimsoft</p>
+  </div>
+  <div class="footer__ghost" aria-hidden="true">hankimsoft</div>
+</div></footer>
 
 </body>
 </html>
