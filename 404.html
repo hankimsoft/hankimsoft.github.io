@@ -41,18 +41,17 @@
   .btn:hover{background:var(--color-ink); color:var(--color-inverse-ink)}
   .btn.dark:hover{opacity:.85}
 
-  .footer{background:var(--color-inverse-bg); color:var(--color-inverse-ink); overflow:hidden}
+  /* 얇은 바닥글 — 메인 · 소개 페이지의 큰 바닥글과 같은 검정, 한 줄만 */
+  .footer{background:var(--color-inverse-bg); color:var(--color-inverse-ink)}
+  .footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:var(--space-3) var(--space-8); padding-block:var(--space-6) var(--space-8)}
   .footer a:focus-visible{outline-color:var(--color-inverse-ink)}
-  .footer__top{padding-top:var(--space-16); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:var(--space-6)}
-  .footer__mail{font-size:clamp(24px,3vw,40px); font-weight:var(--fw-heavy); letter-spacing:-.05em; border-bottom:3px solid currentColor; padding-bottom:6px; line-height:1.2}
-  .footer__copy{margin:0; font-size:var(--fs-label); color:var(--color-inverse-ink-2)}
-  .footer__ghost{margin-top:var(--space-12); text-align:center; white-space:nowrap; font-size:var(--fs-wordmark); line-height:.78; font-weight:var(--fw-black); letter-spacing:var(--ls-wordmark); color:var(--color-inverse-ghost)}
-
+  .footer__copy{margin:0; font-size:var(--fs-label); color:var(--color-inverse-ink-2); max-width:none}
+  .footer__links{display:flex; flex-wrap:wrap; gap:var(--space-1) var(--space-6); font-size:var(--fs-label)}
+  .footer__links a{display:flex; align-items:center; min-height:32px; color:var(--color-inverse-ink-2); transition:color var(--dur-fast) var(--ease-out)}
+  .footer__links a:hover{color:var(--color-inverse-ink)}
   @media (max-width:599px){
     .gnb{height:60px}
     .logo{font-size:17px}
-    .footer__top{padding-top:48px}
-    .footer__mail{border-bottom-width:2px}
   }
 </style>
 </head>
@@ -75,12 +74,9 @@
   </div>
 </main>
 
-<footer class="footer"><div class="wrap">
-  <div class="footer__top">
-    <a href="mailto:hankimsoft@gmail.com" class="footer__mail">hankimsoft@gmail.com</a>
-    <p class="footer__copy">© 2026 hankimsoft</p>
-  </div>
-  <div class="footer__ghost" aria-hidden="true">hankimsoft</div>
+<footer class="footer footer--slim"><div class="wrap">
+  <p class="footer__copy">© 2026 hankimsoft</p>
+  <nav class="footer__links" aria-label="바닥글"><a href="/"><span class="l-ko">홈</span><span class="l-en">Home</span></a><a href="/brim/"><span class="l-ko">담은 소개</span><span class="l-en">About Brim</span></a><a href="mailto:hankimsoft@gmail.com">hankimsoft@gmail.com</a></nav>
 </div></footer>
 
 </body>

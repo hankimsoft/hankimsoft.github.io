@@ -78,20 +78,32 @@ html[data-lang="en"] .lang button[data-lang="en"]{background:var(--ink); color:#
 .faq details p{margin:-4px 0 20px; max-width:62ch}
 .faq details:target summary{color:var(--accent-ink)}
 
-/* ---------- 바닥글 — 메인과 같은 모양(메일 · 링크 · © · 큰 흐린 글자) ---------- */
+/* ---------- 바닥글 — 메인과 같은 검정, 문서 · 404 는 얇은 한 줄 ---------- */
 .footer{background:var(--color-inverse-bg); color:var(--color-inverse-ink); overflow:hidden}
 .footer .in{max-width:var(--container); margin:0 auto; padding-inline:var(--gutter)}
 .footer a{text-decoration:none}
 .footer a:focus-visible{outline:2px solid var(--color-inverse-ink); outline-offset:4px; border-radius:6px}
-.footer__top{padding-top:var(--space-20); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:var(--space-10)}
-.footer__mail{font-size:var(--fs-h2); font-weight:var(--fw-heavy); letter-spacing:-.05em; border-bottom:3px solid currentColor; padding-bottom:6px; line-height:1.2}
-.footer__cols{display:flex; gap:var(--space-12); font-size:14px}
-.footer__cols div{display:flex; flex-direction:column}
-.footer__cols strong{padding-bottom:6px}
-.footer__cols a{min-height:34px; display:flex; align-items:center; color:var(--color-inverse-ink-2); transition:color var(--dur-fast) var(--ease-out)}
-.footer__cols a:hover{color:var(--color-inverse-ink)}
-.footer__copy{margin:var(--space-16) 0 0; font-size:var(--fs-label); color:var(--color-inverse-ink-2)}
-.footer__ghost{margin-top:var(--space-20); text-align:center; white-space:nowrap; font-size:var(--fs-wordmark); line-height:.78; font-weight:var(--fw-black); letter-spacing:var(--ls-wordmark); color:var(--color-inverse-ghost)}
+.footer__copy{margin:0; font-size:var(--fs-label); color:var(--color-inverse-ink-2)}
+/* 얇은 바닥글(문서 · 404) — 같은 검정, 한 줄 */
+.footer--slim .in{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:var(--space-3) var(--space-8); padding-block:var(--space-6) var(--space-8)}
+.footer__links{display:flex; flex-wrap:wrap; gap:var(--space-1) var(--space-6); font-size:var(--fs-label)}
+.footer__links a{display:flex; align-items:center; min-height:32px; color:var(--color-inverse-ink-2); transition:color var(--dur-fast) var(--ease-out)}
+.footer__links a:hover{color:var(--color-inverse-ink)}
+
+/* ---------- 지원 — 왼쪽 문의 · 오른쪽 자주 묻는 질문 (카드 없이) ---------- */
+.wrap{max-width:var(--container); margin:0 auto; padding-inline:var(--gutter)}
+.support{padding-block:var(--space-12) var(--space-20)}
+.sup-head{display:flex; justify-content:space-between; align-items:flex-end; gap:var(--space-4); padding-bottom:var(--space-6); border-bottom:1px solid var(--color-line-ink)}
+.sup-head h1{margin:0; font-size:var(--fs-h1); line-height:1; font-weight:var(--fw-black); letter-spacing:var(--ls-display)}
+.sup-head .lang{grid-column:auto; grid-row:auto; margin:0}
+.sup-grid{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--space-8) var(--space-5); padding-top:var(--space-10)}
+.sup-contact{grid-column:span 5; align-self:start; position:sticky; top:100px}
+.sup-faq{grid-column:7 / span 6}
+.sup-label{margin:0 0 var(--space-3); font-size:var(--fs-label); font-weight:var(--fw-bold); color:var(--color-ink-2); letter-spacing:0}
+.sup-mail{display:inline-block; font-size:clamp(24px,2.6vw,36px); font-weight:var(--fw-heavy); letter-spacing:-.05em; line-height:1.2; text-decoration:none; border-bottom:3px solid currentColor; padding-bottom:4px; color:var(--color-ink)}
+.sup-mail:hover{color:var(--accent-ink)}
+.sup-note{margin:var(--space-5) 0 0; max-width:44ch; font-size:15px; line-height:1.8; color:var(--ink2)}
+.sup-faq .faq{margin-top:0}
 
 /* 앱별 색 */
 body[data-app="treebal"]{--accent:#4F7CFF; --accent-ink:#2F55C9; --accent-soft:#E8EEFF}
@@ -112,7 +124,13 @@ body[data-app="treebal"]{--accent:#4F7CFF; --accent-ink:#2F55C9; --accent-soft:#
   .sheet{border-radius:22px}
   .top nav .opt{display:none}
 }
+@media (max-width:900px){
+  .sup-grid{grid-template-columns:minmax(0,1fr); gap:var(--space-12)}
+  .sup-contact,.sup-faq{grid-column:1 / -1; position:static}
+}
 @media (max-width:599px){
+  .sup-mail{font-size:min(28px,6.6vw); border-bottom-width:2px}
+  .support{padding-top:var(--space-8)}
   .top .in{height:60px}
   .logo,.me{font-size:17px}
   .crumb,.me{display:none}
@@ -124,11 +142,6 @@ body[data-app="treebal"]{--accent:#4F7CFF; --accent-ink:#2F55C9; --accent-soft:#
   .top nav a{padding:0 7px}
   .top nav{margin-right:-7px}
   .contact-card{padding:22px 20px}
-  .footer__top{padding-top:56px}
-  .footer__mail{font-size:clamp(24px,7.5vw,28px); border-bottom-width:2px}
-  .footer__cols{width:100%}
-  .footer__cols a{min-height:44px}
-  .footer__ghost{margin-top:var(--space-12)}
 }
 @media (max-width:520px){
   .doc-head{grid-template-columns:1fr}
