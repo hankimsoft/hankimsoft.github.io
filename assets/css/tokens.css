@@ -39,7 +39,12 @@
   --brim-app-count: #ECE5D9;
   --brim-app-col: #E7E0D4;
   --brim-app-ctrl: #D9D1C4;
-  --brim-gauge-checked: #F2D488; /* 체크 막대 (담은 막대는 --chart-gold) */
+  /* 예산 막대 — 담은 금액 ÷ 예산이 0.5 · 0.8 · 1 을 넘을 때마다 바뀜. 앞 = 담은 막대, -2 = 체크 막대 */
+  --gauge-green: #3E9E6E;   --gauge-green-2: #A9D8BE;
+  --gauge-amber: #E0A82E;   --gauge-amber-2: #F2D488;
+  --gauge-orange: #E0792F;  --gauge-orange-2: #F2C4A0;
+  --gauge-red: #C2562E;     --gauge-red-2: #E7B6A2;
+  --brim-exact: #B36126;    /* 예산에 딱 맞은 합계 */
 
   /* ---------- 색 · 트리밸 ---------- */
   --treebal-500: #4F7CFF;

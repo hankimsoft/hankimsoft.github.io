@@ -107,8 +107,14 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .scr .gauge { position: relative; height: 22px; margin-top: 16px; }
 .scr .lane { height: 8px; margin-bottom: 5px; overflow: hidden; border-radius: var(--radius-pill); background: var(--brim-app-track); }
 .scr .lane u { display: block; height: 100%; border-radius: var(--radius-pill); }
-.scr .l1 { background: var(--chart-gold); }
-.scr .l2 { background: var(--brim-gauge-checked); }
+.scr .l1 { background: var(--gauge-amber); }
+.scr .l2 { background: var(--gauge-amber-2); }
+.scr[data-b="0"] .l1 { background: var(--gauge-green); }  .scr[data-b="0"] .l2 { background: var(--gauge-green-2); }
+.scr[data-b="2"] .l1 { background: var(--gauge-orange); } .scr[data-b="2"] .l2 { background: var(--gauge-orange-2); }
+.scr[data-b="3"] .l1 { background: var(--gauge-red); }    .scr[data-b="3"] .l2 { background: var(--gauge-red-2); }
+.scr .lane u, .scr .leg i { transition: width .35s cubic-bezier(.3, .8, .3, 1), background .35s ease; }
+.scr .tot b, .scr .tot i { transition: color .3s ease; }
+.scr .tot.exact b, .scr .tot.exact i { color: var(--brim-exact); }
 .scr u.l1 { width: 53.955%; }  /* 35,970 / 예산 50,000 의 75% 지점 기준 */
 .scr u.l2 { width: 39.57%; }   /* 26,380 */
 .scr .gauge s { position: absolute; left: 75%; top: -5px; width: 2px; height: 30px; background: var(--brim-app-ink); }
@@ -131,6 +137,20 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .scr .n { flex: 1; white-space: nowrap; overflow: hidden; }
 .scr .p { flex: none; width: 96px; padding-left: 16px; border-left: 1px solid var(--brim-app-col); font-weight: var(--fw-medium); color: var(--brim-app-ink); font-variant-numeric: tabular-nums; }
 .scr .p:empty { border-left-color: transparent; }
+.scr .items li.hide { display: none; }
+.scr .typing .n::after { content: ""; display: inline-block; width: 1.5px; height: 16px; margin-left: 2px; vertical-align: -3px; background: var(--brim-500); animation: blink 1s steps(1) infinite; }
+.scr .items li.alldone { height: auto; padding: 36px 22px 0; border: 0; flex-direction: column; justify-content: center; text-align: center; }
+.scr .alldone img { height: 88px; animation: pop .45s cubic-bezier(.2, 1.5, .4, 1); }
+.scr .alldone b { margin-top: 12px; font-size: 21px; font-weight: var(--fw-heavy); }
+.scr .alldone span { margin-top: 4px; font-size: 14px; font-weight: 400; color: var(--brim-app-ink-2); }
+.scr .filt.on { color: var(--brim-500); }
+.scr .filt.on em { background: var(--brim-500); color: var(--color-surface); }
+.scr .fly { position: absolute; left: 16px; right: 16px; z-index: 2; display: flex; align-items: center; padding: 11px 16px 11px 12px; border-radius: 16px; background: var(--color-surface); box-shadow: 0 12px 30px rgba(42, 37, 33, .2); font-size: 15.5px; font-weight: var(--fw-bold); pointer-events: none; animation: fly 1.2s ease forwards; }
+.scr .fly .ck { border-color: var(--brim-700); background: var(--brim-700); }
+.scr .fly .ck::after { opacity: 1; }
+.scr .fly .p { width: auto; margin-left: 16px; padding: 0; border: 0; color: var(--gauge-orange); font-weight: var(--fw-heavy); }
+.scr { transition: opacity .4s ease; }
+.scr.fade { opacity: 0; }
 .scr .homebar { position: absolute; left: 50%; bottom: 8px; width: 130px; height: 5px; margin-left: -65px; border-radius: 3px; background: var(--brim-app-ink); opacity: .85; }
 
 /* ---------- 대표 앱 띠 ---------- */
@@ -139,6 +159,9 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 .feature__ring--1 { width: 900px; height: 900px; }
 .feature__ring--2 { width: 620px; height: 620px; border-color: rgba(255, 255, 255, 0.16); }
 .feature__label { position: absolute; left: var(--space-16); top: var(--space-16); font-size: var(--fs-label); font-weight: var(--fw-bold); color: var(--color-inverse-ink-2); }
+.feature__steps { position: absolute; left: var(--space-16); top: calc(var(--space-16) + var(--space-10)); margin: 0; padding: 0; list-style: none; font-size: var(--fs-ui); font-weight: var(--fw-bold); line-height: 2; color: var(--color-inverse-ink); }
+.feature__steps li { opacity: .4; transition: opacity var(--dur-fast) var(--ease-out); }
+.feature__steps li.on { opacity: 1; }
 .feature__title { position: absolute; left: var(--space-16); bottom: var(--space-16); margin: 0; font-size: var(--fs-display); line-height: var(--lh-display); font-weight: var(--fw-black); letter-spacing: var(--ls-display); }
 .feature__phone { position: absolute; left: 50%; top: 90px; margin-left: -150px; transform: rotate(-6deg); }
 .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: var(--radius-pill); font-size: var(--fs-ui); font-weight: var(--fw-bold); transition: opacity var(--dur-fast) var(--ease-out); }
@@ -168,6 +191,9 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
 @keyframes floatB { 0%, 100% { transform: translateY(0) rotate(11deg); } 50% { transform: translateY(-12px) rotate(13deg); } }
 @keyframes floatC { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(-2deg); } }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fly { 0% { opacity: 0; transform: translateY(8px) scale(.94) rotate(-2deg); } 15% { opacity: 1; transform: rotate(-2deg); } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-24px) rotate(-2deg); } }
 @keyframes rise { from { transform: translateY(40%); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes mqr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
@@ -218,6 +244,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--color-ink); ou
   .row--next .row__track { padding-top: 22px; }
   .feature { height: 740px; }
   .feature__label { left: var(--gutter); top: var(--space-6); }
+  .feature__steps { display: none; }
   .feature__title { left: var(--gutter); bottom: 108px; }
   .feature .btn { left: var(--gutter); right: var(--gutter); bottom: var(--space-6); justify-content: center; }
   .feature__phone { top: 64px; left: 50%; right: auto; margin-left: -100px; }
